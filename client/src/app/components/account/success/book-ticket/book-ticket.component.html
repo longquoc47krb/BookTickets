@@ -1,0 +1,358 @@
+<section class="book-pay">
+    <div class="container-book-ticket">
+        <div class="ticket-item-left">
+            <div class="title">Thông tin chuyến đi</div>
+            <form action="">
+                <div class="item-left">
+                    <label for="">Tuyến đường</label>
+                    <i class="fas fa-bus"></i>
+                    <select name="departure" (change)="cityChanged($event.target.value)" required>                    
+                        <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.ben_xe_di}} -- Bến xe {{item.ben_xe_toi}}</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <hr style="width: 100%;">
+                <div class="item-left">
+                    <label for="">Ngày đi</label>
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" id="date"  min="{{today}}" (change)="dateChanged($event.target)" required>
+                </div>
+                <div class="clear"></div>
+                <hr style="width: 100%;">
+                <div class="item-left">
+                    <label for="">Giời khởi hành</label>
+                    <i class="fas fa-clock"></i>
+                    <select (change)="onChangeTime($event.target.value)">                    
+                        <optGroup label="Sáng">
+                            <option *ngFor='let i of listSang' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                        </optGroup>
+                        <optGroup label="Chiều">
+                            <option *ngFor='let i of listChieu' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                        </optGroup>
+                        <optGroup label="Tối">
+                            <option *ngFor='let i of listToi' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                        </optGroup>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <hr style="width: 100%;">
+                <div class="item-left">
+                    <label for="">Nơi xuống</label>
+                    <i class="fas fa-ticket-alt"></i>
+                    <input type="text" value="{{point}}" (change)="onChange($event.target.value)">
+                </div>
+                <div class="clear"></div>
+                <hr style="width: 100%;">
+                <div class="item-left">
+                    <label for="">Điểm lên xe</label>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <select>                    
+                        <option value="">Bến xe {{service.step1.departure.ben_toi}}</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <hr style="width: 100%;">
+                <div class="accept-policy">
+                    <input type="checkbox" (change)="onCheck()"><label for="" style="color: black; margin-left: 0px;">Chấp nhận điều khoản <span style="color: #EF5222;">đặt vé</span> của chúng tôi.</label>                </div>
+            </form>
+        </div>
+        <div class="ticket-item-center">
+            <div class="title">
+                <div class="title-text">
+                    Sơ đồ ghế
+                </div>
+                <div class="title-info">
+                    Giá vé: 0<span style="text-transform: none; color: white;">đ</span>  Tổng tiền: 0<span style="text-transform: none; color: white;">đ</span>
+                </div>
+            </div>
+            <div class="floor">
+                <div class="floor-1 floor-title" (click)='select_floor("floor-1")'>
+                    Tầng 1
+                </div>
+                <div class="floor-2 floor-title" (click)='select_floor("floor-2")'>
+                    Tầng 2
+                </div>
+            </div>
+            <div class="floor-seat clear">
+                <table id="show-floor-1">
+                    <tr>
+                        <td id="1"><button class="1" (click)="onBook('1',0)">A01</button></td>
+                        <td></td>
+                        <td id="2"><button class="2" (click)="onBook('2',1)">A02</button></td>
+                        <td></td>
+                        <td id="3"><button class="3" (click)="onBook('3',2)">A03</button></td>
+                    </tr>
+                    <tr>
+                        <td id="4"><button class="4" (click)="onBook('4',3)">A04</button></td>
+                        <td></td>
+                        <td id="5"><button class="5" (click)="onBook('5', 4)">A05</button></td>
+                        <td></td>
+                        <td id="6"><button class="6" (click)="onBook('6',5)">A06</button></td>
+                    </tr>
+                    <tr>
+                        <td id="7"><button class="7" (click)="onBook('7',6)">A07</button></td>
+                        <td></td>
+                        <td id="8"><button class="8" (click)="onBook('8',7)">A08</button></td>
+                        <td></td>
+                        <td id="9"><button class="9" (click)="onBook('9',8)">A09</button></td>
+                    </tr>
+                    <tr>
+                        <td id="10"><button class="10" (click)="onBook('10',9)">A10</button></td>
+                        <td></td>
+                        <td id="11"><button class="11" (click)="onBook('11', 10)">A11</button></td>
+                        <td></td>
+                        <td id="12"><button class="12" (click)="onBook('12',11)">A12</button></td>
+                    </tr>
+                    <tr>
+                        <td id="13"><button class="13" (click)="onBook('13',12)">A13</button></td>
+                        <td></td>
+                        <td id="14"><button class="14" (click)="onBook('14',13)">A14</button></td>
+                        <td></td>
+                        <td id="15"><button class="15" (click)="onBook('15',14)">A15</button></td>
+                    </tr>
+                    <tr>
+                        <td id="16"><button class="16" (click)="onBook('16',15)">A16</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="17"><button class="17" (click)="onBook('17',16)">A17</button></td>
+                    </tr>
+                    <tr>
+                        <td id="18"><button class="18" (click)="onBook('18',17)">A18</button></td>
+                        <td id="19"><button class="19" (click)="onBook('19', 18)">A19</button></td>
+                        <td id="20"><button class="20" (click)="onBook('20',19)">A20</button></td>
+                        <td id="21"><button class="21" (click)="onBook('21',20)">A21</button></td>
+                        <td id="22"><button class="22" (click)="onBook('22',21)">A22</button></td>
+                    </tr>
+                </table>
+                <table id="show-floor-2">
+                    <tr>
+                        <td id="23"><button class="23" (click)="onBook('23',22)">B01</button></td>
+                        <td></td>
+                        <td id="24"><button class="24" (click)="onBook('24',23)">B02</button></td>
+                        <td></td>
+                        <td id="25"><button class="25" (click)="onBook('25',24)">B03</button></td>
+                    </tr>
+                    <tr>
+                        <td id="26"><button class="26" (click)="onBook('26',25)">B04</button></td>
+                        <td></td>
+                        <td id="27"><button class="27" (click)="onBook('27',26)">B05</button></td>
+                        <td></td>
+                        <td id="28"><button class="28" (click)="onBook('28',27)">B06</button></td>
+                    </tr>
+                    <tr>
+                        <td id="29"><button class="29" (click)="onBook('29',28)">B07</button></td>
+                        <td></td>
+                        <td id="30"><button class="30" (click)="onBook('30',29)">B08</button></td>
+                        <td></td>
+                        <td id="31"><button class="31" (click)="onBook('31',30)">B09</button></td>
+                    </tr>
+                    <tr>
+                        <td id="32"><button class="32" (click)="onBook('32',31)">B10</button></td>
+                        <td></td>
+                        <td id="33"><button class="33" (click)="onBook('33',32)">B11</button></td>
+                        <td></td>
+                        <td id="34"><button class="34" (click)="onBook('34',33)">B12</button></td>
+                    </tr>
+                    <tr>
+                        <td id="35"><button class="35" (click)="onBook('35',34)">B13</button></td>
+                        <td></td>
+                        <td id="36"><button class="36" (click)="onBook('36',35)">B14</button></td>
+                        <td></td>
+                        <td id="37"><button class="37" (click)="onBook('37', 36)">B15</button></td>
+                    </tr>
+                    <tr>
+                        <td id="38"><button class="38" (click)="onBook('38', 37)">B16</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="39"><button class="39" (click)="onBook('39', 38)">B17</button></td>
+                    </tr>
+                    <tr>
+                        <td id="40"><button class="40" (click)="onBook('40', 39)">B18</button></td>
+                        <td id="41"><button class="41" (click)="onBook('41', 40)">B19</button></td>
+                        <td id="42"><button class="42" (click)="onBook('42', 41)">B20</button></td>
+                        <td id="43"><button class="43" (click)="onBook('43', 42)">B21</button></td>
+                        <td id="44"><button class="44" (click)="onBook('44', 43)">B22</button></td>
+                    </tr>
+                </table>
+                <div class="note clear">
+                    <div class="note-item">
+                        <input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62);"> <span style="font-weight: bold;"> Trống</span> 
+                        <input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62);"> <span style="font-weight: bold;"> Đang chọn</span>
+                        <input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62);"> <span style="font-weight: bold;"> Đã đặt</span>
+                    </div>
+                </div>
+                <div class="btn-book-ticket">
+                    <button (click)='onSubmitBook()'>Đặt vé</button>
+                </div>
+            </div>
+        </div>
+        <div class="ticket-item-right">
+            <div class="title">
+                Điều Khoản đặt vé
+            </div>
+            <div class="ticket-item-right-infor">
+                <p>(*) Quý khách vui lòng mang email có chứa mã vé đến văn phòng để đổi vé lên xe trước giờ xuất bến ít nhất <span style="color:  #EF5222;">60 phút</span>  để chúng tôi trung chuyển.</p>
+                <p>(*) Thông tin hành khách phải chính xác, nếu không sẽ không thể lên xe hoặc hủy/đổi vé</p>
+                <p>(*) Quý khách không được đổi / trả vé vào các ngày Lễ Tết ( ngày thường qúy khách được quyền chuyển đổi hoặc hủy vé <span style="color:  #EF5222;">một lần</span> duy nhất, và trước giờ xe chạy 24 giờ.), phí hủy vé 10%</p>
+                <p>(*) Nếu quý khách có nhu cầu trung chuyển, vui lòng liên hệ số điện thoại
+                    <span style="color:  #EF5222;">1900 6067</span> trước khi đặt vé. Chúng tôi sẽ không đón/ trung chuyển tại những điểm xe trung chuyển không thể tới được.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="book-pay-accept">
+<!--     <div class="container-pay-item">
+
+        <div class="pay-item-right">
+            <div class="title">
+                Thông tin cá nhân
+            </div>
+            <form action="">
+                <div class="pay-item-infor">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Email</label>
+                    <p class="pay-item-infor-right">aaa</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Họ và tên</label>
+                    <p class="pay-item-infor-right">aaa</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Số điện thoại</label>
+                    <p class="pay-item-infor-right">aaa</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">CMND</label>
+                    <p class="pay-item-infor-right">aaa</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Địa chỉ</label>
+                    <p class="pay-item-infor-right">aaa</p>
+                </div>
+            </form>
+            <div style="margin-top: 35px;"></div>
+            <div class="title">
+                Thông tin vé
+            </div>
+            <form action="">
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Tuyến</label>
+                    <p class="pay-item-infor-right">{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Ngày giờ</label>
+                    <p class="pay-item-infor-right">{{service.step1.daygo}} - {{service.step2.time}}:00 h</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Ghế</label>
+                    <p class="pay-item-infor-right">{{seats}}</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Số lượng</label>
+                    <p class="pay-item-infor-right">{{service.step2.number}} Vé</p>
+                </div>
+                <div class="pay-item-infor clear">
+                    <label for="" class="pay-item-infor-left" style="font-size: 18px;">Tổng tiền</label>
+                    <p class="pay-item-infor-right">{{service.step2.totalMoney}} VNĐ</p>
+                </div>
+            </form>
+        </div>
+    </div> -->
+    <div class="payment-container" *ngIf="!paidFor">
+        <h1>{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</h1>
+        <h2>{{ service.step2.totalMoney }} VND</h2>
+        <div *ngIf="!isWaitting" style="display: flex;">
+            <div class="item-infor">
+                <h2>Thông tin vé</h2>
+                <div style=" width: 80%;margin: auto;">
+                    <label for="">Tuyến đường: </label>
+                    <label for="" style="text-align: right;">{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</label>
+                    <div style=" width: 80%;margin: auto;display: flex;">
+                        <label for="">Ngày chạy: </label>
+                        <label for="" style="text-align: right;">{{service.step1.daygo}}</label>
+                    </div>
+                    <div style=" width: 80%;margin: auto;display: flex;">
+                        <label for="">Giờ chạy: </label>
+                        <label for="" style="text-align: right;">{{service.step2.time}}h</label>
+                    </div>
+                    <div style=" width: 80%;margin: auto;display: flex;">
+                        <label for="">Giường: </label>
+                        <label for="" style="text-align: right;">{{seats}} </label>
+                    </div>
+                    <div style=" width: 80%;margin: auto;display: flex;">
+                        <label for="">Số lượng: </label>
+                        <label for="" style="text-align: right;">{{service.step2.number}} vé</label>
+                    </div>
+                    <div style=" width: 80%;margin: auto;display: flex;">
+                        <label for="">Tổng tiền: </label>
+                        <label for="" style="text-align: right;">{{service.step2.totalMoney}} vnđ</label>
+                    </div>
+                </div>
+            </div>
+            <div class="item-infor">
+                <h2>Thông tin khách hàng</h2>
+                <div style=" width: 80%;margin: auto;display: flex;">
+                    <label for="">Tên khách hàng: </label>
+                    <label for="" style="text-align: right;">{{customer.tenKh}}</label>
+                </div>
+                <div style=" width: 80%;margin: auto;display: flex;">
+                    <label for="">Số điện thoại: </label>
+                    <label for="" style="text-align: right;">{{customer.sdt}}</label>
+                </div>
+                <div style=" width: 80%;margin: auto;display: flex;">
+                    <label for="">Email: </label>
+                    <label for="" style="text-align: right;">{{customer.email}}</label>
+                </div>
+                <div style=" width: 80%;margin: auto;display: flex;">
+                    <label for="">Địa chỉ: </label>
+                    <label for="" style="text-align: right;">{{customer.diaChi}}</label>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isWaitting" class="loader"></div>
+        <div *ngIf="paidFor" class="payment-container">
+            <h1>Thanh toán thành công</h1>
+            <div>
+                <h2>Thông tin vé</h2>
+                <table style="width: 50%; margin: auto;">
+                    <tr>
+                        <td style="font-size: 20px;">Mã vé</td>
+                        <td style="font-size: 20px;">0132456</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Tuyến đường</td>
+                        <td style="font-size: 20px;">{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Ngày chạy</td>
+                        <td style="font-size: 20px;">{{service.step1.daygo}}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Giờ chạy</td>
+                        <td style="font-size: 20px;">{{infor_seat.time}} h</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Giường</td>
+                        <td style="font-size: 20px;"><ng-container  *ngFor="let i of listSeats"> {{i}}</ng-container></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Số lượng</td>
+                        <td style="font-size: 20px;">{{infor_seat.number}} vé</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">Tổng tiền</td>
+                        <td style="font-size: 20px; color: #F2754E;">{{infor_seat.totalMoney}} vnđ</td>
+                    </tr>
+                </table>
+                <div style="width: 50%;">
+                    <p style="text-align: left;font-size: 20px; color:#009344;">Lưu ý (*)</p>
+                    <p style="text-align: left;">- Xin hãy lên bến trước <span style="color: #F2754E;"> 20 phút</span>  để thu xếp hành lý.</p>
+                    <p style="text-align: left;">- Lưu lại <span style="color: #F2754E;"> mã vé</span> để xác thực trước khi lên xe khởi hành.</p>
+                    <p style="text-align: left;">- Hãy chụp lại <span style="color: #F2754E;"> mã vé</span> ngay lúc này hoặc <span style="color: #F2754E;"> vô gmail</span> để xem.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin:auto; width: 60%; text-align: center;" [hidden]="paidFor" #paypal></div>
+</section>

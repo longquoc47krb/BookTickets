@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="clear"></div>
+<section>
+    <div class="container-success">
+        <div class="item">
+            <button (click)="loadChange(0)">
+                <i class="fas fa-bus"> Đặt Vé</i>
+            </button>
+        </div>
+        <div class="item">
+            <button (click)="loadChange(1)">
+                <i class="fas fa-list"> Lịch sử mua vé</i>
+            </button>
+        </div>
+        <div class="item">
+            <button (click)="loadChange(2)">
+                <i class="fas fa-user"> Thông tin đăng nhập</i>
+            </button>
+        </div>
+        <div class="item">
+            <button (click)="loadChange(3)">
+                <i class="fas fa-folder-open"> Thông tin cá nhân</i>
+            </button>
+        </div>
+    </div>
+    <div *ngIf='index==0'>
+        <app-book-ticket></app-book-ticket>
+    </div>
+    <div *ngIf='index==1'>
+        <app-history></app-history>
+    </div>
+    <div *ngIf='index==2'>
+        <app-infor-login taiKhoan={{taiKhoan}}></app-infor-login>
+    </div>
+    <div *ngIf='index==3'>
+        <app-infor-personal></app-infor-personal>
+    </div>
+
+</section>
+<div style="height: 50px;"></div>
+<app-footer></app-footer>

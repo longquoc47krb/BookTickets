@@ -1,0 +1,125 @@
+<app-header index=-1></app-header>
+<section>
+    <div class="route-container">
+        <ul class="progressbar">
+            <li class="active"></li>
+            <li class="active"></li>
+            <li class="active-next">Thông Tin Khách Hàng</li>
+            <li></li>
+        </ul>
+        <div class="clear" style="height: 50px;">
+        </div>
+
+        <div class="infor-left-multiple" style="margin: 0px auto 20px;">
+            <h2 style="padding-top: 30px;">THÔNG TIN NGƯỜI MUA</h2>
+            <div class="infor">
+                <form [formGroup]='formBuyer' autocomplete="on">
+                    <div class="form-group">
+                        <label for="name">Họ tên hành khách *</label>
+                        <input type="text" class="form-control" formControlName="username"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Số điện thoại *</label>
+                        <input type="text" class="form-control" formControlName="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email *</label>
+                        <input type="email" class="form-control" formControlName="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Điểm xuống</label>
+                        <input type="text" class="form-control" formControlName="point">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Giường</label>
+                        <select class="city" style="width: 92%;" (change)="onChangeSeat($event.target.value)" required>
+                            <option *ngFor="let i of listSeats;" value='{{i.id}}'>{{i.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-city-dis">
+                            <div class="form-city">
+                                <label for="name">Tỉnh/TP *</label>
+                                <select class="city" style="width: 180px;"  (change)="onChangeCity($event.target.value)" required>
+                                    <option *ngFor="let item of listAllCity" value='{{item.id}}'>{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-district">
+                                <label for="name">Quận/Huyện *</label>       
+                                <select class="city" style="width: 180px; margin-right: 17px;" (change)="onChangeDistric($event.target.value)" required>
+                                    <option *ngFor="let i of listDistrict" value='{{i.name}}'>{{i.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+       <ng-container *ngFor="let i of listForm; index as in;">
+        <div class="infor-left" style="height: 350px;">
+            <h2 style="margin-top: 30px;">THÔNG TIN NGƯỜI ĐI THỨ {{in+1}}</h2>
+            <div class="infor">
+                <form [formGroup]=i autocomplete="on">
+                    <div class="form-group">
+                        <label for="name">Họ tên hành khách *</label>
+                        <input type="text" class="form-control" formControlName="username"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Số điện thoại *</label>
+                        <input type="text" class="form-control" formControlName="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Điểm xuống khi đi</label>
+                        <input type="text" class="form-control" formControlName="point">
+                    </div>
+<!--                     <div class="form-group">
+                        <div class="form-city-dis">
+                            <div class="form-city">
+                                <label for="name">Tỉnh/TP *</label>
+                                <select class="city" style="width: 180px;"  (change)="onChangeCity($event.target.value,in)" required>
+                                    <option *ngFor="let item of listAllCity" value='{{item.id}}'>{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-district">
+                                <label for="name">Quận/Huyện *</label>       
+                                <select class="city" style="width: 180px; margin-right: 17px;" (change)="onChangeDistric($event.target.value,in)" required>
+                                    <option *ngFor="let item of listDistrict" value='{{item.name}}'>{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="name">Nơi ở *</label>
+                        <input type="text" class="form-control" formControlName="address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" style="color: #f15a24;">Giường vị trí số {{listSeatsContinues[in].name}}</label>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+       </ng-container>
+
+
+
+        <div class="clear"></div>
+
+        <div class="policy">
+            <label for="name"><input type="checkbox" class="form-control city" (click)="onChecked()"> Chấp nhận <span style="color: rgb(241, 58, 58); cursor: pointer;">Điều Khoản</span> đặt vé của chúng tôi *.</label>
+        </div>
+
+        <div class="back" style="margin-left: 32px;">
+            <button class="button" (click)="onBack()"><i class="fas fa-chevron-left"></i> Quay Lại</button>
+        </div>
+        <div class="cont">
+            <button class="button" type="submit" (click)="onSubmit()">Tiếp Tục<i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+<div class="clear"></div>
+<app-footer></app-footer>

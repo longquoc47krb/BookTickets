@@ -1,0 +1,87 @@
+<section>
+    <div class="infor-personal-container">
+        <div class="infor-personal">
+            <div class="title">
+                Thông tin cá nhân
+            </div>
+            <form [formGroup]="form">
+                <div class="item clear">
+                    <div class="item-left">
+                        <p style="font-size: 16px; font-weight: bold;">Họ tên</p>
+                    </div>
+                    <div class="item-center">
+                        <p>{{inforCustomer.tenKh}}</p>
+                    </div>  
+                    <div class="item-right">
+                        <p *ngIf="!isEdit" class="edit-password" style="text-align: right; color: #EF5222;" (click)='onEdit()'><i class="far fa-edit"></i> Cập nhật</p>
+                    </div>
+                </div>
+                <div class="item clear form-group">
+                    <div class="item-left ">
+                        <p style="font-size: 16px; font-weight: bold;">Email</p>
+                    </div>
+                    <div class="item-center ">
+                        <p *ngIf='!isEdit'>{{inforCustomer.email}}</p>
+                        <p *ngIf='isEdit'> <input type="text" placeholder="{{inforCustomer.email}}" class="form-control" formControlName="email"></p>
+                    </div>
+                </div>
+                <div class="item clear form-group">
+                    <div class="item-left">
+                        <p style="font-size: 16px; font-weight: bold;">Điện thoại</p>
+                    </div>
+                    <div class="item-center ">
+                        <p *ngIf='!isEdit'>{{inforCustomer.sdt}}</p>
+                        <p *ngIf='isEdit'> <input type="text" placeholder="{{inforCustomer.sdt}}" class="form-control" formControlName="sdt"></p>
+                    </div>
+                </div>
+                <div class="item clear">
+                    <div class="item-left">
+                        <p style="font-size: 16px; font-weight: bold;">CMND</p>
+                    </div>
+                    <div class="item-center">
+                        <p>{{inforCustomer.cmnd}}</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="infor-address">
+            <div class="title">
+                Thông tin địa chỉ
+            </div>
+            <form [formGroup]='form' autocomplete="on">
+                <div class="item clear ">
+                    <div class="item-left">
+                        <p style="font-size: 16px; font-weight: bold;">Địa chỉ</p>
+                    </div>
+                    <div class="item-center form-group">
+                        <p *ngIf='!isEdit'>{{inforCustomer.diaChi}}</p>
+                        <p *ngIf='isEdit'><input type="text"  placeholder="{{inforCustomer.diaChi}}" class="form-control" formControlName="dia_chi"></p>
+                    </div>
+                </div>
+                <div class="item clear form-group">
+                    <div class="item-left">
+                        <p style="font-size: 16px; font-weight: bold;">Thành phố</p>
+                    </div>
+                    <div class="item-center">
+                        <p *ngIf='!isEdit'>{{inforCustomer.thanhPho}}</p>
+                        <p *ngIf='isEdit'><input type="text"  placeholder="{{inforCustomer.thanhPho}}" class="form-control" formControlName="thanh_pho"></p>
+                    </div>
+                </div>
+                <div class="item clear form-group">
+                    <div class="item-left">
+                        <p style="font-size: 16px; font-weight: bold;">Quận huyện</p>
+                    </div>
+                    <div class="item-center">
+                        <p *ngIf='!isEdit'>{{inforCustomer.quanHuyen}}</p>
+                        <p *ngIf='isEdit'><input type="text" placeholder="{{inforCustomer.quanHuyen}}" class="form-control" formControlName="quan_huyen"></p>
+                    </div>
+                </div>
+                <div class="item clear">
+                    <div class="item-left">
+                        <p *ngIf='isEdit' (click)='onEdit()'><button class="button-item-update">Lưu</button></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

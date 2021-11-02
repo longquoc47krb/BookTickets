@@ -1,0 +1,38 @@
+<nav class="nav" style="background: -webkit-linear-gradient(left, #F2754E,#009344);">
+  <div class="nav-menu flex-row">
+    <div class="nav-brand">
+      <a href="#" class="text-gray" style="color: #ffffff;"> <span>Tran</span>sportation Services</a>
+    </div>
+  </div>
+
+</nav>
+<div class="register">
+  <div class="cont">
+    <form class="form" [formGroup]="loginForm" autocomplete="on" (ngSubmit)="onSubmit()">
+      <h2 class="" style="color: #6e6c6c;">Đăng nhập</h2>
+      <div>
+        <input class="inputbox" formControlName='username' placeholder="Tên đăng nhập" >
+        <div *ngIf="submitted && username.errors" class="invalid-feedback">
+          <div class="validate" *ngIf="username.errors.required">Vui lòng nhập tên đăng nhập</div>
+        </div>
+      </div>
+      <div>
+        <input type="password" class="inputbox" formControlName='password' placeholder="Password" minlength="8">
+        <div *ngIf="submitted && password.errors" class="invalid-feedback">
+          <div class="validate" *ngIf="password.errors.required">Vui lòng nhập password</div>
+          <div class="validate" *ngIf="password.errors.minlength">Mật khẩu phải ít nhất 8 ký tự bao gồm chữ và số</div>
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="submit" (click)="onSubmit()">
+          Đăng nhập</button>
+        <a class="fas fa-chevron-left" [routerLink]="['/forgot-password']">Quên mật khẩu?</a>
+      </div>
+      <div>
+        <i class="fas fa-chevron-right" [routerLink]="['/register']">Đăng ký</i>
+      </div>
+    </form>
+  </div>
+</div>
+
+

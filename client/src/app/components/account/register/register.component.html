@@ -1,0 +1,94 @@
+<nav class="nav" style="background: -webkit-linear-gradient(left, #F2754E,#009344);">
+  <div class="nav-menu flex-row">
+    <div class="nav-brand">
+      <a href="#" class="text-gray" style="color: #ffffff;"> <span>Tran</span>sportation Services</a>
+    </div>
+  </div>
+</nav>
+<div *ngIf="!loading" class="register">
+  <div class="cont">
+    <form [formGroup]='registerForm' class="form" (ngSubmit)="onSignUp()">
+      <h2 class="" style="color: #6e6c6c;">Đăng ký</h2>
+      <div class="form-group">
+        <input id="fullName" formControlName="fullName" type="text" class="form-control"
+          [ngClass]="registerForm.controls['fullName'].invalid ? 'is-invalid' : ''" placeholder="Họ và tên">
+        <label class="text-danger" *ngIf="submitted && registerForm.controls['fullName'].hasError('required')">
+          Vui lòng nhập họ tên!
+        </label>
+      </div>
+      <div class="form-group">
+        <input id="username" formControlName="username" type="text" class="form-control"
+          [ngClass]="registerForm.controls['username'].invalid ? 'is-invalid' : ''" placeholder="Tên đăng nhập">
+        <label class="text-danger" *ngIf="submitted && registerForm.controls['username'].hasError('required')">
+          Vui lòng nhập tên đăng nhập!
+        </label>
+      </div>
+      <div class="form-group">
+        <input id="email" formControlName="email" type="email" class="form-control"
+          [ngClass]="registerForm.controls['email'].invalid ? 'is-invalid' : ''" placeholder="Email">
+        <label class="text-danger" *ngIf="submitted && registerForm.controls['email'].hasError('required')">
+          Vui lòng nhập email!
+        </label>
+        <label class="text-danger" *ngIf="submitted && registerForm.controls['email'].hasError('email')">
+          Vui lòng nhập địa chỉ email hợp lệ!
+        </label>
+      </div>
+      <div class="form-group">
+        <input id="password" formControlName="password" type="password" class="form-control"
+          [ngClass]="registerForm.controls['password'].invalid" placeholder="Password">
+        <label class="col"
+          [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+          Phải có ít nhất 8 kí tự!
+        </label>
+        <label class="col"
+          [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+          Phải có ít nhất 1 chữ số!
+        </label>
+        <label class="col"
+          [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+          Phải có ít nhất 1 kí tự viết hoa!
+        </label>
+        <label class="col"
+          [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+          Phải có ít nhất 1 chữ cái viết thường!
+        </label>
+        <label class="col"
+          [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+          Phải có ít nhất 1 kí tự đặc biệt!
+        </label>
+      </div>
+      <div class="form-group">
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control"
+          [ngClass]="registerForm.controls['confirmPassword'].invalid " placeholder="Xác nhận password">
+        <label class="text-danger" *ngIf="submitted && registerForm.controls['confirmPassword'].hasError('required')">
+          Vui lòng nhập mật khẩu!
+        </label>
+        <label class="text-danger"
+          *ngIf="submitted && registerForm.controls['confirmPassword'].hasError('NoPassswordMatch')">
+          Mật khẩu không khớp
+        </label>
+        <div class="form-group">
+          <input id="phone" formControlName="phone" type="phone" class="form-control"
+            [ngClass]="registerForm.controls['phone'].invalid " placeholder="Số điện thoại">
+          <label class="text-danger" *ngIf="registerForm.controls['phone'].hasError('required') && submitted">
+            Vui lòng nhập số điện thoại!
+          </label>
+          <label class="text-danger" *ngIf="registerForm.controls['phone'].hasError('isPhone') && submitted ">
+            Vui lòng nhập số điện thoại hợp lệ!
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="submit">
+          Đăng ký</button>
+      </div>
+      <div>
+        <a [routerLink]="['/login']">Đăng nhập</a>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="loading" class="loader">
+
+</div>

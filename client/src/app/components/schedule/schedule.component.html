@@ -1,0 +1,41 @@
+<app-header index=1></app-header>
+<section>
+    <div class="container" style="width: 71%;">
+        <img src="../../assets/schedule.png" alt="">
+        <div class="search">
+            <div class="search-left">
+                <input type="text" placeholder="Tìm điểm đi">
+                <span class="fas fa-search"></span>
+            </div>
+            <div class="search-right">
+                <input type="text" placeholder="Tìm điểm đến">
+                <span class="fas fa-search"></span>
+            </div>
+        </div>
+        <div class="schedule-content scroll">
+            <table>
+                <tr>
+                    <th>Tuyến Xe</th>
+                    <th>Loại Xe</th>
+                    <th>Quãng Đường</th>
+                    <th>Thời gian hành trình</th>
+                    <th>Giờ chạy</th>
+                    <th>Đặt Vé</th>
+                </tr>
+                <ng-container *ngFor="let item of allRouter">
+                    <tr>
+                        <td style="text-align: left;"> <span style="color: #F15A61; font-weight: bold;">{{item.ben_xe_di}}</span> <span style="font-weight: bold;"> ⇒ </span><span style="color: #009344; font-weight: bold;">{{item.ben_xe_toi}}</span></td>
+                        <td> Giường</td>
+                        <td>  {{item.khoang_cach}} KM</td>
+                        <td> {{item.khoang_thoi_gian}} giờ</td>
+                        <td><span class="detail" (click)="onDetail(item)">Chi tiết <i class="fas fa-info-circle"></i></span></td>
+                        <td (click)="onClick(item)"><span class="book">Đặt vé <i class="fas fa-calendar-check"></i></span></td>
+                    </tr>
+                </ng-container>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

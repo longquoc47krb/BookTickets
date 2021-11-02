@@ -1,0 +1,66 @@
+<app-header index=1></app-header>
+<section>
+    <div class="container">
+        <img src="../../assets/schedule.png" alt="">
+        <div class="transhipment">
+            <div class="title">
+                Bến xe & VP Trung chuyển
+            </div>
+            <div class="transhipment-content">
+                <p  style="color: #F15A24;">Chưa có thông tin xử lý </p>
+            </div>
+        </div>
+
+        <div class="transhipment" style="border-radius: 10px;">
+            <div class="title">
+                {{route.ben_xe_di}} ⇒ {{route.ben_xe_toi}} <span>- {{route.khoang_cach}}km - {{route.khoang_thoi_gian}}h</span>
+            </div>
+            <div class="content-left">
+                <p>Thời gian di chuyển</p>   
+                <div style="display: flex;">
+                    <div style="width: 37%;">
+                        <p style="text-align: left; margin-left: 50px;">Sáng :</p>
+                        <ng-container *ngFor="let item of listSang">
+                            <p style="color: #F15A24;">{{item}}:00 h</p>
+                        </ng-container>
+                    </div>
+                    <div style="width: 35%;">
+                        <p style="text-align: left; margin-left: 50px;">Chiều :</p>
+                        <ng-container *ngFor="let item of listChieu">
+                            <p style="color: #F15A24;">{{item}}:00 h</p>
+                        </ng-container>
+                    </div>
+                    <div style="width: 30%;">
+                        <p style="text-align: left; margin-left: 50px;">Tối : </p>
+                        <ng-container *ngFor="let item of listToi">
+                            <p style="color: #F15A24;">{{item}}:00 h </p>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="content-right">
+                <p>Nơi xuất phát : <span style="color: #F15A24;">Bến xe {{route.ben_xe_di}}</span> </p>
+                <p style="text-align: left; margin-left: 50px;color: #F15A24;">
+                    (*) Lưu ý:
+                </p>
+                <p style="text-align: left; margin-left: 100px;">
+                    - Quý khách vui lòng lên sớm hơn 20 phút để thu xếp hành lý.
+                </p>
+                <p style="text-align: left; margin-left: 100px;">
+                    - Xin hãy lưu lại thông tin mã vé để tiện cho việc kiểm tra.
+                </p>
+                <p style="text-align: left; margin-left: 50px;color: #F15A24;">
+                    (*) Chúc quý khách có một chuyến đi vui vẻ.
+                </p>
+                <p style="text-align: left; margin-left: 50px;color: #F15A24;">
+                    (*) Cảm ơn quý khách đã ưu ái nhà xe chúng tôi.
+                </p>
+            </div>
+        </div>
+        <div class="continue">
+            <button class="button" (click)="onBook()">ĐẶT VÉ <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

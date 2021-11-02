@@ -1,0 +1,91 @@
+<app-header index=4></app-header>
+<section>
+    <div *ngIf="!isShow" class="invoice" >
+        <p>Tra cứu hóa đơn</p>
+        <div class="invoice-search"> 
+            <input type="text" [(ngModel)]="code"  placeholder="Nhập mã vé">
+            <button class="btn-confirm" (click)="onSearch()"><i class="fas fa-search"></i> Tra cứu</button>
+        </div>
+    </div>
+    <div *ngIf="isShow" class="infor-invoice" >
+        <div style="width:100%;">
+            <div class="title">
+                <p>THÔNG TIN VÉ</p>
+            </div>
+            <div style="margin-top: 20px; width: 100%;" *ngIf="!isWaitting">
+                <div class="infor-invoice-item">
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Ngày mua
+                        </label>
+                        <p>{{data.ngay_dat}}</p>
+                    </div>
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Giờ mua
+                        </label>
+                        <p>{{data.gio_dat}}</p>
+                    </div>
+                </div>
+                <div class="infor-invoice-item">
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Mã vé
+                        </label>
+                        <p>{{data.ma_code}}</p>
+                    </div>
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Giờ chạy 
+                        </label>
+                        <p>{{data.gio_chay}}</p>
+                    </div>
+                </div>
+                <div class="infor-invoice-item">
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Tuyến   
+                        </label>
+                        <p >{{data.tuyen_xe}}</p>
+                    </div>
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Giường
+                        </label>
+                        <p >
+                            <ng-container *ngFor="let i of listItem">
+                                {{i}}
+                            </ng-container>
+                        </p>
+                    </div>
+                </div>
+                <div class="infor-invoice-item">
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Số vé
+                        </label>
+                        <p>{{number}} vé</p>
+                    </div>
+                    <div style="width: 50%; text-align: center; display: flex;">
+                        <label for="" style="font-size: 16px; width:70px;">
+                            Tổng tiền 
+                        </label>
+                        <p>{{data.gia_ve}} VNĐ</p>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isWaitting" class="loader">
+
+            </div>
+        </div>
+        <div>
+            <button class="btn-back" (click)="onBack()">Quay lại</button>
+            <button class="btn-cancel" (click)="onCancel()">Hủy vé</button>
+        </div>
+    </div>
+</section>
+<div style="height: 50px;">
+</div>
+<app-footer></app-footer>
+
+

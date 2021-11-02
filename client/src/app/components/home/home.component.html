@@ -1,0 +1,173 @@
+<app-header></app-header>
+<main>
+  <img src="./assets/background.png" alt="" class="site-title">
+  <div class="auth-context">
+    <h2 class="form-title">Book Tickets Online</h2>
+    <form #inforRouteForm="ngForm">
+      <div>
+        <label for="" class="label-title">Điểm Đi</label>
+        <select class="text-input" name="departure" (change)="provinceChange($event.target.value,0)" required>
+          <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.province}}</option>
+        </select>
+        <label for="" class="label-title">Điểm Đến</label>
+        <select class="text-input" name="destination" (change)="provinceChange($event.target.value,1)" required>
+          <option *ngFor="let item of listDestination" value='{{item.id}}'>Bến xe {{item.ben_toi}}</option>
+        </select>
+      </div>
+      <div>
+        <label for="" class="label-title">Ngày Đi</label>
+        <input type="date" class="text-input" id="date" min="{{today}}" (change)="dateChanged($event.target)" required>
+        <label for="" class="label-title">Ngày Về</label>
+        <input type="date" id="return-date" class="text-input" min="{{today}}"
+          (change)="dateChangedReturn($event.target)">
+      </div>
+      <div>
+        <label for="" class="label-radio">Một Chiều</label>
+        <input type="radio" name="type" value="oneway" class="text-radio" (change)="onItemChange(items[0])" checked>
+        <label for="" class="label-radio">Khứ Hồi</label>
+        <input type="radio" name="type" value="round" class="text-radio" (change)="onItemChange(items[1])">
+      </div>
+      <hr>
+      <div>
+        <button type="submit" name="search" class="btn btn-big" (click)='submit()'>Tìm kiếm</button>
+      </div>
+    </form>
+  </div>
+
+  <section style="margin-bottom:-100px;">
+    <div class="blog" style="margin-left: 25px;">
+      <h2 class="section-title">Tuyến phổ biến</h2>
+      <div class="container">
+        <div class="section" *ngFor="let i of listPopularRoute">
+          <div class="section-info">
+            <img src="{{i.image}}" alt="" (click)="onTranser(i)">
+            <div style="float: right;">
+              <div>
+                <span style="float: right; padding-top: 15px; margin-right: 10px;">{{i.departure}} ⇒
+                  {{i.destination}}</span>
+              </div>
+              <div>
+                <i class="fas fa-map-marker-alt"> {{i.distance}} km</i>
+                <i class="fas fa-clock"> {{i.time}}h</i>
+                <i class="fas fa-tags price"> {{i.price | currency: 'VND' }}</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <div style="height: 30px;">
+
+  </div>
+
+  <section>
+    <div class="section-title" style="text-align: center; margin-left: -30px;">
+      <p style="font-size: 25px;">Điểm đến được yêu thích nhất</p>
+      <p style="font-size: 25px;">Gợi ý những điểm đến được yêu thích nhất năm qua</p>
+    </div>
+    <div class="for_slick_slider multiple-items">
+      <div *ngFor="let destination of listPopularDestination" class="items">
+        <img src="{{destination.image}}" alt="">
+        <div class="item-text">
+          <i class="fas fa-map-marker-alt">{{destination.province}}</i>
+          <h3>{{destination.name}}</h3>
+        </div>
+        <div class="overlay"></div>
+      </div>
+      <!-- <div class="items">
+                <img src="../../assets/dd1.jpg" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt"> Quảng Ninh</i>
+                    <h3>Vịnh Hạ Long</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/hoi_an.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Đà Nẵng</i>
+                    <h3>Hội An</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/hue.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Huế</i>
+                    <h3>Cố Đô Huế</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/tphcm.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Tp. Hồ Chí Minh</i>
+                    <h3>Sài Gòn</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/nam_cat_tien.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Đồng Nai</i>
+                    <h3>Nam Cát Tiên</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/da_lat.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Đà Lạt</i>
+                    <h3>Lâm Đồng</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/ha_tien.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Hà Tiên</i>
+                    <h3>Rạch Giá</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/da_nang.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Đà Nẵng</i>
+                    <h3>Cầu Rồng</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/ha_noi.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Hà Nội</i>
+                    <h3>Hồ Gươm</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/nha_trang.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Nha Trang</i>
+                    <h3>Khánh Hòa</h3>
+                </div>
+                <div class="overlay"></div>
+            </div>
+            <div class="items">
+                <img src="../../assets/chau_doc.png" alt="">
+                <div class="item-text">
+                    <i class="fas fa-map-marker-alt">  Châu Đốc</i>
+                    <h3>Long Xuyên</h3>
+                </div>
+                <div class="overlay"></div>
+            </div> -->
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

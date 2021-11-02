@@ -1,0 +1,62 @@
+<section>
+    <div class="history-container">
+        <p>Lịch sử mua vé</p>
+        <div class="history-search">
+            <div class="item-search">
+                <label>Thời gian</label>
+                <div class="history-search-item">
+                    <input id="historyDate" type="date" style="border:none;outline: none;background: none; width: 80%;" (change)="onChangeDate($event.target)">    
+                    <hr style="width: 80%; margin-left: 0px; color: black;">
+                </div>
+            </div>
+            <div class="item-search">
+                <label>Lịch trình</label>
+                <div class="history-search-item">
+                    <select style="border:none;outline: none;background: none; margin-top: -8px;" (change)="cityChanged($event.target.value)">                    
+                        <option *ngFor="let i of allRoute" value='{{i.id}}'>{{i.benDi}} -- {{i.benToi}}</option>
+                    </select>
+                   <hr style="margin-top: 3px; margin-left: 0px; width: 90%;" >
+                </div>
+            </div>
+            <div class="item-button-search">
+                <div class="item-btn-search" >
+                    <button (click)="onReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!isWaitting" class="history-table">
+            <table style="width: 100%;">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã</th>
+                    <th>SL</th>
+                    <th>Bến</th>
+                    <th>Ngày đi</th>
+                    <th>Giờ</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày đặt</th>
+                    <th>Thanh toán</th>
+                    <th>Trạng thái</th>
+
+                </tr>
+                <ng-container *ngFor="let item of history;index as i">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{item.code}}</td>
+                        <td>{{item.count}}</td>
+                        <td>{{item.ben_di}} => {{item.ben_toi}}</td>
+                        <td>{{item.ngay_chay}}</td>
+                        <td> {{item.gio_chay}} h</td>
+                        <td>{{item.gia_ve}}</td>
+                        <td> {{item.ngay_dat}}</td>
+                        <td>{{item.ngay_thanh_toan}}</td>
+                        <td>{{item.trang_thai}}</td>
+                        <td *ngIf="item.trang_thai=='Chưa chạy'" class="td-cancel" (click)="onCancelTicket(item)">Hủy</td>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+        <div *ngIf="isWaitting" class="loader"></div>
+    </div>
+
+</section>

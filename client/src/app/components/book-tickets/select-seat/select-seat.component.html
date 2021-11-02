@@ -1,0 +1,220 @@
+<app-header index=-1></app-header>
+<section>
+    <div class="route-container">
+        <ul class="progressbar">
+            <li class="active"></li>
+            <li class="active-next">Chọn Ghế</li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div style="float: none; height: 100px;">
+        </div>
+        <div class="container-left">
+            <div class="content-address">
+                <div class="title">
+                    <h2>{{day}}</h2>
+                    <p>{{ser.step1.departure.ben_toi}} => {{ser.step1.destination.ben_toi}}</p>    
+                </div>
+                <div class="select-station">
+                    <p>Chọn Bến Xe</p>
+                    <label>{{ser.step1.departure.ben_toi}} => {{ser.step1.destination.ben_toi}}</label><span>{{price}} đ</span>
+                </div>
+                <div class="clear"></div>
+                <div class="select-station">
+                    <p>Giờ Khởi Hành</p>
+                    <select name="time" (change)="onChangeTime($event.target.value)">
+                        <optGroup label="Sáng">
+                            <option *ngFor='let i of listSang' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                        </optGroup>
+                        <optGroup label="Chiều">
+                            <option *ngFor='let i of listChieu' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                        </optGroup>
+                        <optGroup label="Tối">
+                            <option *ngFor='let i of listToi' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                        </optGroup>
+                    </select>
+                </div>
+                <div class="select-station">
+                    <p>Điểm Lên Xe</p>
+                    <select style="margin-bottom: 20px;" name="point" >
+                        <option>Bến xe {{ser.step1.departure.ben_toi}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="schedule">
+                <h2>LỊCH TRÌNH CHUYẾN ĐI  <span *ngIf="isDown" class="fas fa-chevron-down" (click)='onClick()'></span>
+                    <span *ngIf="!isDown" class="fas fa-chevron-up" (click)='onClick()'></span></h2>
+               <div class="information">
+                    <table>
+                        <tr>
+                          <th style="padding-left: 20px;">Thời Gian</th>
+                          <th style="padding-left: 20px">Địa Điểm</th>
+                        </tr>
+                        <tr *ngFor="let i of schedule; let j = index">
+                            <td style="width: 50%; position: relative;">
+                                <p style="padding: 0; position: absolute; top: 0;">
+                                    <i *ngIf="j == 0" class="fas fa-map-marker-alt" style="color: orange;"></i>
+                                    <i *ngIf="j == (schedule.length - 1)" class="fas fa-dot-circle" style="color: #00603D;"></i>
+                                    <i *ngIf="j!=0 && j!=(schedule.length - 1)" class="fas fa-map-marker-alt"></i>
+                                    {{ser.step1.daygo}}
+                                </p>   
+                            </td>
+                            <td>
+                                {{i.tenTram}}
+                                <p style="text-align: left; color: #756e6e;">
+                                    {{i.diaChi}}
+                                </p>
+                            </td>
+                        </tr>
+                      </table>
+               </div>
+            </div>
+        </div>
+        <div class="container-right">
+            <div class="title">
+               <h2>Sơ Đồ Ghế</h2>
+            </div>
+            <div class="floor-1" style="padding-bottom: 10px;">
+                <h2>Tang 1</h2>
+                <table style="width: 100%;">
+                    <tr>
+                        <td id="1"><button class="1" (click)="onBook('1',0)">A01</button></td>
+                        <td></td>
+                        <td id="2"><button class="2" (click)="onBook('2',1)">A02</button></td>
+                        <td></td>
+                        <td id="3"><button class="3" (click)="onBook('3',2)">A03</button></td>
+                    </tr>
+                    <tr>
+                        <td id="4"><button class="4" (click)="onBook('4',3)">A04</button></td>
+                        <td></td>
+                        <td id="5"><button class="5" (click)="onBook('5', 4)">A05</button></td>
+                        <td></td>
+                        <td id="6"><button class="6" (click)="onBook('6',5)">A06</button></td>
+                    </tr>
+                    <tr>
+                        <td id="7"><button class="7" (click)="onBook('7',6)">A07</button></td>
+                        <td></td>
+                        <td id="8"><button class="8" (click)="onBook('8',7)">A08</button></td>
+                        <td></td>
+                        <td id="9"><button class="9" (click)="onBook('9',8)">A09</button></td>
+                    </tr>
+                    <tr>
+                        <td id="10"><button class="10" (click)="onBook('10',9)">A10</button></td>
+                        <td></td>
+                        <td id="11"><button class="11" (click)="onBook('11', 10)">A11</button></td>
+                        <td></td>
+                        <td id="12"><button class="12" (click)="onBook('12',11)">A12</button></td>
+                    </tr>
+                    <tr>
+                        <td id="13"><button class="13" (click)="onBook('13',12)">A13</button></td>
+                        <td></td>
+                        <td id="14"><button class="14" (click)="onBook('14',13)">A14</button></td>
+                        <td></td>
+                        <td id="15"><button class="15" (click)="onBook('15',14)">A15</button></td>
+                    </tr>
+                    <tr>
+                        <td id="16"><button class="16" (click)="onBook('16',15)">A16</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="17"><button class="17" (click)="onBook('17',16)">A17</button></td>
+                    </tr>
+                    <tr>
+                        <td id="18"><button class="18" (click)="onBook('18',17)">A18</button></td>
+                        <td id="19"><button class="19" (click)="onBook('19', 18)">A19</button></td>
+                        <td id="20"><button class="20" (click)="onBook('20',19)">A20</button></td>
+                        <td id="21"><button class="21" (click)="onBook('21',20)">A21</button></td>
+                        <td id="22"><button class="22" (click)="onBook('22',21)">A22</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="floor-2" style="padding-bottom: 10px;">
+                <h2>Tang 2</h2>
+                <table style="width: 100%;">
+                    <tr>
+                        <td id="23"><button class="23" (click)="onBook('23',22)">B01</button></td>
+                        <td></td>
+                        <td id="24"><button class="24" (click)="onBook('24',23)">B02</button></td>
+                        <td></td>
+                        <td id="25"><button class="25" (click)="onBook('25',24)">B03</button></td>
+                    </tr>
+                    <tr>
+                        <td id="26"><button class="26" (click)="onBook('26',25)">B04</button></td>
+                        <td></td>
+                        <td id="27"><button class="27" (click)="onBook('27',26)">B05</button></td>
+                        <td></td>
+                        <td id="28"><button class="28" (click)="onBook('28',27)">B06</button></td>
+                    </tr>
+                    <tr>
+                        <td id="29"><button class="29" (click)="onBook('29',28)">B07</button></td>
+                        <td></td>
+                        <td id="30"><button class="30" (click)="onBook('30',29)">B08</button></td>
+                        <td></td>
+                        <td id="31"><button class="31" (click)="onBook('31',30)">B09</button></td>
+                    </tr>
+                    <tr>
+                        <td id="32"><button class="32" (click)="onBook('32',31)">B10</button></td>
+                        <td></td>
+                        <td id="33"><button class="33" (click)="onBook('33',32)">B11</button></td>
+                        <td></td>
+                        <td id="34"><button class="34" (click)="onBook('34',33)">B12</button></td>
+                    </tr>
+                    <tr>
+                        <td id="35"><button class="35" (click)="onBook('35',34)">B13</button></td>
+                        <td></td>
+                        <td id="36"><button class="36" (click)="onBook('36',35)">B14</button></td>
+                        <td></td>
+                        <td id="37"><button class="37" (click)="onBook('37', 36)">B15</button></td>
+                    </tr>
+                    <tr>
+                        <td id="38"><button class="38" (click)="onBook('38', 37)">B16</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="39"><button class="39" (click)="onBook('39', 38)">B17</button></td>
+                    </tr>
+                    <tr>
+                        <td id="40"><button class="40" (click)="onBook('40', 39)">B18</button></td>
+                        <td id="41"><button class="41" (click)="onBook('41', 40)">B19</button></td>
+                        <td id="42"><button class="42" (click)="onBook('42', 41)">B20</button></td>
+                        <td id="43"><button class="43" (click)="onBook('43', 42)">B21</button></td>
+                        <td id="44"><button class="44" (click)="onBook('44', 43)">B22</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="note" style="margin-left: 70px;">
+                <div class="note-content">
+                    <label for=""><input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62);"> Trống</label>
+                </div>
+                <div class="note-content">
+                    <label for=""><input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62);"> Đang chọn</label>
+                </div>
+                <div class="note-content">
+                    <label for=""><input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62);"> Đã đặt</label>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="selected-seat">
+                <p style="text-align: left;">Ghế đã chọn: </p>
+                <div>
+                    <span *ngFor="let i of listitem">  
+                        <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>  
+                        <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span> 
+                    </span>
+                </div>
+            </div>
+            <div class="total">
+                <p>Tổng tiền: </p>
+                <p><span> {{ser.step2.totalMoney}} đ</span></p>
+            </div>
+        </div>
+        <div class="back">
+            <button class="button" [routerLink]="['']" style="margin-left: -10px;"><i class="fas fa-chevron-left"></i> Quay Lại</button>        
+        </div>
+        <div class="cont">
+            <button class="button" (click)="submit()">Tiếp Tục<i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+<div class="clear"></div>
+<app-footer></app-footer>
