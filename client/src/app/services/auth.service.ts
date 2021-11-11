@@ -1,12 +1,18 @@
 import { User } from './../shared/models/user.model';
 import { UserService } from './user.service';
-import { ToastComponent } from './../shared/toast/toast.component';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import {JwtHelperService} from '@auth0/angular-jwt'
-import { Auth, AuthUser } from './../interface/AuthResponse';
+import { JwtHelperService } from '@auth0/angular-jwt'
+import { Auth, AuthUser, ResetPassword } from './../interface/AuthResponse';
+
+import { ToastrService } from 'ngx-toastr';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -24,55 +30,69 @@ export class AuthService {
   private endpoint = 'http://localhost:3000/v1'
   private urlTicket = "http://localhost:8082/api/ve";
 
+
   constructor(public http: HttpClient,
     private userService: UserService,
     private router: Router,
     private jwtHelper: JwtHelperService,
-    public toast: ToastComponent) { }
+    public toast: ToastrService) { }
 
+  resetPassword(model) {
+    this.http.post(this.endpoint + '/reset-password', model).subscribe((res: any) => {
+      this.toast.success(res.message);
+      this.router.navigate(['/login']);
+    }, (res: any) => {
+      this.toast.error(res.error.message, 'Error');
+    });
+  }
+  loginUser(user: User) {
+    return this.http
+      .post<Auth>(this.endpoint + "/auth/login", user)
+      .subscribe((res) => {
+        localStorage.setItem("id", res.user.id);
+        localStorage.setItem("role", res.user.role);
+        localStorage.setItem("username", res.user.username);
+        localStorage.setItem("access-token", res.tokens.access.token);
+        if (String(localStorage.getItem("role")) === "admin") {
+          this.router.navigate(["/admin/dashboard"]);
+        }
+        else {
+          this.router.navigate(['/customer/dashboard']);
+        }
 
-    loginUser(user: User) {
-      return this.http
-        .post<Auth>(this.endpoint + "/auth/login", user)
-        .subscribe((res) => {
-          localStorage.setItem("id", res.user.id);
-          localStorage.setItem("role", res.user.role);
-          localStorage.setItem("username", res.user.username);
-          localStorage.setItem("access-token", res.tokens.access.token);
-          if(String(localStorage.getItem("role")) === "admin"){
-            this.router.navigate(["/admin/dashboard"]);
-          }
-          else{
-            this.router.navigate(['/customer/dashboard']);
-          }
+      }, console.error);
+  }
+  verifyEmail(token: string) {
+    return this.http.post(this.endpoint + '/auth/verify-email', token);
+  }
+  forgetPasswordLink(email) {
+    return this.http.post(this.endpoint + '/auth/forgot-password', email);
+  }
 
-        }, console.error);
-    }
+  refreshAuth() {
+    const id = localStorage.getItem("id");
+    const token = localStorage.getItem("access-token");
+    const headers = new HttpHeaders().append(
+      "Authorization",
+      "Bearer " + token
+    );
+    return this.http
+      .get(this.endpoint + "/users/" + id, {
+        headers,
+      })
+  }
 
-    refreshAuth() {
-      const id = localStorage.getItem("id");
-      const token = localStorage.getItem("access-token");
-      const headers = new HttpHeaders().append(
-        "Authorization",
-        "Bearer " + token
-      );
-      return this.http
-        .get(this.endpoint + "/users/" + id, {
-          headers,
-        })
-    }
+  getAuth() {
+    return this.user;
+  }
 
-    getAuth() {
-      return this.user;
-    }
-
-    getRole() {
-      return this.user.role;
-    }
-    logout(){
-      localStorage.clear();
-      this.router.navigate(["/"]);
-    }
+  getRole() {
+    return this.user.role;
+  }
+  logout() {
+    localStorage.clear();
+    this.router.navigate(["/"]);
+  }
 
   postChangePassword(token: any, userName: any, passWordOld: any, passWord: any): Observable<any> {
     const httpOptions = {
@@ -127,15 +147,10 @@ export class AuthService {
         localStorage.setItem("role", res.user.role);
         localStorage.setItem("username", res.user.username);
         localStorage.setItem("access-token", res.tokens.access.token);
-        this.toast.setMessage('Đăng ký thành công','success');
+        this.toast.success('Đăng ký thành công');
         this.router.navigate(["/"]);
-      }, error =>{
-        if(error.status(500)){
-          this.toast.setMessage('Lỗi server','danger');
-        }
-        else if(error.status(400)){
-          this.toast.setMessage('Yêu cầu bị lỗi','danger');
-        }
+      }, error => {
+        this.toast.error(error.error.message)
       });
   }
 

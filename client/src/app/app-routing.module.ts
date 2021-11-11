@@ -1,3 +1,5 @@
+import { ResetPasswordComponent } from './components/account/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './components/account/forget-password/forget-password.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PrivateGuard } from './guard/private.guard';
 import { PublicGuard } from './guard/public.guard';
@@ -23,24 +25,26 @@ import { InforMultipleCustomerTwoWayComponent } from './components/book-tickets/
 
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'login', component:LoginComponent, canActivate: [PublicGuard]},
-  {path:'register', component:RegisterComponent, canActivate: [PublicGuard]},
-  {path:'schedule', component:ScheduleComponent, canActivate: [PublicGuard]},
-  {path:'schedule/detail/:id', component:DetailComponent, canActivate: [PublicGuard]},
-  {path:'booktickets/select-route', component:SelectRouteComponent, canActivate: [PublicGuard]},
-  {path:'booktickets/select-seat', component:SelectSeatComponent, canActivate: [PublicGuard]},
-  {path:'booktickets/infor-customer', component:InforCustomerComponent,canActivate: [PublicGuard] },
-  {path:'booktickets/infor-multiple-customer', component:InforMultipleCustomerComponent, canActivate: [PublicGuard]},
-  {path:'booktickets/infor-multiple-customer-two-way', component:InforMultipleCustomerTwoWayComponent, canActivate: [PublicGuard]},
-  {path:'booktickets/pay', component:PayComponent, canActivate: [PublicGuard]},
-  {path:'policy/rules', component:RulesComponent, canActivate: [PublicGuard]},
-  {path:'invoice', component:InvoiceComponent, canActivate: [PublicGuard]},
-  {path:'customer/dashboard', component:SuccessComponent, canActivate: [PrivateGuard]},
-  {path:'admin/dashboard', component:AddminComponent, canActivate: [PrivateGuard]},
-  {path:'booktickets/select-seat-two-way', component:SelectSeatReturnAwayComponent, canActivate: [PublicGuard]},
-  {path:'booktickets/pay-two-way', component:PayTwoWayComponent, canActivate: [PublicGuard]},
-  {path: '**', component: NotFoundComponent}
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent, canActivate: [PublicGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [PublicGuard] },
+  { path: 'forgot-password', component: ForgetPasswordComponent },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: 'schedule', component: ScheduleComponent, canActivate: [PublicGuard] },
+  { path: 'schedule/detail/:id', component: DetailComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/select-route', component: SelectRouteComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/select-seat', component: SelectSeatComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/infor-customer', component: InforCustomerComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/infor-multiple-customer', component: InforMultipleCustomerComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/infor-multiple-customer-two-way', component: InforMultipleCustomerTwoWayComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/pay', component: PayComponent, canActivate: [PublicGuard] },
+  { path: 'policy/rules', component: RulesComponent, canActivate: [PublicGuard] },
+  { path: 'invoice', component: InvoiceComponent, canActivate: [PublicGuard] },
+  { path: 'customer/dashboard', component: SuccessComponent, canActivate: [PrivateGuard] },
+  { path: 'admin/dashboard', component: AddminComponent, canActivate: [PrivateGuard] },
+  { path: 'booktickets/select-seat-two-way', component: SelectSeatReturnAwayComponent, canActivate: [PublicGuard] },
+  { path: 'booktickets/pay-two-way', component: PayTwoWayComponent, canActivate: [PublicGuard] },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

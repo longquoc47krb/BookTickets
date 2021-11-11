@@ -1,3 +1,5 @@
+import { ResetPasswordComponent } from './components/account/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './components/account/forget-password/forget-password.component';
 import { SharedModule } from './shared/shared.module';
 import { UserService } from './services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,6 +45,12 @@ import { InforMultipleCustomerTwoWayComponent } from './components/book-tickets/
 import { JwtModule } from '@auth0/angular-jwt';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
+
 
 
 
@@ -79,6 +87,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     InforMultipleCustomerComponent,
     InforMultipleCustomerTwoWayComponent,
     NotFoundComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
 
 
   ],
@@ -89,6 +99,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: (): string => localStorage.getItem('token'),

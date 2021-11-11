@@ -21,3 +21,7 @@ export interface AuthUser {
   id: string;
   username: string;
 }
+export interface ResetPassword {
+  token: string;
+  password: string;
+}

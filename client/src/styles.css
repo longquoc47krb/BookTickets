@@ -1,10 +1,10 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap');
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap");
 @font-face {
   font-family: "myFont";
   src: url("src/assets/fonts/FontsFree-Net-SFProText-Semibold-1.ttf");
 }
-
+@import "~ngx-toastr/toastr";
 html {
   font-family: "myFont";
 }
@@ -182,13 +182,11 @@ ul {
   font-size: 35px;
   text-transform: uppercase;
   text-align: center;
-  font-family: 'Cabin', sans-serif;
-
+  font-family: "Cabin", sans-serif;
 }
 
 .auth-context form div {
   margin-bottom: 10px;
-
 }
 
 .auth-context div {
@@ -540,7 +538,9 @@ footer.footer .move-up span:hover {
   text-transform: uppercase;
 }
 
-.register .cont .form input,button,i {
+.register .cont .form input,
+button,
+i {
   border: none;
   outline: none;
   background: none;
@@ -586,8 +586,8 @@ footer.footer .move-up span:hover {
 }
 
 .register .cont .form .submit {
-  margin-top: 40px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-weight: 600;
 
@@ -629,16 +629,16 @@ footer.footer .move-up span:hover {
   max-width: 1200px;
   position: relative;
   margin: auto;
-  text-align:center;
+  text-align: center;
 }
 
-.slideshow-container img{
+.slideshow-container img {
   display: none;
 }
 
 .slideshow-container img.image-active {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 /* The dots/indicators */

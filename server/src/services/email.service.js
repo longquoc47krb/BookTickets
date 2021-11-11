@@ -19,7 +19,7 @@ if (config.env !== 'test') {
  * @returns {Promise}
  */
 const sendEmail = async (to, subject, text) => {
-  const msg = { from: config.email.from, to, subject, text };
+  const msg = { from: 'support@hdbus.com', to, subject, text };
   await transport.sendMail(msg);
 };
 
@@ -32,10 +32,10 @@ const sendEmail = async (to, subject, text) => {
 const sendResetPasswordEmail = async (to, token) => {
   const subject = 'Reset password';
   // replace this url with the link to the reset password page of your front-end app
-  const resetPasswordUrl = `http://link-to-app/reset-password?token=${token}`;
-  const text = `Dear user,
-To reset your password, click on this link: ${resetPasswordUrl}
-If you did not request any password resets, then ignore this email.`;
+  const resetPasswordUrl = `http://localhost:4200/reset-password/${token}`;
+  const text = `Chào quý khách,
+Để khôi phục mật khẩu, vui lòng click vào đường link: ${resetPasswordUrl}
+Nếu bạn không có bất kỳ yêu cầu khôi phục nào, hãy bỏ qua email này.`;
   await sendEmail(to, subject, text);
 };
 
@@ -48,7 +48,7 @@ If you did not request any password resets, then ignore this email.`;
 const sendVerificationEmail = async (to, token) => {
   const subject = 'Email Verification';
   // replace this url with the link to the email verification page of your front-end app
-  const verificationEmailUrl = `http://link-to-app/verify-email?token=${token}`;
+  const verificationEmailUrl = `http://localhost:4200/verify-email?token=${token}`;
   const text = `Dear user,
 To verify your email, click on this link: ${verificationEmailUrl}
 If you did not create an account, then ignore this email.`;
