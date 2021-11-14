@@ -14,7 +14,7 @@
                 <h2>Thông Tin Mua Vé</h2>
             </div>
             <div class="customer">
-                <h3>Thông tin khác hàng mua vé</h3>   
+                <h3>Thông tin khác hàng mua vé</h3>
                 <div class="customer-infor">
                     <div class="customer-name">
                         Họ và tên: <label for="">{{infor.username}}</label>
@@ -34,22 +34,25 @@
             </div>
 
 
-            <div *ngIf=!isMultiple class="customer" >
-                <h3>Thông tin vé</h3>   
+            <div *ngIf=!isMultiple class="customer">
+                <h3>Thông tin vé</h3>
                 <div class="customer-infor">
                     <div class="customer-name">
-                        Tuyến xe: <label for="">{{infor_router.departure.ben_toi}} => {{infor_router.destination.ben_toi}}</label>
+                        Tuyến xe: <label for="">{{infor_router.departure.toStationName}} =>
+                            {{infor_router.destination.toStationName}}</label>
                     </div>
                     <div class="customer-phone">
                         Số lượng ghế: <label for="">{{infor_seat.number}}</label>
                     </div>
                     <div class="customer-email n_seats">
-                        Số ghế: <label for="" style="color: #00613D;" *ngFor="let item of infor_seat.seats">{{item}}</label>
+                        Số ghế: <label for="" style="color: #00613D;"
+                            *ngFor="let item of infor_seat.seats">{{item}}</label>
                     </div>
                 </div>
                 <div class="customer-infor">
                     <div class="customer-name">
-                        Thời gian: <label for="" style="color: #00613D;">{{infor_seat.time}}:00h - {{infor_router.daygo}}</label>
+                        Thời gian: <label for="" style="color: #00613D;">{{infor_seat.time}}:00h -
+                            {{infor_router.daygo}}</label>
                     </div>
                     <div class="customer-phone">
                         Điểm lên xe: <label for="">{{infor_seat.boardingPoint.name}}</label>
@@ -65,11 +68,12 @@
                 </div>
             </div>
 
-            <div *ngIf=isMultiple class="customer" >
-                <h3>Thông tin vé {{infor_seat.seats[0]}}</h3>   
+            <div *ngIf=isMultiple class="customer">
+                <h3>Thông tin vé {{infor_seat.seats[0]}}</h3>
                 <div class="customer-infor">
                     <div class="customer-name">
-                        Tuyến xe: <label for="">{{infor_router.departure.ben_toi}} => {{infor_router.destination.ben_toi}}</label>
+                        Tuyến xe: <label for="">{{infor_router.departure.toStationName}} =>
+                            {{infor_router.destination.toStationName}}</label>
                     </div>
                     <div class="customer-phone">
                         Số lượng ghế: <label for="">1</label>
@@ -80,7 +84,8 @@
                 </div>
                 <div class="customer-infor">
                     <div class="customer-name">
-                        Thời gian: <label for="" style="color: #00613D;">{{infor_seat.time}}:00h - {{infor_router.daygo}}</label>
+                        Thời gian: <label for="" style="color: #00613D;">{{infor_seat.time}}:00h -
+                            {{infor_router.daygo}}</label>
                     </div>
                     <div class="customer-phone">
                         Điểm lên xe: <label for="">{{infor_seat.boardingPoint.name}}</label>
@@ -96,12 +101,13 @@
                 </div>
             </div>
 
-            <ng-container *ngIf=isMultiple >
+            <ng-container *ngIf=isMultiple>
                 <div *ngFor="let item of listPersonGoWithBuyer" class="customer">
-                    <h3>Thông tin vé {{item.bed.name}}</h3>   
+                    <h3>Thông tin vé {{item.bed.name}}</h3>
                     <div class="customer-infor">
                         <div class="customer-name">
-                            Tuyến xe: <label for="">{{infor_router.departure.ben_toi}} => {{infor_router.destination.ben_toi}}</label>
+                            Tuyến xe: <label for="">{{infor_router.departure.toStationName}} =>
+                                {{infor_router.destination.toStationName}}</label>
                         </div>
                         <div class="customer-phone">
                             Số lượng ghế: <label for="">1</label>
@@ -112,7 +118,8 @@
                     </div>
                     <div class="customer-infor">
                         <div class="customer-name">
-                            Thời gian: <label for="" style="color: #00613D;">{{infor_seat.time}}:00h - {{infor_router.daygo}}</label>
+                            Thời gian: <label for="" style="color: #00613D;">{{infor_seat.time}}:00h -
+                                {{infor_router.daygo}}</label>
                         </div>
                         <div class="customer-phone">
                             Điểm lên xe: <label for="">{{infor_seat.boardingPoint.name}}</label>
@@ -136,8 +143,10 @@
 
             <div class="total">
                 <div style="float: right; padding-right: 20px;">
-                    <p>Số lượng ghế : <span class="pay-total" style="text-transform: lowercase;">{{infor_seat.seats.length}} Ghế</span></p>
-                    <p>Tổng Tiền : <span class="pay-total">{{infor_seat.totalMoney}} <sup data-v-6f125f51="">₫</sup></span></p>
+                    <p>Số lượng ghế : <span class="pay-total"
+                            style="text-transform: lowercase;">{{infor_seat.seats.length}} Ghế</span></p>
+                    <p>Tổng Tiền : <span class="pay-total">{{infor_seat.totalMoney}} <sup
+                                data-v-6f125f51="">₫</sup></span></p>
                 </div>
             </div>
         </div>

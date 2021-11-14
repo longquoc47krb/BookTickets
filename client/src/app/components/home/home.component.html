@@ -11,7 +11,7 @@
         </select>
         <label for="" class="label-title">Điểm Đến</label>
         <select class="text-input" name="destination" (change)="provinceChange($event.target.value,1)" required>
-          <option *ngFor="let item of listDestination" value='{{item.id}}'>Bến xe {{item.ben_toi}}</option>
+          <option *ngFor="let item of listDestination" value='{{item.id}}'>Bến xe {{item.toStationName}}</option>
         </select>
       </div>
       <div>

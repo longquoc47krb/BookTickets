@@ -1,6 +1,6 @@
 export class Ben {
-    id:Int32Array;
-    ben_toi:string;
+    id: Int32Array;
+    toStationName: string;
 }
 
 

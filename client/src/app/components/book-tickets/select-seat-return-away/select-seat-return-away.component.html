@@ -13,12 +13,16 @@
             <div style=" width: 49%;">
                 <div class="return-left">
                     <div>
-                        <h2>{{routeInfor.daygo}}</h2>
-                        <p style="font-weight: bold;">{{routeInfor.departure.ben_toi}} -- {{routeInfor.destination.ben_toi}}</p>
+                        <h2>{{stationInfor.daygo}}</h2>
+                        <p style="font-weight: bold;">{{stationInfor.departure.toStationName}} --
+                            {{stationInfor.destination.toStationName}}</p>
                     </div>
                     <div style="display: flex; padding:0px 10px;">
-                        <div style="width: 60%;">                    
-                            <p style="text-align: left; color: #726d6d;">Chọn Bến Xe: <span>{{routeInfor.departure.ben_toi}} -- {{routeInfor.destination.ben_toi}}</span></p>
+                        <div style="width: 60%;">
+                            <p style="text-align: left; color: #726d6d;">Chọn Bến Xe:
+                                <span>{{stationInfor.departure.toStationName}} --
+                                    {{stationInfor.destination.toStationName}}</span>
+                            </p>
                         </div>
                         <div style="width: 40%;">
                             <p style="text-align: right;color: #EF5222;">{{inforRouteGo.gia_ca}} d</p>
@@ -27,27 +31,31 @@
                     <div style="padding:0px 10px; font-family: 'Oswald', sans-serif; display: flex;">
                         <div style="width: 49%;">
                             <p style="text-align: left; color: #726d6d;">Giờ Khởi Hành:</p>
-                            <select name="time" (change)="onChangeTime($event.target.value,1)" style="margin-left: 0px;width: 80%;">
+                            <select name="time" (change)="onChangeTime($event.target.value,1)"
+                                style="margin-left: 0px;width: 80%;">
                                 <optGroup label="Sáng">
-                                    <option *ngFor='let i of listSangGo' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                                    <option *ngFor='let i of listSangGo' value="{{i}}">{{i}}:00 <span>(Giường)</span>
+                                    </option>
                                 </optGroup>
                                 <optGroup label="Chiều">
-                                    <option *ngFor='let i of listChieuGo' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                                    <option *ngFor='let i of listChieuGo' value="{{i}}">{{i}}:00 <span>(Giường)</span>
+                                    </option>
                                 </optGroup>
                                 <optGroup label="Tối">
-                                    <option *ngFor='let i of listToiGo' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                                    <option *ngFor='let i of listToiGo' value="{{i}}">{{i}}:00 <span>(Giường)</span>
+                                    </option>
                                 </optGroup>
                             </select>
                         </div>
                         <div style="width: 49%; margin-left: 2%;">
                             <p style="text-align: left; color: #726d6d;">Điểm Lên Xe:</p>
                             <select style="margin-left: 0px;">
-                                <option>Bến xe {{routeInfor.departure.ben_toi}}</option>
+                                <option>Bến xe {{stationInfor.departure.toStationName}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="return-right" >
+                <div class="return-right">
                     <h2 style="padding-top: 10px;">Sơ Đồ Ghế</h2>
                     <div style="display: flex;">
                         <button class="btn-right T11" (click)="OnSelectFloor(1,1)">Tầng 1</button>
@@ -55,59 +63,59 @@
                     </div>
                     <div style="margin: 20px 0px; width: 100%;">
                         <div class="floor-1">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td id="G1"><button class="G1" (click)="onBook('G1',0,1)">A01</button></td>
-                                        <td></td>
-                                        <td id="G2"><button class="G2" (click)="onBook('G2',1,1)">A02</button></td>
-                                        <td></td>
-                                        <td id="G3"><button class="G3" (click)="onBook('G3',2,1)">A03</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="G4"><button class="G4" (click)="onBook('G4',3,1)">A04</button></td>
-                                        <td></td>
-                                        <td id="G5"><button class="G5" (click)="onBook('G5', 4,1)">A05</button></td>
-                                        <td></td>
-                                        <td id="G6"><button class="G6" (click)="onBook('G6',5,1)">A06</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="G7"><button class="G7" (click)="onBook('G7',6,1)">A07</button></td>
-                                        <td></td>
-                                        <td id="G8"><button class="G8" (click)="onBook('G8',7,1)">A08</button></td>
-                                        <td></td>
-                                        <td id="G9"><button class="G9" (click)="onBook('G9',8,1)">A09</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="G10"><button class="G10" (click)="onBook('G10',9,1)">A10</button></td>
-                                        <td></td>
-                                        <td id="G11"><button class="G11" (click)="onBook('G11', 10,1)">A11</button></td>
-                                        <td></td>
-                                        <td id="G12"><button class="G12" (click)="onBook('G12',11,1)">A12</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="G13"><button class="G13" (click)="onBook('G13',12,1)">A13</button></td>
-                                        <td></td>
-                                        <td id="G14"><button class="G14" (click)="onBook('G14',13,1)">A14</button></td>
-                                        <td></td>
-                                        <td id="G15"><button class="G15" (click)="onBook('G15',14,1)">A15</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="G16"><button class="G16" (click)="onBook('G16',15,1)">A16</button></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td id="G17"><button class="G17" (click)="onBook('G17',16,1)">A17</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="G18"><button class="G18" (click)="onBook('G18',17,1)">A18</button></td>
-                                        <td id="G19"><button class="G19" (click)="onBook('G19', 18,1)">A19</button></td>
-                                        <td id="G20"><button class="G20" (click)="onBook('G20',19,1)">A20</button></td>
-                                        <td id="G21"><button class="G21" (click)="onBook('G21',20,1)">A21</button></td>
-                                        <td id="G22"><button class="G22" (click)="onBook('G22',21,1)">A22</button></td>
-                                    </tr>
-                                </table>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td id="G1"><button class="G1" (click)="onBook('G1',0,1)">A01</button></td>
+                                    <td></td>
+                                    <td id="G2"><button class="G2" (click)="onBook('G2',1,1)">A02</button></td>
+                                    <td></td>
+                                    <td id="G3"><button class="G3" (click)="onBook('G3',2,1)">A03</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="G4"><button class="G4" (click)="onBook('G4',3,1)">A04</button></td>
+                                    <td></td>
+                                    <td id="G5"><button class="G5" (click)="onBook('G5', 4,1)">A05</button></td>
+                                    <td></td>
+                                    <td id="G6"><button class="G6" (click)="onBook('G6',5,1)">A06</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="G7"><button class="G7" (click)="onBook('G7',6,1)">A07</button></td>
+                                    <td></td>
+                                    <td id="G8"><button class="G8" (click)="onBook('G8',7,1)">A08</button></td>
+                                    <td></td>
+                                    <td id="G9"><button class="G9" (click)="onBook('G9',8,1)">A09</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="G10"><button class="G10" (click)="onBook('G10',9,1)">A10</button></td>
+                                    <td></td>
+                                    <td id="G11"><button class="G11" (click)="onBook('G11', 10,1)">A11</button></td>
+                                    <td></td>
+                                    <td id="G12"><button class="G12" (click)="onBook('G12',11,1)">A12</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="G13"><button class="G13" (click)="onBook('G13',12,1)">A13</button></td>
+                                    <td></td>
+                                    <td id="G14"><button class="G14" (click)="onBook('G14',13,1)">A14</button></td>
+                                    <td></td>
+                                    <td id="G15"><button class="G15" (click)="onBook('G15',14,1)">A15</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="G16"><button class="G16" (click)="onBook('G16',15,1)">A16</button></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td id="G17"><button class="G17" (click)="onBook('G17',16,1)">A17</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="G18"><button class="G18" (click)="onBook('G18',17,1)">A18</button></td>
+                                    <td id="G19"><button class="G19" (click)="onBook('G19', 18,1)">A19</button></td>
+                                    <td id="G20"><button class="G20" (click)="onBook('G20',19,1)">A20</button></td>
+                                    <td id="G21"><button class="G21" (click)="onBook('G21',20,1)">A21</button></td>
+                                    <td id="G22"><button class="G22" (click)="onBook('G22',21,1)">A22</button></td>
+                                </tr>
+                            </table>
                         </div>
-                        <div  class="floor-2">
+                        <div class="floor-2">
                             <table style="width: 100%;">
                                 <tr>
                                     <td id="G23"><button class="G23" (click)="onBook('G23',22,1)">B01</button></td>
@@ -162,21 +170,27 @@
                         </div>
                         <div class="note" style="margin-left: 90px; display: flex;">
                             <div class="note-content">
-                                <label for=""><input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;"> Trống</label>
+                                <label for=""><input type="text" disabled
+                                        style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;">
+                                    Trống</label>
                             </div>
                             <div class="note-content">
-                                <label for=""><input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;"> Đang chọn</label>
+                                <label for=""><input type="text" disabled
+                                        style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;">
+                                    Đang chọn</label>
                             </div>
                             <div class="note-content">
-                                <label for=""><input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;"> Đã đặt</label>
+                                <label for=""><input type="text" disabled
+                                        style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;">
+                                    Đã đặt</label>
                             </div>
                         </div>
                         <div style="padding-left: 20px; font-family: 'Oswald', sans-serif;">
                             <p style="text-align: left;">Ghế đã chọn: </p>
                             <div>
-                                <span *ngFor="let i of listitemGos;">  
-                                    <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>  
-                                    <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span> 
+                                <span *ngFor="let i of listitemGos;">
+                                    <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>
+                                    <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span>
                                 </span>
                             </div>
                         </div>
@@ -190,12 +204,16 @@
             <div style="width: 49%;margin-left: 1.5%;">
                 <div class="return-left">
                     <div style="font-family: 'Oswald', sans-serif;">
-                        <h2>{{routeInfor.returnday}}</h2>
-                        <p style="font-weight: bold;">{{routeInfor.destination.ben_toi}} -- {{routeInfor.departure.ben_toi}}</p>
+                        <h2>{{stationInfor.returnday}}</h2>
+                        <p style="font-weight: bold;">{{stationInfor.destination.toStationName}} --
+                            {{stationInfor.departure.toStationName}}</p>
                     </div>
                     <div style="font-family: 'Oswald', sans-serif; display: flex; padding:0px 10px;">
-                        <div style="width: 60%;">                    
-                            <p style="text-align: left; color: #726d6d;">Chọn Bến Xe: <span>{{routeInfor.destination.ben_toi}} -- {{routeInfor.departure.ben_toi}}</span></p>
+                        <div style="width: 60%;">
+                            <p style="text-align: left; color: #726d6d;">Chọn Bến Xe:
+                                <span>{{stationInfor.destination.toStationName}} --
+                                    {{stationInfor.departure.toStationName}}</span>
+                            </p>
                         </div>
                         <div style="width: 40%;">
                             <p style="text-align: right;color: #EF5222;">{{inforRouteGo.gia_ca}} d</p>
@@ -204,22 +222,28 @@
                     <div style="padding:0px 10px; font-family: 'Oswald', sans-serif; display: flex;">
                         <div style="width: 49%;">
                             <p style="text-align: left; color: #726d6d;">Giờ Khởi Hành:</p>
-                            <select name="time" (change)="onChangeTime($event.target.value)" style="margin-left: 0px;width: 80%;">
+                            <select name="time" (change)="onChangeTime($event.target.value)"
+                                style="margin-left: 0px;width: 80%;">
                                 <optGroup label="Sáng">
-                                    <option *ngFor='let i of listSangReturn' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                                    <option *ngFor='let i of listSangReturn' value="{{i}}">{{i}}:00
+                                        <span>(Giường)</span>
+                                    </option>
                                 </optGroup>
                                 <optGroup label="Chiều">
-                                    <option *ngFor='let i of listChieuReturn' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                                    <option *ngFor='let i of listChieuReturn' value="{{i}}">{{i}}:00
+                                        <span>(Giường)</span>
+                                    </option>
                                 </optGroup>
                                 <optGroup label="Tối">
-                                    <option *ngFor='let i of listToiReturn' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
+                                    <option *ngFor='let i of listToiReturn' value="{{i}}">{{i}}:00 <span>(Giường)</span>
+                                    </option>
                                 </optGroup>
                             </select>
                         </div>
                         <div style="width: 49%; margin-left: 2%;">
                             <p style="text-align: left; color: #726d6d;">Điểm Lên Xe:</p>
                             <select style="margin-left: 0px;">
-                                <option>Bến xe {{routeInfor.destination.ben_toi}}</option>
+                                <option>Bến xe {{stationInfor.destination.toStationName}}</option>
                             </select>
                         </div>
                     </div>
@@ -232,57 +256,57 @@
                     </div>
                     <div style="margin: 20px 0px; width: 100%;">
                         <div class="floor-1">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td id="R1"><button class="R1" (click)="onBook('R1',0)">A01</button></td>
-                                        <td></td>
-                                        <td id="R2"><button class="R2" (click)="onBook('R2',1)">A02</button></td>
-                                        <td></td>
-                                        <td id="R3"><button class="R3" (click)="onBook('R3',2)">A03</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="R4"><button class="R4" (click)="onBook('R4',3)">A04</button></td>
-                                        <td></td>
-                                        <td id="R5"><button class="R5" (click)="onBook('R5', 4)">A05</button></td>
-                                        <td></td>
-                                        <td id="R6"><button class="R6" (click)="onBook('R6',5)">A06</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="R7"><button class="R7" (click)="onBook('R7',6)">A07</button></td>
-                                        <td></td>
-                                        <td id="R8"><button class="R8" (click)="onBook('R8',7)">A08</button></td>
-                                        <td></td>
-                                        <td id="R9"><button class="R9" (click)="onBook('R9',8)">A09</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="R10"><button class="R10" (click)="onBook('R10',9)">A10</button></td>
-                                        <td></td>
-                                        <td id="R11"><button class="R11" (click)="onBook('R11', 10)">A11</button></td>
-                                        <td></td>
-                                        <td id="R12"><button class="R12" (click)="onBook('R12',11)">A12</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="R13"><button class="R13" (click)="onBook('R13',12)">A13</button></td>
-                                        <td></td>
-                                        <td id="R14"><button class="R14" (click)="onBook('R14',13)">A14</button></td>
-                                        <td></td>
-                                        <td id="R15"><button class="R15" (click)="onBook('R15',14)">A15</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="R16"><button class="R16" (click)="onBook('R16',15)">A16</button></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td id="R17"><button class="R17" (click)="onBook('R17',16)">A17</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="R18"><button class="R18" (click)="onBook('R18',17)">A18</button></td>
-                                        <td id="R19"><button class="R19" (click)="onBook('R19', 18)">A19</button></td>
-                                        <td id="R20"><button class="R20" (click)="onBook('R20',19)">A20</button></td>
-                                        <td id="R21"><button class="R21" (click)="onBook('R21',20)">A21</button></td>
-                                        <td id="R22"><button class="R22" (click)="onBook('R22',21)">A22</button></td>
-                                    </tr>
-                                </table>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td id="R1"><button class="R1" (click)="onBook('R1',0)">A01</button></td>
+                                    <td></td>
+                                    <td id="R2"><button class="R2" (click)="onBook('R2',1)">A02</button></td>
+                                    <td></td>
+                                    <td id="R3"><button class="R3" (click)="onBook('R3',2)">A03</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="R4"><button class="R4" (click)="onBook('R4',3)">A04</button></td>
+                                    <td></td>
+                                    <td id="R5"><button class="R5" (click)="onBook('R5', 4)">A05</button></td>
+                                    <td></td>
+                                    <td id="R6"><button class="R6" (click)="onBook('R6',5)">A06</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="R7"><button class="R7" (click)="onBook('R7',6)">A07</button></td>
+                                    <td></td>
+                                    <td id="R8"><button class="R8" (click)="onBook('R8',7)">A08</button></td>
+                                    <td></td>
+                                    <td id="R9"><button class="R9" (click)="onBook('R9',8)">A09</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="R10"><button class="R10" (click)="onBook('R10',9)">A10</button></td>
+                                    <td></td>
+                                    <td id="R11"><button class="R11" (click)="onBook('R11', 10)">A11</button></td>
+                                    <td></td>
+                                    <td id="R12"><button class="R12" (click)="onBook('R12',11)">A12</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="R13"><button class="R13" (click)="onBook('R13',12)">A13</button></td>
+                                    <td></td>
+                                    <td id="R14"><button class="R14" (click)="onBook('R14',13)">A14</button></td>
+                                    <td></td>
+                                    <td id="R15"><button class="R15" (click)="onBook('R15',14)">A15</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="R16"><button class="R16" (click)="onBook('R16',15)">A16</button></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td id="R17"><button class="R17" (click)="onBook('R17',16)">A17</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="R18"><button class="R18" (click)="onBook('R18',17)">A18</button></td>
+                                    <td id="R19"><button class="R19" (click)="onBook('R19', 18)">A19</button></td>
+                                    <td id="R20"><button class="R20" (click)="onBook('R20',19)">A20</button></td>
+                                    <td id="R21"><button class="R21" (click)="onBook('R21',20)">A21</button></td>
+                                    <td id="R22"><button class="R22" (click)="onBook('R22',21)">A22</button></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="floor-2">
                             <table style="width: 100%;">
@@ -339,21 +363,27 @@
                         </div>
                         <div class="note" style="margin-left: 90px; display: flex;">
                             <div class="note-content">
-                                <label for=""><input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;"> Trống</label>
+                                <label for=""><input type="text" disabled
+                                        style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;">
+                                    Trống</label>
                             </div>
                             <div class="note-content">
-                                <label for=""><input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;"> Đang chọn</label>
+                                <label for=""><input type="text" disabled
+                                        style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;">
+                                    Đang chọn</label>
                             </div>
                             <div class="note-content">
-                                <label for=""><input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;"> Đã đặt</label>
+                                <label for=""><input type="text" disabled
+                                        style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62); width: 20px; height: 20px;">
+                                    Đã đặt</label>
                             </div>
                         </div>
                         <div style="padding-left: 20px; font-family: 'Oswald', sans-serif;">
                             <p style="text-align: left;">Ghế đã chọn: </p>
                             <div>
-                                <span *ngFor="let i of listitemReturns">  
-                                    <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>  
-                                    <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span> 
+                                <span *ngFor="let i of listitemReturns">
+                                    <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>
+                                    <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span>
                                 </span>
                             </div>
                         </div>
@@ -366,7 +396,8 @@
             </div>
         </div>
         <div class="back">
-            <button class="button" (click)="onBack()" style="margin-left: -10px;"><i class="fas fa-chevron-left"></i> Quay Lại</button>        
+            <button class="button" (click)="onBack()" style="margin-left: -10px;"><i class="fas fa-chevron-left"></i>
+                Quay Lại</button>
         </div>
         <div class="cont">
             <button class="button" (click)="submit()">Tiếp Tục<i class="fas fa-chevron-right"></i></button>

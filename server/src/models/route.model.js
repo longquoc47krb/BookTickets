@@ -1,32 +1,24 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
-
+const { SeatSchema } = require('./seat.model');
 const routeSchema = mongoose.Schema(
   {
-    departure: {
+    fromStationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Station',
     },
-    destination: {
+    toStationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Station',
     },
-    price: {
-      type: Number,
+    startTime: {
+      type: Date,
       required: true,
     },
-    car: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Car',
-      required: true,
-    },
-    departureProvince: {
+    seats: [SeatSchema],
+    price: { type: Number, default: 0 },
+    image: {
       type: String,
-      required: true,
-    },
-    arrivalProvince: {
-      type: String,
-      required: true,
     },
   },
   {

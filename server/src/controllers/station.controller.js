@@ -1,84 +1,92 @@
 const { Station, Route } = require('../models');
-const pick = require('../utils/pick');
-const catchAsync = require('../utils/catchAsync');
-const postStation = async (req, res) => {
-  try {
-    const { stationName, stationAddress, province } = req.body;
-    const foundStation = await Station.findOne({ stationCode });
-    if (foundStation) {
-      return res.status(400).send({ message: 'Bến đã tồn tại!' });
-    }
-    const newStation = new Station({
-      stationName,
-      stationAddress,
-      province,
-      statusActive: 'Active',
-    });
-    const result = await newStation.save();
-    res.status(201).send(result);
-  } catch (error) {
-    res.status(500).send({ message: 'Something went wrong !' });
-  }
-};
+const cloudinary = require('../utils/cloudinary');
+const postStation = async (req, res, next) => {
+  const { stationName, stationAddress, statusActive, province, thumbnail } = req.body;
+  // Upload image to cloudinary
+  const result = await cloudinary.uploader.upload(req.file.path, { folder: 'images/stations' });
+  const newStation = new Station({
+    stationName,
+    stationAddress,
+    province,
+    statusActive: 'Active',
+    thumbnail: result.secure_url,
+    thumbnail_id: result.public_id,
+  });
 
-const patchStation = async (req, res) => {
-  try {
-    const { stationCode, stationName, stationAddress, province } = req.body;
-    const foundStation = await Station.findOne({ stationCode });
-    if (!foundStation) {
-      return res.status(404).send({ message: 'Bến không hợp lệ' });
-    }
-    foundStation.stationName = stationName;
-    foundStation.stationAddress = stationAddress;
-    foundStation.province = province;
-    const result = await foundStation.save();
-    res.status(202).send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: 'Something went wrong !' });
-  }
+  newStation
+    .save()
+    .then((station) => {
+      res.status(201).json(station);
+      console.log(req.file);
+    })
+    .catch((err) => res.json(err));
 };
+// replace
+const putStation = (req, res, next) => {
+  const { id } = req.params;
+  Station.findById(id)
+    .then((station) => {
+      if (!station)
+        return Promise.reject({
+          status: 404,
+          message: 'Station not found',
+        });
 
+      const keys = ['stationName', 'stationAddress', 'province'];
+      keys.forEach((key) => {
+        station[key] = req.body[key];
+      });
+      return station.save();
+    })
+    .then((station) => res.status(200).json(station))
+    .catch((err) => res.json(err));
+};
+// update
+const patchStation = (req, res, next) => {
+  const { id } = req.params;
+  Station.findById(id)
+    .then((station) => {
+      if (!station)
+        return Promise.reject({
+          status: 404,
+          message: 'Station not found',
+        });
+      Object.keys(req.body).forEach((key) => {
+        station[key] = req.body[key];
+      });
+
+      return station.save();
+    })
+    .then((station) => res.status(200).json(station))
+    .catch((err) => res.json(err));
+};
 const deleteStation = async (req, res) => {
-  try {
-    const { stationCode } = req.query;
-    const foundStation = await Station.findOne({ stationCode });
-    if (!foundStation) {
-      return res.status(404).send({ message: 'Bến không hợp lệ' });
-    }
-    const findRoute = await Route.findOne().or([{ departurePlace: foundStation._id }, { arrivalPlace: foundStation._id }]);
-    if (findRoute) {
-      return res.status(400).send({ message: 'Bến đã tồn tại!' });
-    }
-    foundStation.statusActive = 'Inactive';
-    const result = await foundStation.save();
-    res.status(202).send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: 'Something went wrong !' });
-  }
+  const { id } = req.params;
+  Station.findById(id)
+    .then((station) => {
+      if (!station)
+        return Promise.reject({
+          status: 404,
+          message: 'Station not found',
+        });
+      return Promise.all([Station.deleteOne({ _id: id }), station]);
+    })
+    .then((result) => res.status(200).json(result[1]))
+    .catch((err) => res.json(err));
 };
 
-const getStation = async (req, res) => {
-  try {
-    const findStation = await Station.find({ statusActive: 'Active' });
-    res.status(200).send(findStation);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: 'Something went wrong !' });
-  }
+const getStation = (req, res, next) => {
+  const { id } = req.params;
+  Station.findById(id)
+    .then((station) => res.status(200).json(station))
+    .catch((err) => res.json(err));
 };
-const getAllStations = async (req, res) => {
-  try {
-    const findStation = await Station.find().populate('stationName stationAddress province', 'stationId');
-    if (findStation.length === 0) {
-      return res.status(404).send({ message: 'Not Found Station' });
-    }
-    res.status(200).send(findStation);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: 'Something went wrong !' });
-  }
+const getAllStations = (req, res, next) => {
+  Station.find()
+    .then((stations) => {
+      res.status(200).json(stations);
+    })
+    .catch((err) => res.status(500).send({ message: 'Something went wrong !' }));
 };
 
-module.exports = { postStation, patchStation, deleteStation, getStation, getAllStations };
+module.exports = { postStation, putStation, patchStation, deleteStation, getStation, getAllStations };

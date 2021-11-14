@@ -6,8 +6,9 @@
                 <div class="item-left">
                     <label for="">Tuyến đường</label>
                     <i class="fas fa-bus"></i>
-                    <select name="departure" (change)="cityChanged($event.target.value)" required>                    
-                        <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.ben_xe_di}} -- Bến xe {{item.ben_xe_toi}}</option>
+                    <select name="departure" (change)="cityChanged($event.target.value)" required>
+                        <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.ben_xe_di}} -- Bến
+                            xe {{item.ben_xe_toi}}</option>
                     </select>
                 </div>
                 <div class="clear"></div>
@@ -15,14 +16,14 @@
                 <div class="item-left">
                     <label for="">Ngày đi</label>
                     <i class="fas fa-calendar-alt"></i>
-                    <input type="date" id="date"  min="{{today}}" (change)="dateChanged($event.target)" required>
+                    <input type="date" id="date" min="{{today}}" (change)="dateChanged($event.target)" required>
                 </div>
                 <div class="clear"></div>
                 <hr style="width: 100%;">
                 <div class="item-left">
                     <label for="">Giời khởi hành</label>
                     <i class="fas fa-clock"></i>
-                    <select (change)="onChangeTime($event.target.value)">                    
+                    <select (change)="onChangeTime($event.target.value)">
                         <optGroup label="Sáng">
                             <option *ngFor='let i of listSang' value="{{i}}">{{i}}:00 <span>(Giường)</span></option>
                         </optGroup>
@@ -46,14 +47,17 @@
                 <div class="item-left">
                     <label for="">Điểm lên xe</label>
                     <i class="fas fa-map-marker-alt"></i>
-                    <select>                    
-                        <option value="">Bến xe {{service.step1.departure.ben_toi}}</option>
+                    <select>
+                        <option value="">Bến xe {{service.step1.departure.toStationName}}</option>
                     </select>
                 </div>
                 <div class="clear"></div>
                 <hr style="width: 100%;">
                 <div class="accept-policy">
-                    <input type="checkbox" (change)="onCheck()"><label for="" style="color: black; margin-left: 0px;">Chấp nhận điều khoản <span style="color: #EF5222;">đặt vé</span> của chúng tôi.</label>                </div>
+                    <input type="checkbox" (change)="onCheck()"><label for=""
+                        style="color: black; margin-left: 0px;">Chấp nhận điều khoản <span style="color: #EF5222;">đặt
+                            vé</span> của chúng tôi.</label>
+                </div>
             </form>
         </div>
         <div class="ticket-item-center">
@@ -62,7 +66,8 @@
                     Sơ đồ ghế
                 </div>
                 <div class="title-info">
-                    Giá vé: 0<span style="text-transform: none; color: white;">đ</span>  Tổng tiền: 0<span style="text-transform: none; color: white;">đ</span>
+                    Giá vé: 0<span style="text-transform: none; color: white;">đ</span> Tổng tiền: 0<span
+                        style="text-transform: none; color: white;">đ</span>
                 </div>
             </div>
             <div class="floor">
@@ -178,9 +183,12 @@
                 </table>
                 <div class="note clear">
                     <div class="note-item">
-                        <input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62);"> <span style="font-weight: bold;"> Trống</span> 
-                        <input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62);"> <span style="font-weight: bold;"> Đang chọn</span>
-                        <input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62);"> <span style="font-weight: bold;"> Đã đặt</span>
+                        <input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62);">
+                        <span style="font-weight: bold;"> Trống</span>
+                        <input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62);">
+                        <span style="font-weight: bold;"> Đang chọn</span>
+                        <input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62);">
+                        <span style="font-weight: bold;"> Đã đặt</span>
                     </div>
                 </div>
                 <div class="btn-book-ticket">
@@ -193,17 +201,22 @@
                 Điều Khoản đặt vé
             </div>
             <div class="ticket-item-right-infor">
-                <p>(*) Quý khách vui lòng mang email có chứa mã vé đến văn phòng để đổi vé lên xe trước giờ xuất bến ít nhất <span style="color:  #EF5222;">60 phút</span>  để chúng tôi trung chuyển.</p>
+                <p>(*) Quý khách vui lòng mang email có chứa mã vé đến văn phòng để đổi vé lên xe trước giờ xuất bến ít
+                    nhất <span style="color:  #EF5222;">60 phút</span> để chúng tôi trung chuyển.</p>
                 <p>(*) Thông tin hành khách phải chính xác, nếu không sẽ không thể lên xe hoặc hủy/đổi vé</p>
-                <p>(*) Quý khách không được đổi / trả vé vào các ngày Lễ Tết ( ngày thường qúy khách được quyền chuyển đổi hoặc hủy vé <span style="color:  #EF5222;">một lần</span> duy nhất, và trước giờ xe chạy 24 giờ.), phí hủy vé 10%</p>
+                <p>(*) Quý khách không được đổi / trả vé vào các ngày Lễ Tết ( ngày thường qúy khách được quyền chuyển
+                    đổi hoặc hủy vé <span style="color:  #EF5222;">một lần</span> duy nhất, và trước giờ xe chạy 24
+                    giờ.), phí hủy vé 10%</p>
                 <p>(*) Nếu quý khách có nhu cầu trung chuyển, vui lòng liên hệ số điện thoại
-                    <span style="color:  #EF5222;">1900 6067</span> trước khi đặt vé. Chúng tôi sẽ không đón/ trung chuyển tại những điểm xe trung chuyển không thể tới được.</p>
+                    <span style="color:  #EF5222;">1900 6067</span> trước khi đặt vé. Chúng tôi sẽ không đón/ trung
+                    chuyển tại những điểm xe trung chuyển không thể tới được.
+                </p>
             </div>
         </div>
     </div>
 </section>
 <section class="book-pay-accept">
-<!--     <div class="container-pay-item">
+    <!--     <div class="container-pay-item">
 
         <div class="pay-item-right">
             <div class="title">
@@ -238,7 +251,7 @@
             <form action="">
                 <div class="pay-item-infor clear">
                     <label for="" class="pay-item-infor-left" style="font-size: 18px;">Tuyến</label>
-                    <p class="pay-item-infor-right">{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</p>
+                    <p class="pay-item-infor-right">{{service.step1.departure.toStationName}} -- {{service.step1.destination.toStationName}}</p>
                 </div>
                 <div class="pay-item-infor clear">
                     <label for="" class="pay-item-infor-left" style="font-size: 18px;">Ngày giờ</label>
@@ -260,14 +273,15 @@
         </div>
     </div> -->
     <div class="payment-container" *ngIf="!paidFor">
-        <h1>{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</h1>
+        <h1>{{service.step1.departure.toStationName}} -- {{service.step1.destination.toStationName}}</h1>
         <h2>{{ service.step2.totalMoney }} VND</h2>
         <div *ngIf="!isWaitting" style="display: flex;">
             <div class="item-infor">
                 <h2>Thông tin vé</h2>
                 <div style=" width: 80%;margin: auto;">
                     <label for="">Tuyến đường: </label>
-                    <label for="" style="text-align: right;">{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</label>
+                    <label for="" style="text-align: right;">{{service.step1.departure.toStationName}} --
+                        {{service.step1.destination.toStationName}}</label>
                     <div style=" width: 80%;margin: auto;display: flex;">
                         <label for="">Ngày chạy: </label>
                         <label for="" style="text-align: right;">{{service.step1.daygo}}</label>
@@ -294,11 +308,11 @@
                 <h2>Thông tin khách hàng</h2>
                 <div style=" width: 80%;margin: auto;display: flex;">
                     <label for="">Tên khách hàng: </label>
-                    <label for="" style="text-align: right;">{{customer.tenKh}}</label>
+                    <label for="" style="text-align: right;">{{customer.fullName}}</label>
                 </div>
                 <div style=" width: 80%;margin: auto;display: flex;">
                     <label for="">Số điện thoại: </label>
-                    <label for="" style="text-align: right;">{{customer.sdt}}</label>
+                    <label for="" style="text-align: right;">{{customer.phone}}</label>
                 </div>
                 <div style=" width: 80%;margin: auto;display: flex;">
                     <label for="">Email: </label>
@@ -322,7 +336,8 @@
                     </tr>
                     <tr>
                         <td style="font-size: 20px;">Tuyến đường</td>
-                        <td style="font-size: 20px;">{{service.step1.departure.ben_toi}} -- {{service.step1.destination.ben_toi}}</td>
+                        <td style="font-size: 20px;">{{service.step1.departure.toStationName}} --
+                            {{service.step1.destination.toStationName}}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 20px;">Ngày chạy</td>
@@ -334,7 +349,9 @@
                     </tr>
                     <tr>
                         <td style="font-size: 20px;">Giường</td>
-                        <td style="font-size: 20px;"><ng-container  *ngFor="let i of listSeats"> {{i}}</ng-container></td>
+                        <td style="font-size: 20px;">
+                            <ng-container *ngFor="let i of listSeats"> {{i}}</ng-container>
+                        </td>
                     </tr>
                     <tr>
                         <td style="font-size: 20px;">Số lượng</td>
@@ -347,9 +364,12 @@
                 </table>
                 <div style="width: 50%;">
                     <p style="text-align: left;font-size: 20px; color:#009344;">Lưu ý (*)</p>
-                    <p style="text-align: left;">- Xin hãy lên bến trước <span style="color: #F2754E;"> 20 phút</span>  để thu xếp hành lý.</p>
-                    <p style="text-align: left;">- Lưu lại <span style="color: #F2754E;"> mã vé</span> để xác thực trước khi lên xe khởi hành.</p>
-                    <p style="text-align: left;">- Hãy chụp lại <span style="color: #F2754E;"> mã vé</span> ngay lúc này hoặc <span style="color: #F2754E;"> vô gmail</span> để xem.</p>
+                    <p style="text-align: left;">- Xin hãy lên bến trước <span style="color: #F2754E;"> 20 phút</span>
+                        để thu xếp hành lý.</p>
+                    <p style="text-align: left;">- Lưu lại <span style="color: #F2754E;"> mã vé</span> để xác thực trước
+                        khi lên xe khởi hành.</p>
+                    <p style="text-align: left;">- Hãy chụp lại <span style="color: #F2754E;"> mã vé</span> ngay lúc này
+                        hoặc <span style="color: #F2754E;"> vô gmail</span> để xem.</p>
                 </div>
             </div>
         </div>

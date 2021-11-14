@@ -3,12 +3,6 @@ const { toJSON, paginate } = require('./plugins');
 
 const stationSchema = mongoose.Schema(
   {
-    stationCode: {
-      type: mongoose.Schema.Types.ObjectId,
-      index: true,
-      required: true,
-      auto: true,
-    },
     stationName: {
       type: String,
       required: true,
@@ -19,7 +13,13 @@ const stationSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    thumbnail: String,
+    thumbnail: {
+      type: String,
+    },
+    thumbnail_id: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

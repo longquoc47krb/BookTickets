@@ -144,14 +144,12 @@ export class AddminComponent implements OnInit {
     this.form = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      conf_password: ['', [Validators.required]],
-      tenKh: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-      sdt: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(10), Validators.minLength(10)]],
-      cmnd: ['', [Validators.required]],
-      dia_chi: ['', [Validators.required]],
-      thanh_pho: ['', [Validators.required]],
-      quan_huyen: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(10), Validators.minLength(10)]],
+      address: ['', [Validators.required]],
+      province: ['', [Validators.required]]
     })
 
     this.formRoute = this.fb.group({
@@ -163,9 +161,9 @@ export class AddminComponent implements OnInit {
     })
 
     this.formPoint = this.fb.group({
-      thanh_pho: ['', [Validators.required]],
-      ten_ben: ['', [Validators.required]],
-      dia_chi: ['', [Validators.required]],
+      province: ['', [Validators.required]],
+      stationName: ['', [Validators.required]],
+      address: ['', [Validators.required]],
     })
 
     this.formCar = this.fb.group({
@@ -179,6 +177,7 @@ export class AddminComponent implements OnInit {
     })
     this.getAllRoute();
     this.getAllAccount();
+    console.log(this.listUser)
     this.getAllCar();
     this.getDate();
     this.onGetRouteToExport();
@@ -275,9 +274,9 @@ export class AddminComponent implements OnInit {
       }
       if (this.isShow == 2) {
         this.formPoint = this.fb.group({
-          thanh_pho: '',
-          ten_ben: '',
-          dia_chi: '',
+          province: '',
+          stationName: '',
+          address: '',
         });
         this.srcImage = this.route.picture;
       }
@@ -548,19 +547,19 @@ export class AddminComponent implements OnInit {
       this.ser.getBenById(obj).subscribe(
         data => {
           this.listDestination = data.data;
-          this.ser.step1.destination.ben_toi = this.listDestination[0].ben_toi.replace('Bến xe', '');
+          this.ser.step1.destination.toStationName = this.listDestination[0].toStationName.replace('Bến xe', '');
           this.ser.step1.destination.id = this.listDestination[0].id;
           sessionStorage.setItem('lBenToi', JSON.stringify(this.listDestination));
         }
       )
       const item = this.listDeparture.find(departure => departure.id == obj);
-      this.ser.step1.departure.ben_toi = item.ben_toi.replace('Bến xe', '');
+      this.ser.step1.departure.toStationName = item.toStationName.replace('Bến xe', '');
       this.ser.step1.departure.id = item.id.toString();
       this.form.value.fromStation_Id = obj;
     }
     else {
       const item = this.listDestination.find(destination => destination.id == obj);
-      this.ser.step1.destination.ben_toi = item.ben_toi.replace('Bến xe', '');
+      this.ser.step1.destination.toStationName = item.toStationName.replace('Bến xe', '');
       this.ser.step1.destination.id = item.id.toString();
       this.form.value.toStation_Id = obj;
     }
@@ -582,12 +581,12 @@ export class AddminComponent implements OnInit {
     var account = {
       username: this.form.value.username,
       password: this.form.value.password,
-      fullName: this.form.value.tenKh,
+      fullName: this.form.value.fullName,
       email: this.form.value.email,
-      sdt: this.form.value.sdt,
+      phone: this.form.value.phone,
       cmnd: this.form.value.cmnd,
-      dia_chi: this.form.value.dia_chi,
-      thanh_pho: this.form.value.thanh_pho,
+      address: this.form.value.address,
+      province: this.form.value.province,
       quan_huyen: this.form.value.quan_huyen
     }
 
@@ -785,9 +784,9 @@ export class AddminComponent implements OnInit {
       var data1 = {}
       if (this.fileSelected == null) {
         data1 = {
-          ten_ben: this.formPoint.value.ten_ben,
-          dia_chi: this.formPoint.value.dia_chi,
-          thanh_pho: this.formPoint.value.thanh_pho,
+          stationName: this.formPoint.value.stationName,
+          address: this.formPoint.value.address,
+          province: this.formPoint.value.province,
           picture: null,
         };
         console.log(data1);
@@ -799,9 +798,9 @@ export class AddminComponent implements OnInit {
             res => {
               this.hinhAnh = "https://drive.google.com/uc?id=" + res.id;
               data1 = {
-                ten_ben: this.formPoint.value.ten_ben,
-                dia_chi: this.formPoint.value.dia_chi,
-                thanh_pho: this.formPoint.value.thanh_pho,
+                stationName: this.formPoint.value.stationName,
+                address: this.formPoint.value.address,
+                province: this.formPoint.value.province,
                 picture: this.hinhAnh,
               };
               this.onCreateRoute(data1);
@@ -822,8 +821,8 @@ export class AddminComponent implements OnInit {
           hinhAnh = null;
 
         data1 = {
-          ten_ben: this.formPoint.value.ten_ben == "" ? this.route.ben_toi : this.formPoint.value.ten_ben,
-          dia_chi: this.formPoint.value.dia_chi == "" ? this.route.dia_chi : this.formPoint.value.dia_chi,
+          stationName: this.formPoint.value.stationName == "" ? this.route.toStationName : this.formPoint.value.stationName,
+          address: this.formPoint.value.address == "" ? this.route.address : this.formPoint.value.address,
           picture: hinhAnh,
         };
       }
@@ -834,8 +833,8 @@ export class AddminComponent implements OnInit {
             res => {
               // this.hinhAnh = "https://drive.google.com/uc?id="+res.id;
               // data1 = {
-              //     ten_ben:this.formPoint.value.ten_ben==""?this.route.ben_toi:this.formPoint.value.ten_ben,
-              //     dia_chi:this.formPoint.value.dia_chi==""?this.route.dia_chi:this.formPoint.value.dia_chi,
+              //     stationName:this.formPoint.value.stationName==""?this.route.toStationName:this.formPoint.value.stationName,
+              //     address:this.formPoint.value.address==""?this.route.address:this.formPoint.value.address,
               //     picture:this.hinhAnh,
               //   };
               //   console.log(data1);
@@ -914,7 +913,7 @@ export class AddminComponent implements OnInit {
             var datas1 = {
               maVe: i.ma_ve,
               ten_khach_hang: j.fullName,
-              sdt: i.phone,
+              phone: i.phone,
               giuong: j.stt,
               noiXuong: j.noi_xuong
             }
@@ -934,13 +933,13 @@ export class AddminComponent implements OnInit {
 
 
 
-  routeInfor;
+  stationInfor;
   onGetAllRouteInfor() {
     this.service.getAllRouteInfor().subscribe(
       data => {
-        this.routeInfor = data.data;
+        this.stationInfor = data.data;
         console.log("Bến ")
-        console.log(this.routeInfor);
+        console.log(this.stationInfor);
 
       }
     )

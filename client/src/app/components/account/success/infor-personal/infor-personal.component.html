@@ -10,10 +10,11 @@
                         <p style="font-size: 16px; font-weight: bold;">Họ tên</p>
                     </div>
                     <div class="item-center">
-                        <p>{{inforCustomer.tenKh}}</p>
-                    </div>  
+                        <p>{{inforCustomer.fullName}}</p>
+                    </div>
                     <div class="item-right">
-                        <p *ngIf="!isEdit" class="edit-password" style="text-align: right; color: #EF5222;" (click)='onEdit()'><i class="far fa-edit"></i> Cập nhật</p>
+                        <p *ngIf="!isEdit" class="edit-password" style="text-align: right; color: #EF5222;"
+                            (click)='onEdit()'><i class="far fa-edit"></i> Cập nhật</p>
                     </div>
                 </div>
                 <div class="item clear form-group">
@@ -22,7 +23,8 @@
                     </div>
                     <div class="item-center ">
                         <p *ngIf='!isEdit'>{{inforCustomer.email}}</p>
-                        <p *ngIf='isEdit'> <input type="text" placeholder="{{inforCustomer.email}}" class="form-control" formControlName="email"></p>
+                        <p *ngIf='isEdit'> <input type="text" placeholder="{{inforCustomer.email}}" class="form-control"
+                                formControlName="email"></p>
                     </div>
                 </div>
                 <div class="item clear form-group">
@@ -30,8 +32,9 @@
                         <p style="font-size: 16px; font-weight: bold;">Điện thoại</p>
                     </div>
                     <div class="item-center ">
-                        <p *ngIf='!isEdit'>{{inforCustomer.sdt}}</p>
-                        <p *ngIf='isEdit'> <input type="text" placeholder="{{inforCustomer.sdt}}" class="form-control" formControlName="sdt"></p>
+                        <p *ngIf='!isEdit'>{{inforCustomer.phone}}</p>
+                        <p *ngIf='isEdit'> <input type="text" placeholder="{{inforCustomer.phone}}" class="form-control"
+                                formControlName="phone"></p>
                     </div>
                 </div>
                 <div class="item clear">
@@ -55,7 +58,8 @@
                     </div>
                     <div class="item-center form-group">
                         <p *ngIf='!isEdit'>{{inforCustomer.diaChi}}</p>
-                        <p *ngIf='isEdit'><input type="text"  placeholder="{{inforCustomer.diaChi}}" class="form-control" formControlName="dia_chi"></p>
+                        <p *ngIf='isEdit'><input type="text" placeholder="{{inforCustomer.diaChi}}" class="form-control"
+                                formControlName="dia_chi"></p>
                     </div>
                 </div>
                 <div class="item clear form-group">
@@ -64,7 +68,8 @@
                     </div>
                     <div class="item-center">
                         <p *ngIf='!isEdit'>{{inforCustomer.thanhPho}}</p>
-                        <p *ngIf='isEdit'><input type="text"  placeholder="{{inforCustomer.thanhPho}}" class="form-control" formControlName="thanh_pho"></p>
+                        <p *ngIf='isEdit'><input type="text" placeholder="{{inforCustomer.thanhPho}}"
+                                class="form-control" formControlName="thanh_pho"></p>
                     </div>
                 </div>
                 <div class="item clear form-group">
@@ -73,7 +78,8 @@
                     </div>
                     <div class="item-center">
                         <p *ngIf='!isEdit'>{{inforCustomer.quanHuyen}}</p>
-                        <p *ngIf='isEdit'><input type="text" placeholder="{{inforCustomer.quanHuyen}}" class="form-control" formControlName="quan_huyen"></p>
+                        <p *ngIf='isEdit'><input type="text" placeholder="{{inforCustomer.quanHuyen}}"
+                                class="form-control" formControlName="quan_huyen"></p>
                     </div>
                 </div>
                 <div class="item clear">

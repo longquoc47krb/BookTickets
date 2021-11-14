@@ -3,8 +3,10 @@ const express = require('express');
 const stationValidation = require('../../validations/station.validation');
 const router = express.Router();
 const validate = require('../../middlewares/validate');
-const multer = require('multer');
-const upload = multer({ dest: '/uploads/stations' });
+const uploads = require('../../middlewares/upload');
+const { upload } = require('cloudinary').v2;
+const cloudinary = require('../../utils/cloudinary');
+const Station = require('../../models/station.model');
 const {
   postStation,
   patchStation,
@@ -15,12 +17,12 @@ const {
 
 router
   .route('/')
-  .post(auth('manageStation'), upload.single('stationImage'), postStation)
+  .post(auth('manageStation'), uploads.single('station_image'), postStation)
   .get(validate(stationValidation.getStations), getAllStations);
 
 router
   .route('/:stationId')
-  .patch(auth('manageStation'), validate(stationValidation.updateStation), upload.single('stationImage'), patchStation)
+  .patch(auth('manageStation'), validate(stationValidation.updateStation), patchStation)
   .get(validate(stationValidation.getStation), getStation)
   .delete(auth('manageStation'), validate(stationValidation.deleteStation), deleteStation);
 

@@ -45,55 +45,54 @@ export class SelectSeatReturnAwayComponent implements OnInit {
   routeGo;
   routeReturn;
 
-  routeInfor;
+  stationInfor;
 
-  constructor(public ser: BookService,private route: Router) { }
+  constructor(public ser: BookService, private route: Router) { }
 
   ngOnInit(): void {
-    this.load();  
+    this.load();
   }
 
-  load(){
+  load() {
     this.getInforSession();
-    this.OnSelectFloor(1,1);
-    this.OnSelectFloor(1,2);
+    this.OnSelectFloor(1, 1);
+    this.OnSelectFloor(1, 2);
   }
 
-  getInforSession(){
-    this.routeInfor = JSON.parse(sessionStorage.getItem('b1'));
-    console.log(this.routeInfor);
-    this.getRouteByIdPoint(this.routeInfor.departure.id,this.routeInfor.destination.id)
+  getInforSession() {
+    this.stationInfor = JSON.parse(sessionStorage.getItem('b1'));
+    console.log(this.stationInfor);
+    this.getRouteByIdPoint(this.stationInfor.departure.id, this.stationInfor.destination.id)
   }
 
-  onChangeTime(obj:any,option=0){
-    if(option==1){
-      this.routeGo.gio= obj;
+  onChangeTime(obj: any, option = 0) {
+    if (option == 1) {
+      this.routeGo.gio = obj;
       console.log("Go")
       console.log(this.routeGo);
       this.resetSeats(this.seatGo);
-      this.getStatusSeat(this.routeGo,"");
+      this.getStatusSeat(this.routeGo, "");
     }
-    else{
-      this.routeReturn.gio= obj;
+    else {
+      this.routeReturn.gio = obj;
       console.log("Return")
       console.log(this.routeReturn);
-      this.resetSeats(this.seatReturn,0);
-      this.getStatusSeat("",this.routeReturn);
+      this.resetSeats(this.seatReturn, 0);
+      this.getStatusSeat("", this.routeReturn);
     }
 
   }
 
 
 
-  onBook(item: any, index:any, option=0){
-    if(option == 1){
+  onBook(item: any, index: any, option = 0) {
+    if (option == 1) {
       var seat = document.getElementById(item);
       var test = seat.getElementsByClassName('disable');
-      if(test[0] == null){
+      if (test[0] == null) {
         var nav1 = document.getElementsByClassName(item);
-        if(this.seatGo[index].trangThai == 0 && this.listitemGo.length <= 5)
-        {
-          if(this.listitemGo.length + 1 == 6){
+        if (this.seatGo[index].trangThai == 0 && this.listitemGo.length <= 5) {
+          if (this.listitemGo.length + 1 == 6) {
             window.alert("Số vé giới hạn mua là 5 vé");
             return;
           }
@@ -101,27 +100,25 @@ export class SelectSeatReturnAwayComponent implements OnInit {
           this.listitemGo.push(item);
           this.seatGo[index].trangThai = 2;
         }
-        else if(this.seatGo[index].trangThai == 2)
-        {
+        else if (this.seatGo[index].trangThai == 2) {
           nav1[0].classList.remove('select');
           this.seatGo[index].trangThai = 0;
-          
-          for(let i=0; i < this.listitemGo.length; i++){
-            if(this.listitemGo[i] == item){
-              this.listitemGo.splice(i,1);
+
+          for (let i = 0; i < this.listitemGo.length; i++) {
+            if (this.listitemGo[i] == item) {
+              this.listitemGo.splice(i, 1);
             }
           }
         }
       }
     }
-    else{
+    else {
       var seat = document.getElementById(item);
       var test = seat.getElementsByClassName('disable');
-      if(test[0] == null){
+      if (test[0] == null) {
         var nav1 = document.getElementsByClassName(item);
-        if(this.seatReturn[index].trangThai == 0 && this.listitemReturn.length <= 5)
-        {
-          if(this.listitemReturn.length + 1 == 6){
+        if (this.seatReturn[index].trangThai == 0 && this.listitemReturn.length <= 5) {
+          if (this.listitemReturn.length + 1 == 6) {
             window.alert("Số vé giới hạn mua là 5 vé");
             return;
           }
@@ -130,13 +127,12 @@ export class SelectSeatReturnAwayComponent implements OnInit {
           this.listitemReturn.push(item);
           this.seatReturn[index].trangThai = 2;
         }
-        else if(this.seatReturn[index].trangThai == 2)
-        {
+        else if (this.seatReturn[index].trangThai == 2) {
           nav1[0].classList.remove('select');
           this.seatReturn[index].trangThai = 0;
-          for(let i=0; i < this.listitemReturn.length; i++){
-            if(this.listitemReturn[i]==item){
-              this.listitemReturn.splice(i,1);
+          for (let i = 0; i < this.listitemReturn.length; i++) {
+            if (this.listitemReturn[i] == item) {
+              this.listitemReturn.splice(i, 1);
             }
           }
         }
@@ -144,36 +140,36 @@ export class SelectSeatReturnAwayComponent implements OnInit {
     }
 
     console.log("Danh sách ghế")
-    this.listitemGos=[];
-    for(let i of this.listitemGo){
-      this.listitemGos.push(i.replace("G",""))
+    this.listitemGos = [];
+    for (let i of this.listitemGo) {
+      this.listitemGos.push(i.replace("G", ""))
     }
 
-    this.listitemReturns=[];
-    for(let i of this.listitemReturn){
-      this.listitemReturns.push(i.replace("R",""))
+    this.listitemReturns = [];
+    for (let i of this.listitemReturn) {
+      this.listitemReturns.push(i.replace("R", ""))
     }
 
-    this.routeGo.gia_ve = this.priceGo*(this.listitemGos.length);
-  
-    this.routeReturn.gia_ve = this.priceReturn*(this.listitemReturns.length);
+    this.routeGo.gia_ve = this.priceGo * (this.listitemGos.length);
+
+    this.routeReturn.gia_ve = this.priceReturn * (this.listitemReturns.length);
 
   }
 
-  resetSeats(array:any,option=1){
-    if(option==1){
-      for(let i of array){
-        document.getElementsByClassName("G"+i.stt)[0].classList.remove('disable');
-        document.getElementsByClassName("G"+i.stt)[0].classList.remove('select');
+  resetSeats(array: any, option = 1) {
+    if (option == 1) {
+      for (let i of array) {
+        document.getElementsByClassName("G" + i.stt)[0].classList.remove('disable');
+        document.getElementsByClassName("G" + i.stt)[0].classList.remove('select');
       }
       this.listitemGo = [];
       this.listitemGos = [];
       this.routeGo.gia_ve = 0;
     }
-    else{
-      for(let i of array){
-        document.getElementsByClassName("R"+i.stt)[0].classList.remove('disable');
-        document.getElementsByClassName("R"+i.stt)[0].classList.remove('select');
+    else {
+      for (let i of array) {
+        document.getElementsByClassName("R" + i.stt)[0].classList.remove('disable');
+        document.getElementsByClassName("R" + i.stt)[0].classList.remove('select');
       }
 
       this.listitemReturn = [];
@@ -182,9 +178,9 @@ export class SelectSeatReturnAwayComponent implements OnInit {
     }
   }
 
-  OnSelectFloor(index:any, type:any){
-    if(type==1){
-      if(index ==1 ){
+  OnSelectFloor(index: any, type: any) {
+    if (type == 1) {
+      if (index == 1) {
         var btn = document.getElementsByClassName("T11");
         btn[0].classList.add("bottom");
         btn = document.getElementsByClassName("T12");
@@ -195,7 +191,7 @@ export class SelectSeatReturnAwayComponent implements OnInit {
         floor2[0].classList.add("hide-item");
         floor2[0].classList.remove("show-hide-item");
       }
-      else{
+      else {
         var btn = document.getElementsByClassName("T11");
         btn[0].classList.remove("bottom");
         btn = document.getElementsByClassName("T12");
@@ -208,9 +204,9 @@ export class SelectSeatReturnAwayComponent implements OnInit {
       }
       this.floorGo = index;
     }
-    else{
+    else {
       this.floorReturn = index;
-      if(index ==1 ){
+      if (index == 1) {
         var btn = document.getElementsByClassName("T21");
         btn[0].classList.add("bottom");
         btn = document.getElementsByClassName("T22");
@@ -222,7 +218,7 @@ export class SelectSeatReturnAwayComponent implements OnInit {
         floor2[1].classList.add("hide-item");
         floor2[1].classList.remove("show-hide-item");
       }
-      else{
+      else {
         var btn = document.getElementsByClassName("T21");
         btn[0].classList.remove("bottom");
         btn = document.getElementsByClassName("T22");
@@ -237,33 +233,33 @@ export class SelectSeatReturnAwayComponent implements OnInit {
     }
   }
 
-  getRouteByIdPoint(ben_di_id:any, ben_toi_id:any){
-    this.ser.getRouterId(ben_di_id,ben_toi_id).subscribe(
-      data =>  {
+  getRouteByIdPoint(ben_di_id: any, ben_toi_id: any) {
+    this.ser.getRouterId(ben_di_id, ben_toi_id).subscribe(
+      data => {
         this.inforRouteGo = data.data
         console.log("thong tin di");
         console.log(this.inforRouteGo)
         this.priceGo = this.inforRouteGo.gia_ca;
-        this.ser.getRunTime(this.inforRouteGo.id,this.routeInfor.daygo).subscribe(
+        this.ser.getRunTime(this.inforRouteGo.id, this.stationInfor.daygo).subscribe(
           data => {
             this.timeRouteGo = data.data;
-            for(let i of this.timeRouteGo){
-              if(i.giochay<12)
+            for (let i of this.timeRouteGo) {
+              if (i.giochay < 12)
                 this.listSangGo.push(i.giochay)
-              else if(i.giochay>=12&&i.giochay<17)
+              else if (i.giochay >= 12 && i.giochay < 17)
                 this.listChieuGo.push(i.giochay)
-              else 
+              else
                 this.listToiGo.push(i.giochay)
             }
             this.routeGo = {
-              tuyen_xe_id:this.inforRouteGo.id,
-              gio:this.timeRouteGo[0].giochay,
-              ngay:this.routeInfor.daygo,
-              gia_ve:0
+              tuyen_xe_id: this.inforRouteGo.id,
+              gio: this.timeRouteGo[0].giochay,
+              ngay: this.stationInfor.daygo,
+              gia_ve: 0
             }
             console.log("Thông tin chạy đi");
             console.log(this.routeGo);
-            this.getStatusSeat(this.routeGo,"");
+            this.getStatusSeat(this.routeGo, "");
 
             console.log("Sang")
             console.log(this.listSangGo);
@@ -276,34 +272,34 @@ export class SelectSeatReturnAwayComponent implements OnInit {
 
       }
     )
-    this.ser.getRouterId(ben_toi_id,ben_di_id).subscribe(
-      data =>  {
+    this.ser.getRouterId(ben_toi_id, ben_di_id).subscribe(
+      data => {
         this.inforRouteReturn = data.data;
         console.log("thong tin toi");
         console.log(this.inforRouteReturn);
         this.priceReturn = this.inforRouteReturn.gia_ca;
-        this.ser.getRunTime(this.inforRouteReturn.id,this.routeInfor.returnday).subscribe(
+        this.ser.getRunTime(this.inforRouteReturn.id, this.stationInfor.returnday).subscribe(
           data => {
             this.timeRouteReturn = data.data;
             console.log("ádawdwadwadwad");
             console.log(this.timeRouteReturn);
-            for(let i of this.timeRouteReturn){
-              if(i.giochay<12)
+            for (let i of this.timeRouteReturn) {
+              if (i.giochay < 12)
                 this.listSangReturn.push(i.giochay)
-              else if(i.giochay>=12&&i.giochay<17)
+              else if (i.giochay >= 12 && i.giochay < 17)
                 this.listChieuReturn.push(i.giochay)
-              else 
+              else
                 this.listToiReturn.push(i.giochay)
             }
             this.routeReturn = {
-              tuyen_xe_id:this.inforRouteReturn.id,
-              gio:this.timeRouteReturn[0].giochay,
-              ngay:this.routeInfor.returnday,
-              gia_ve:0
+              tuyen_xe_id: this.inforRouteReturn.id,
+              gio: this.timeRouteReturn[0].giochay,
+              ngay: this.stationInfor.returnday,
+              gia_ve: 0
             }
             console.log("Thông tin chạy về");
             console.log(this.routeReturn);
-            this.getStatusSeat("",this.routeReturn);
+            this.getStatusSeat("", this.routeReturn);
           }
         )
       }
@@ -311,19 +307,19 @@ export class SelectSeatReturnAwayComponent implements OnInit {
 
   }
 
-  getStatusSeat(routeGo:any,routeReturn:any){
-    if(routeReturn==""){
+  getStatusSeat(routeGo: any, routeReturn: any) {
+    if (routeReturn == "") {
       console.log("data");
       console.log(routeGo);
-      this.ser.getStatusSeat(routeGo.tuyen_xe_id,routeGo.gio,routeGo.ngay).subscribe(
+      this.ser.getStatusSeat(routeGo.tuyen_xe_id, routeGo.gio, routeGo.ngay).subscribe(
         data => {
-          for(let i of data.data){
-            if(i.trangThai == Number(1)){
-              var name = "G"+i.stt;
+          for (let i of data.data) {
+            if (i.trangThai == Number(1)) {
+              var name = "G" + i.stt;
               document.getElementsByClassName(name)[0].classList.add('disable');
             }
-            else{ 
-              var name = "G"+i.stt;
+            else {
+              var name = "G" + i.stt;
               document.getElementsByClassName(name)[0].classList.add('active');
             }
           }
@@ -333,64 +329,64 @@ export class SelectSeatReturnAwayComponent implements OnInit {
         }
       )
     }
-    else if(routeGo==""){     
+    else if (routeGo == "") {
       console.log("data");
-      console.log(routeReturn); 
-      this.ser.getStatusSeat(routeReturn.tuyen_xe_id,routeReturn.gio,routeReturn.ngay).subscribe(
-      data => {
-        for(let i of data.data){
-          if(i.trangThai == Number(1)){
-            document.getElementsByClassName("R"+i.stt)[0].classList.add('disable');
+      console.log(routeReturn);
+      this.ser.getStatusSeat(routeReturn.tuyen_xe_id, routeReturn.gio, routeReturn.ngay).subscribe(
+        data => {
+          for (let i of data.data) {
+            if (i.trangThai == Number(1)) {
+              document.getElementsByClassName("R" + i.stt)[0].classList.add('disable');
+            }
+            else {
+              document.getElementsByClassName("R" + i.stt)[0].classList.add('active');
+            }
           }
-          else{ 
-            document.getElementsByClassName("R"+i.stt)[0].classList.add('active');
-          }
+          this.seatReturn = data.data;
+          console.log("Status");
+          console.log(this.seatReturn);
         }
-        this.seatReturn = data.data;
-        console.log("Status");
-        console.log(this.seatReturn);
-      }
-    )
+      )
     }
   }
 
-  submit(){
-    if(this.listitemGos.length==0 || this.listitemReturns.length==0){
+  submit() {
+    if (this.listitemGos.length == 0 || this.listitemReturns.length == 0) {
       return alert("Xin hãy chọn giường");
     }
 
     var routeGoStore = {
-        gio_chay:this.routeGo.gio,
-        gio_ket_thuc:this.routeGo.gio,
-        id_tuyen_xe: this.routeGo.tuyen_xe_id,
-        date:this.routeGo.ngay,
-        gia_ve:this.routeGo.gia_ve,
-        slot:this.listitemGos
+      gio_chay: this.routeGo.gio,
+      gio_ket_thuc: this.routeGo.gio,
+      id_tuyen_xe: this.routeGo.tuyen_xe_id,
+      date: this.routeGo.ngay,
+      gia_ve: this.routeGo.gia_ve,
+      slot: this.listitemGos
     }
 
     var routeReturnStore = {
-      gio_chay:this.routeReturn.gio,
-      gio_ket_thuc:this.routeReturn.gio,
+      gio_chay: this.routeReturn.gio,
+      gio_ket_thuc: this.routeReturn.gio,
       id_tuyen_xe: this.routeReturn.tuyen_xe_id,
-      date:this.routeReturn.ngay,
-      gia_ve:this.routeReturn.gia_ve,
-      slot:this.listitemReturns
+      date: this.routeReturn.ngay,
+      gia_ve: this.routeReturn.gia_ve,
+      slot: this.listitemReturns
     }
 
-    sessionStorage.setItem("oneWay",JSON.stringify(routeGoStore));
-    sessionStorage.setItem("twoWay",JSON.stringify(routeReturnStore))
+    sessionStorage.setItem("oneWay", JSON.stringify(routeGoStore));
+    sessionStorage.setItem("twoWay", JSON.stringify(routeReturnStore))
 
-    if(this.listitemGos.length ==1 && this.listitemReturns.length == 1){
+    if (this.listitemGos.length == 1 && this.listitemReturns.length == 1) {
       this.route.navigate(['/booktickets/infor-customer']);
     }
-    else{
+    else {
       this.route.navigate(['/booktickets/infor-multiple-customer-two-way']);
     }
 
 
   }
 
-  onBack(){
+  onBack() {
     this.route.navigate(["/"]);
   }
 

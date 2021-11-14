@@ -13,11 +13,12 @@
             <div class="content-address">
                 <div class="title">
                     <h2>{{day}}</h2>
-                    <p>{{ser.step1.departure.ben_toi}} => {{ser.step1.destination.ben_toi}}</p>    
+                    <p>{{ser.step1.departure.toStationName}} => {{ser.step1.destination.toStationName}}</p>
                 </div>
                 <div class="select-station">
                     <p>Chọn Bến Xe</p>
-                    <label>{{ser.step1.departure.ben_toi}} => {{ser.step1.destination.ben_toi}}</label><span>{{price}} đ</span>
+                    <label>{{ser.step1.departure.toStationName}} =>
+                        {{ser.step1.destination.toStationName}}</label><span>{{price}} đ</span>
                 </div>
                 <div class="clear"></div>
                 <div class="select-station">
@@ -36,28 +37,30 @@
                 </div>
                 <div class="select-station">
                     <p>Điểm Lên Xe</p>
-                    <select style="margin-bottom: 20px;" name="point" >
-                        <option>Bến xe {{ser.step1.departure.ben_toi}}</option>
+                    <select style="margin-bottom: 20px;" name="point">
+                        <option>Bến xe {{ser.step1.departure.toStationName}}</option>
                     </select>
                 </div>
             </div>
             <div class="schedule">
-                <h2>LỊCH TRÌNH CHUYẾN ĐI  <span *ngIf="isDown" class="fas fa-chevron-down" (click)='onClick()'></span>
-                    <span *ngIf="!isDown" class="fas fa-chevron-up" (click)='onClick()'></span></h2>
-               <div class="information">
+                <h2>LỊCH TRÌNH CHUYẾN ĐI <span *ngIf="isDown" class="fas fa-chevron-down" (click)='onClick()'></span>
+                    <span *ngIf="!isDown" class="fas fa-chevron-up" (click)='onClick()'></span>
+                </h2>
+                <div class="information">
                     <table>
                         <tr>
-                          <th style="padding-left: 20px;">Thời Gian</th>
-                          <th style="padding-left: 20px">Địa Điểm</th>
+                            <th style="padding-left: 20px;">Thời Gian</th>
+                            <th style="padding-left: 20px">Địa Điểm</th>
                         </tr>
                         <tr *ngFor="let i of schedule; let j = index">
                             <td style="width: 50%; position: relative;">
                                 <p style="padding: 0; position: absolute; top: 0;">
                                     <i *ngIf="j == 0" class="fas fa-map-marker-alt" style="color: orange;"></i>
-                                    <i *ngIf="j == (schedule.length - 1)" class="fas fa-dot-circle" style="color: #00603D;"></i>
+                                    <i *ngIf="j == (schedule.length - 1)" class="fas fa-dot-circle"
+                                        style="color: #00603D;"></i>
                                     <i *ngIf="j!=0 && j!=(schedule.length - 1)" class="fas fa-map-marker-alt"></i>
                                     {{ser.step1.daygo}}
-                                </p>   
+                                </p>
                             </td>
                             <td>
                                 {{i.tenTram}}
@@ -66,13 +69,13 @@
                                 </p>
                             </td>
                         </tr>
-                      </table>
-               </div>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="container-right">
             <div class="title">
-               <h2>Sơ Đồ Ghế</h2>
+                <h2>Sơ Đồ Ghế</h2>
             </div>
             <div class="floor-1" style="padding-bottom: 10px;">
                 <h2>Tang 1</h2>
@@ -184,22 +187,25 @@
             </div>
             <div class="note" style="margin-left: 70px;">
                 <div class="note-content">
-                    <label for=""><input type="text" disabled style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62);"> Trống</label>
+                    <label for=""><input type="text" disabled
+                            style="background: #eff9ff; border: 1px solid  rgb(65, 62, 62);"> Trống</label>
                 </div>
                 <div class="note-content">
-                    <label for=""><input type="text" disabled style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62);"> Đang chọn</label>
+                    <label for=""><input type="text" disabled
+                            style="background:  #e05c30; border: 1px solid  rgb(65, 62, 62);"> Đang chọn</label>
                 </div>
                 <div class="note-content">
-                    <label for=""><input type="text" disabled style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62);"> Đã đặt</label>
+                    <label for=""><input type="text" disabled
+                            style="background: #c0c6cc; border: 1px solid  rgb(65, 62, 62);"> Đã đặt</label>
                 </div>
             </div>
             <div class="clear"></div>
             <div class="selected-seat">
                 <p style="text-align: left;">Ghế đã chọn: </p>
                 <div>
-                    <span *ngFor="let i of listitem">  
-                        <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>  
-                        <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span> 
+                    <span *ngFor="let i of listitem">
+                        <span *ngIf="i <= 22" style="color: #F15A24;">A{{i}} </span>
+                        <span *ngIf="i > 22" style="color: #F15A24;">B{{i-22}} </span>
                     </span>
                 </div>
             </div>
@@ -209,7 +215,8 @@
             </div>
         </div>
         <div class="back">
-            <button class="button" [routerLink]="['']" style="margin-left: -10px;"><i class="fas fa-chevron-left"></i> Quay Lại</button>        
+            <button class="button" [routerLink]="['']" style="margin-left: -10px;"><i class="fas fa-chevron-left"></i>
+                Quay Lại</button>
         </div>
         <div class="cont">
             <button class="button" (click)="submit()">Tiếp Tục<i class="fas fa-chevron-right"></i></button>

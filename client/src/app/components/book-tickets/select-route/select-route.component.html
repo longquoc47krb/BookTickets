@@ -10,32 +10,34 @@
         <div style="float: none; height: 100px;">
         </div>
         <div class="route-input">
-            <form >
+            <form>
                 <div class="input" style="float: left;">
-                    <input id="radio-1" name="radio" type="radio" (change)="onItemChange(items[0])"  checked>
+                    <input id="radio-1" name="radio" type="radio" (change)="onItemChange(items[0])" checked>
                     <label for="radio-1" class="radio-label">Một chiều</label>
                 </div>
                 <div class="input">
                     <input id="radio-2" name="radio" type="radio" (change)="onItemChange(items[1])">
-                    <label  for="radio-2" class="radio-label">Thứ hồi</label>
+                    <label for="radio-2" class="radio-label">Thứ hồi</label>
                 </div>
                 <div class="time">
                     <div class="point" style="margin-left: 20px;">
                         <label>Nơi đi</label>
-                        <select name="departure" (change)="cityChanged($event.target.value,0)" required >
-                              <option *ngFor="let item of listDeparture" value="{{item.id}}">{{item.ben_toi}}</option>
+                        <select name="departure" (change)="cityChanged($event.target.value,0)" required>
+                            <option *ngFor="let item of listDeparture" value="{{item.id}}">{{item.toStationName}}
+                            </option>
                         </select>
                     </div>
                     <div class="point">
                         <label>Nơi đến</label>
                         <select name="destination" (change)="cityChanged($event.target.value,1)" required>
-                            <option *ngFor="let item of listDestiantion" value="{{item.id}}">{{item.ben_toi}}</option>
+                            <option *ngFor="let item of listDestiantion" value="{{item.id}}">{{item.toStationName}}
+                            </option>
                         </select>
                     </div>
                     <div class="point-date">
                         <div class="date-left">
                             <label>Ngày đi</label>
-                           <input type="date" id="date" required min="{{today}}" (change)="dateChanged($event.target)" >
+                            <input type="date" id="date" required min="{{today}}" (change)="dateChanged($event.target)">
                         </div>
                         <div class="vr">
                         </div>
@@ -48,7 +50,7 @@
             </form>
 
         </div>
-<!--         <div style="padding-bottom:50px; margin-top: -40px;">
+        <!--         <div style="padding-bottom:50px; margin-top: -40px;">
             <button class="button search" (click)='submit()'><i class="fas fa-search"></i> Tìm chuyến xe</button>
         </div> -->
         <div class="route-input">
@@ -59,13 +61,14 @@
                 <h2></h2>
                 <p>Khoảng cách: <span>{{range}} KM</span></p>
                 <p>Thời gian: <span>{{time}} h</span></p>
-                <p>*Lưu ý: thời gian đón và trung chuyển xe có thể thay đổi phụ thuộc vào mật độ giao thông tại từng thời điểm. Kính mong quý hành khách thông cảm !</p>
+                <p>*Lưu ý: thời gian đón và trung chuyển xe có thể thay đổi phụ thuộc vào mật độ giao thông tại từng
+                    thời điểm. Kính mong quý hành khách thông cảm !</p>
             </div>
         </div>
         <div>
             <button class="button continue" (click)='submit()'>Tiếp tục</button>
         </div>
-    </div>   
+    </div>
 </section>
 
 <app-footer></app-footer>

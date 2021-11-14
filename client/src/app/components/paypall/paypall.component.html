@@ -1,12 +1,13 @@
 <div class="payment-container" *ngIf="!paidFor">
-    <h1>{{infor_router.departure.ben_toi}} -- {{infor_router.destination.ben_toi}}</h1>
+    <h1>{{infor_router.departure.toStationName}} -- {{infor_router.destination.toStationName}}</h1>
     <h2>{{ ticket.totalMoney }} VND</h2>
-    <div *ngIf="!isWaitting"  style="display: flex;">
+    <div *ngIf="!isWaitting" style="display: flex;">
         <div class="item-infor">
             <h2>Thông tin vé</h2>
             <div style=" width: 80%;margin: auto;display: flex;">
                 <label for="">Tuyến đường: </label>
-                <label for="" style="text-align: right;">{{infor_router.departure.ben_toi}} -- {{infor_router.destination.ben_toi}}</label>
+                <label for="" style="text-align: right;">{{infor_router.departure.toStationName}} --
+                    {{infor_router.destination.toStationName}}</label>
             </div>
             <div style=" width: 80%;margin: auto;display: flex;">
                 <label for="">Ngày chạy: </label>
@@ -37,7 +38,7 @@
             </div>
             <div style=" width: 80%;margin: auto;display: flex;">
                 <label for="">Số điện thoại: </label>
-                <label for="" style="text-align: right;">{{customer.sdt}}</label>
+                <label for="" style="text-align: right;">{{customer.phone}}</label>
             </div>
             <div style=" width: 80%;margin: auto;display: flex;">
                 <label for="">Email: </label>
@@ -58,7 +59,8 @@
         <table style="width: 50%; margin: auto;">
             <tr>
                 <td style="font-size: 20px;">Tuyến đường</td>
-                <td style="font-size: 20px;">{{infor_router.departure.ben_toi}} -- {{infor_router.destination.ben_toi}}</td>
+                <td style="font-size: 20px;">{{infor_router.departure.toStationName}} --
+                    {{infor_router.destination.toStationName}}</td>
             </tr>
             <tr>
                 <td style="font-size: 20px;">Ngày chạy</td>
@@ -70,7 +72,9 @@
             </tr>
             <tr>
                 <td style="font-size: 20px;">Giường</td>
-                <td style="font-size: 20px;"><ng-container  *ngFor="let i of listSeats"> {{i}}</ng-container></td>
+                <td style="font-size: 20px;">
+                    <ng-container *ngFor="let i of listSeats"> {{i}}</ng-container>
+                </td>
             </tr>
             <tr>
                 <td style="font-size: 20px;">Số lượng</td>
@@ -83,8 +87,10 @@
         </table>
         <div style="width: 50%;">
             <p style="text-align: left;font-size: 20px; color:#009344;">Lưu ý (*)</p>
-            <p style="text-align: left;">- Xin hãy lên bến trước <span style="color: #F2754E;"> 20 phút</span>  để thu xếp hành lý.</p>
-            <p style="text-align: left;">- Xin hãy <span style="color: #F2754E;"> vô gmail</span> để xem cũng như lưu lại mã vé.</p>
+            <p style="text-align: left;">- Xin hãy lên bến trước <span style="color: #F2754E;"> 20 phút</span> để thu
+                xếp hành lý.</p>
+            <p style="text-align: left;">- Xin hãy <span style="color: #F2754E;"> vô gmail</span> để xem cũng như lưu
+                lại mã vé.</p>
         </div>
     </div>
 </div>

@@ -10,8 +10,8 @@ export class UserService {
   endpoint = 'http://localhost:3000/v1/'
   constructor(private http: HttpClient, private router: Router) { }
 
-  user : User[];
-  getUsers(){
+  user: User[];
+  getUsers() {
     return this.http.get<User[]>(this.endpoint + "users");
   }
 

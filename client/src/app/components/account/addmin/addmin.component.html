@@ -1,609 +1,578 @@
 <app-header></app-header>
-<section class='adminContainer' >
-    <div class="menu-left">
-        <div class="menu-item">
-            <button id='0' (click)='onShowMenu(0)'>Tài Khoản</button>
-        </div>
-        <div class="menu-item">
-            <button id='1' (click)='onShowMenu(1)'>Tuyến Đường</button>
-        </div>
-        <div class="menu-item">
-            <button id='2' (click)='onShowMenu(2)'>Bến</button>
-        </div>
-        <div class="menu-item">
-            <button id='3' (click)='onShowMenu(3)'>Xe</button>
-        </div>
-        <div class="menu-item">
-            <button id='4' (click)='onShowMenu(4)'>Xuất lịch trình</button>
-        </div>
-        <div class="menu-item">
-            <button id='5' (click)='onShowMenu(5)'>Thống kê</button>
-        </div>
-        <div class="menu-item">
-            <button id='5' (click)='onShowMenu(6)'>Hủy tuyến</button>
-        </div>
+<section class='adminContainer'>
+  <div class="menu-left">
+    <div class="menu-item">
+      <button id='0' (click)='onShowMenu(0)'>Tài Khoản</button>
     </div>
-    <div class="menu-content" *ngIf='isShow == 0'>
-        <div class="menu-content-item">
-            <div class="menu-content-title">
-                <p>Danh sách tài khoản</p>
-            </div>
-            <div class="menu-content-item-content">
-                <div style="height:300px; overflow:auto;">
-                    <table style="width:100%;">
-                        <tr>
-                            <th>Tài khoản</th>
-                            <th>Số điện thoại</th>
-                            <th>Vai trò</th>
-                            <th></th>
-                        </tr>
-                        <ng-container *ngFor="let item of listUser">
-                            <tr>
-                                <td>{{item.username}}</td>
-                                <td>{{item.phone}}</td>
-                                <td>{{item.role}}</td>
-                            </tr>
-                        </ng-container>
-                    </table>
-                </div>
-                <div class="menu-action">
-                    <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Tạo tài khoản</p>
-                </div>
-            </div>
-        </div>
-        <div class="menu-item-right" *ngIf='isCreateAccount==1'>
-            <div class="item-account">
-                <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344  );                   ">
-                    <p>Thông tin tài khoản</p>
-                </div>
-                <form [formGroup]='form'>
-                    <div class="infor-item form-group" style="padding-top: 5px;">
-                        <p for="">Họ tên khách hàng</p>
-                        <input type="text" class="form-control" formControlName="tenKh" placeholder="Nhập mật tên khách hàng">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Tài khoản</p>
-                        <input type="text" class="form-control" formControlName="tai_khoan" placeholder="Nhập tên tài khoản">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Email</p>
-                        <input type="email" placeholder="Nhập email" class="form-control" formControlName="email">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Mật khẩu</p>
-                        <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="mat_khau">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Nhập lại mật khẩu</p>
-                        <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="conf_mat_khau">
-                    </div>
-                </form>
-            </div>
-            <div class="item-account" style="margin-left: 25px;" >
-                <div class="menu-content-title" style="border-top-right-radius: 50px;
-                border-bottom-right-radius: 50px;">
-                    <p>Thông tin khác</p>
-                </div>
-                <form [formGroup]='form'>
-                    <div class="infor-item form-group" style="padding-top: 5px;">
-                        <p for="">SĐT</p>
-                        <input type="text" placeholder="Nhập số điện thoại" class="form-control" formControlName="sdt">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">CMND</p>
-                        <input type="text" placeholder="Nhập số CMND" class="form-control" formControlName="cmnd">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Địa chỉ</p>
-                        <input type="text" placeholder="Nhập địa chỉ thường trú" class="form-control" formControlName="dia_chi">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Thành Phố</p>
-                        <input type="text" placeholder="Nhập địa chỉ thường trú" class="form-control" formControlName="thanh_pho">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Quận huyện</p>
-                        <input type="text" placeholder="Nhập địa chỉ thường trú" class="form-control" formControlName="quan_huyen">
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="infor-item">
-                        <button class="btn-submit" (click)="onShow(1,0)">Đăng ký</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-<!--         <div class="menu-item-right" *ngIf='isCreateAccount==2'>
-            <div class="item-account">
-                <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344  );                   ">
-                    <p>Thông tin tài khoản</p>
-                </div>
-                <form action="">
-                    <div class="infor-item" style="padding-top: 5px;">
-                        <p for="">Họ tên</p>
-                        <input type="password" placeholder="Nhập họ và tên">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Email</p>
-                        <input type="password" placeholder="Nhập email">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Mật khẩu cũ</p>
-                        <input type="password" placeholder="Nhập mật khẩu cũ">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Mật khẩu mới</p>
-                        <input type="password" placeholder="Nhập mật khẩu mới">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Mật lại khẩu mới</p>
-                        <input type="password" placeholder="Nhập lại mật khẩu mới">
-                    </div>
-                </form>
-            </div>
-            <div class="item-account" style="margin-left: 25px;">
-                <div class="menu-content-title" style="border-top-right-radius: 50px;
-                border-bottom-right-radius: 50px;">
-                    <p>Thông tin khác</p>
-                </div>
-                <form action="">
-                    <div class="infor-item" style="padding-top: 5px;">
-                        <p for="">SĐT</p>
-                        <input type="password" placeholder="Nhập số điện thoại">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">CMND</p>
-                        <input type="password" placeholder="Nhập số CMND">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Địa chỉ</p>
-                        <input type="password" placeholder="Nhập địa chỉ thường trú">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Thành phố</p>
-                        <input type="password" placeholder="Nhập thành phố">
-                    </div>
-                    <div class="infor-item">
-                        <p for="">Quận huyện</p>
-                        <input type="password" placeholder="Nhập quận huyện">
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="infor-item">
-                        <button class="btn-submit" (click)="onShow(2,0)">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div> -->
+    <div class="menu-item">
+      <button id='1' (click)='onShowMenu(1)'>Tuyến Đường</button>
     </div>
-    <div class="menu-content" *ngIf='isShow == 1'>
-        <div class="menu-content-item">
-            <div class="menu-content-title">
-                <p>Danh sách tuyến đường</p>
-            </div>
-            <div class="menu-content-item-content schedule">
-                <div style="height:300px; overflow:auto; ">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <ng-container *ngFor="let item of listRoute">
-                            <tr>
-                                <td>{{item.ben_xe_di}} -- {{item.ben_xe_toi}}</td>
-                                <td>{{item.khoang_cach}} KM</td>
-                                <td>{{item.gia_ca}} đ</td>
-                                <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa </td>
-                              </tr>
-                        </ng-container>
-                    </table>
-                </div>
-                <div class="menu-action">
-                    <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Thêm tuyến đường</p>
-                </div>
-            </div>
-        </div>
-        <div class="menu-item-right" *ngIf='isCreateAccount!=0'>
-            <div class="item-account">
-                <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344);">
-                    <p>Thông tin tuyến đường</p>
-                </div>
-                <form [formGroup]="formRoute">
-                    <div class="infor-item form-group" style="padding-top: 5px;">
-                        <p for="">Nơi đi</p>
-                        <select name="departure" class="form-control" formControlName="diem_di_id" *ngIf='isCreateAccount==1' (change)="onChangeRoute($event.target.value)">
-                            <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.thanh_pho}}</option>
-                        </select>
-                        <input type="text" placeholder="Bến xe {{route.ben_xe_di}}" *ngIf='isCreateAccount==2' disabled>
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Nơi đến</p>
-                        <select name="placego" id="" class="form-control" formControlName="diem_toi_id" *ngIf='isCreateAccount==1'>
-                            <option *ngFor="let item of listDestinationForRoute" value='{{item.id}}'>Bến xe {{item.thanh_pho}}</option>
-                        </select>
-                        <input type="text" placeholder="Bến xe {{route.ben_xe_toi}}" *ngIf='isCreateAccount==2' disabled>
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Quãng đường</p>
-                        <input type="text" #khoang_cach placeholder="Nhập quãng đường" *ngIf='isCreateAccount==1' class="form-control" formControlName="khoang_cach">
-                        <input type="text" #khoang_cach placeholder="{{route.khoang_cach}}" *ngIf='isCreateAccount==2' class="form-control" formControlName="khoang_cach">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Thời gian hành trình</p>
-                        <input type="text" #khoang_thoi_gian placeholder="Nhập thời gian hành trình" *ngIf='isCreateAccount==1' class="form-control" formControlName="khoang_thoi_gian">
-                        <input type="text" #khoang_thoi_gian placeholder="{{route.khoang_thoi_gian}}" *ngIf='isCreateAccount==2' class="form-control" formControlName="khoang_thoi_gian">
-                    </div>
-                </form>
-            </div>
-            <div class="item-account" style="margin-left: 25px;">
-                <div class="menu-content-title" style="border-top-right-radius: 50px;
-                border-bottom-right-radius: 50px;">
-                    <p>Thông tin vé</p>
-                </div>
-                <form [formGroup]="formRoute">
-                    <div class="infor-item form-group" style="padding-top: 5px;">
-                        <p for="">Giá vé</p>
-                        <input type="text" #gia_ca placeholder="Nhập giá vé" *ngIf='isCreateAccount==1' class="form-control" formControlName="gia_ca">
-                        <input type="text" #gia_ca placeholder="{{route.gia_ca}}" *ngIf='isCreateAccount==2' class="form-control" formControlName="gia_ca">
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="infor-item">
-                        <button class="btn-submit" (click)="onShow(1,0)" *ngIf='isCreateAccount==1'>Thêm tuyến</button>
-                        <button class="btn-submit" (click)="onShow(2,0)" *ngIf='isCreateAccount==2'>Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <div class="menu-item">
+      <button id='2' (click)='onShowMenu(2)'>Bến</button>
     </div>
-    <div class="menu-content" *ngIf='isShow == 2'>
-        <div class="menu-content-item">
-            <div class="menu-content-title">
-                <p>Danh sách bến</p>
-            </div>
-            <div class="menu-content-item-content schedule">
-                <div style="height:300px; overflow:auto; ">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <ng-container *ngFor="let item of routeInfor">
-                            <tr style="background: #eb8287;">
-                                <td style="text-align: left; color: white;">{{item.thanh_pho}}</td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>Bến xe {{item.ben_toi}}</td>
-                                <td>{{item.dia_chi}}</td>
-                                <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa </td>
-                              </tr>
-                        </ng-container>
-                    </table>
-                </div>
-                <div class="menu-action">
-                    <p style="color: #009344;"  (click)="onShow(0,1)"><i class="far fa-edit"></i> Thêm bến</p>
-                </div>
-            </div>
+    <div class="menu-item">
+      <button id='3' (click)='onShowMenu(3)'>Xe</button>
+    </div>
+    <div class="menu-item">
+      <button id='4' (click)='onShowMenu(4)'>Xuất lịch trình</button>
+    </div>
+    <div class="menu-item">
+      <button id='5' (click)='onShowMenu(5)'>Thống kê</button>
+    </div>
+    <div class="menu-item">
+      <button id='5' (click)='onShowMenu(6)'>Hủy tuyến</button>
+    </div>
+  </div>
+  <div class="menu-content" *ngIf='isShow == 0'>
+    <div class="menu-content-item">
+      <div class="menu-content-title">
+        <p>Danh sách tài khoản</p>
+      </div>
+      <div class="menu-content-item-content">
+        <div style="height:300px; overflow:auto;">
+          <table style="width:100%;">
+            <tr>
+              <th>Tài khoản</th>
+              <th>Số điện thoại</th>
+              <th>Vai trò</th>
+              <th></th>
+            </tr>
+            <ng-container *ngFor="let item of listUser">
+              <tr>
+                <td>{{item.username}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.role}}</td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+        <div class="menu-action">
+          <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Tạo tài khoản</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item-right" *ngIf='isCreateAccount==1'>
+      <div class="item-account">
+        <div class="menu-content-title"
+          style="background: -webkit-linear-gradient(left, #F2754E,#009344  );                   ">
+          <p>Thông tin tài khoản</p>
+        </div>
+        <form [formGroup]='form'>
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Họ tên khách hàng</p>
+            <input type="text" class="form-control" formControlName="fullName" placeholder="Nhập mật tên khách hàng">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Tài khoản</p>
+            <input type="text" class="form-control" formControlName="tai_khoan" placeholder="Nhập tên tài khoản">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Email</p>
+            <input type="email" placeholder="Nhập email" class="form-control" formControlName="email">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Mật khẩu</p>
+            <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="mat_khau">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Nhập lại mật khẩu</p>
+            <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="conf_mat_khau">
+          </div>
+        </form>
+      </div>
+      <div class="item-account" style="margin-left: 25px;">
+        <div class="menu-content-title" style="border-top-right-radius: 50px;
+                border-bottom-right-radius: 50px;">
+          <p>Thông tin khác</p>
+        </div>
+        <form [formGroup]='form'>
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">SĐT</p>
+            <input type="text" placeholder="Nhập số điện thoại" class="form-control" formControlName="phone">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Địa chỉ</p>
+            <input type="text" placeholder="Nhập địa chỉ thường trú" class="form-control" formControlName="dia_chi">
+          </div>
+          <div style="clear: both;"></div>
+          <div class="infor-item">
+            <button class="btn-submit" (click)="onShow(1,0)">Đăng ký</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="menu-content" *ngIf='isShow == 1'>
+    <div class="menu-content-item">
+      <div class="menu-content-title">
+        <p>Danh sách tuyến đường</p>
+      </div>
+      <div class="menu-content-item-content schedule">
+        <div style="height:300px; overflow:auto; ">
+          <table style="width:100%; border-collapse: collapse;">
+            <ng-container *ngFor="let item of listRoute">
+              <tr>
+                <td>{{item.ben_xe_di}} -- {{item.ben_xe_toi}}</td>
+                <td>{{item.khoang_cach}} KM</td>
+                <td>{{item.gia_ca}} đ</td>
+                <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa </td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+        <div class="menu-action">
+          <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Thêm tuyến đường</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item-right" *ngIf='isCreateAccount!=0'>
+      <div class="item-account">
+        <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344);">
+          <p>Thông tin tuyến đường</p>
+        </div>
+        <form [formGroup]="formRoute">
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Nơi đi</p>
+            <select name="departure" class="form-control" formControlName="diem_di_id" *ngIf='isCreateAccount==1'
+              (change)="onChangeRoute($event.target.value)">
+              <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.thanh_pho}}</option>
+            </select>
+            <input type="text" placeholder="Bến xe {{route.ben_xe_di}}" *ngIf='isCreateAccount==2' disabled>
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Nơi đến</p>
+            <select name="placego" id="" class="form-control" formControlName="diem_toi_id" *ngIf='isCreateAccount==1'>
+              <option *ngFor="let item of listDestinationForRoute" value='{{item.id}}'>Bến xe {{item.thanh_pho}}
+              </option>
+            </select>
+            <input type="text" placeholder="Bến xe {{route.ben_xe_toi}}" *ngIf='isCreateAccount==2' disabled>
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Quãng đường</p>
+            <input type="text" #khoang_cach placeholder="Nhập quãng đường" *ngIf='isCreateAccount==1'
+              class="form-control" formControlName="khoang_cach">
+            <input type="text" #khoang_cach placeholder="{{route.khoang_cach}}" *ngIf='isCreateAccount==2'
+              class="form-control" formControlName="khoang_cach">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Thời gian hành trình</p>
+            <input type="text" #khoang_thoi_gian placeholder="Nhập thời gian hành trình" *ngIf='isCreateAccount==1'
+              class="form-control" formControlName="khoang_thoi_gian">
+            <input type="text" #khoang_thoi_gian placeholder="{{route.khoang_thoi_gian}}" *ngIf='isCreateAccount==2'
+              class="form-control" formControlName="khoang_thoi_gian">
+          </div>
+        </form>
+      </div>
+      <div class="item-account" style="margin-left: 25px;">
+        <div class="menu-content-title" style="border-top-right-radius: 50px;
+                border-bottom-right-radius: 50px;">
+          <p>Thông tin vé</p>
+        </div>
+        <form [formGroup]="formRoute">
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Giá vé</p>
+            <input type="text" #gia_ca placeholder="Nhập giá vé" *ngIf='isCreateAccount==1' class="form-control"
+              formControlName="gia_ca">
+            <input type="text" #gia_ca placeholder="{{route.gia_ca}}" *ngIf='isCreateAccount==2' class="form-control"
+              formControlName="gia_ca">
+          </div>
+          <div style="clear: both;"></div>
+          <div class="infor-item">
+            <button class="btn-submit" (click)="onShow(1,0)" *ngIf='isCreateAccount==1'>Thêm tuyến</button>
+            <button class="btn-submit" (click)="onShow(2,0)" *ngIf='isCreateAccount==2'>Lưu</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="menu-content" *ngIf='isShow == 2'>
+    <div class="menu-content-item">
+      <div class="menu-content-title">
+        <p>Danh sách bến</p>
+      </div>
+      <div class="menu-content-item-content schedule">
+        <div style="height:300px; overflow:auto; ">
+          <table style="width:100%; border-collapse: collapse;">
+            <tr>
+              <th>Tỉnh/TP</th>
+              <th>Bến xe</th>
+              <th>Địa chỉ</th>
+            </tr>
+            <ng-container *ngFor="let item of stationInfor">
+              <tr style="background: #eb8287;">
+                <td style="text-align: left; color: white;">{{item.thanh_pho}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Bến xe {{item.toStationName}}</td>
+                <td>{{item.dia_chi}}</td>
+                <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa </td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+        <div class="menu-action">
+          <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Thêm bến</p>
+        </div>
+      </div>
 
-        </div>
-        <div class="menu-item-right" *ngIf='isCreateAccount!=0'>
+    </div>
+    <div class="menu-item-right" *ngIf='isCreateAccount!=0'>
 
-                <div  *ngIf="!isWaiting" class="item-account">
-                    <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344  );">
-                        <p>Thông tin thành phố</p>
-                    </div>
-                    <form [formGroup]="formPoint">
-                        <div class="infor-item form-group" style="padding-top: 5px;">
-                            <p for="">Thành Phố</p>
-                            <input type="text" #tenTP placeholder="Nhập thành phố" *ngIf='isCreateAccount==1' class="form-control" formControlName="thanh_pho">
-                            <input type="text" #tenTP placeholder="{{route.thanh_pho}}" *ngIf='isCreateAccount==2' class="form-control" formControlName="thanh_pho" disabled>
-                        </div>
-                        <div class="infor-item">
-                            <p for="">Hình ảnh của thành phố</p>
-                            <input type="file" accept="image/*" capture="camera" (change)="imgeChanged($event)">
-                            <div *ngIf=retrievedImage>
-                                <img [src]="srcImage">
-                            </div>
-                        </div>
-                        <div class="infor-item">
-                            <img [src]="srcImage" *ngIf='srcImage' width="300" height="300">
-                        </div>
-                    </form>
-                </div>
-                <div  *ngIf="!isWaiting" class="item-account" style="margin-left: 25px;">
-                    <div class="menu-content-title" style="border-top-right-radius: 50px;
+      <div *ngIf="!isWaiting" class="item-account">
+        <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344  );">
+          <p>Thông tin thành phố</p>
+        </div>
+        <form [formGroup]="formPoint">
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Thành Phố</p>
+            <input type="text" #tenTP placeholder="Nhập thành phố" *ngIf='isCreateAccount==1' class="form-control"
+              formControlName="thanh_pho">
+            <input type="text" #tenTP placeholder="{{route.thanh_pho}}" *ngIf='isCreateAccount==2' class="form-control"
+              formControlName="thanh_pho" disabled>
+          </div>
+          <div class="infor-item">
+            <p for="">Hình ảnh của thành phố</p>
+            <input type="file" accept="image/*" capture="camera" (change)="imgeChanged($event)">
+            <div *ngIf=retrievedImage>
+              <img [src]="srcImage">
+            </div>
+          </div>
+          <div class="infor-item">
+            <img [src]="srcImage" *ngIf='srcImage' width="300" height="300">
+          </div>
+        </form>
+      </div>
+      <div *ngIf="!isWaiting" class="item-account" style="margin-left: 25px;">
+        <div class="menu-content-title" style="border-top-right-radius: 50px;
                     border-bottom-right-radius: 50px;">
-                        <p>Thông tin chi tiết bến</p>
-                    </div>
-                    <form [formGroup]="formPoint">
-                        <div class="infor-item form-group" style="padding-top: 5px;">
-                            <p for="">Tên bến</p>
-                            <input type="text" #tenBen placeholder="Nhập tên bến" *ngIf='isCreateAccount==1' class="form-control" formControlName="ten_ben">
-                            <input type="text" #tenBen placeholder="Bến xe {{route.ben_toi}}" *ngIf='isCreateAccount==2' class="form-control" formControlName="ten_ben">
-                        </div>
-                        <div class="infor-item form-group">
-                            <p for="">Địa chỉ</p>
-                            <input type="text" #diaChi placeholder="Nhập địa chỉ" *ngIf='isCreateAccount==1' class="form-control" formControlName="dia_chi">
-                            <input type="text" #diaChi placeholder="{{route.dia_chi}}" *ngIf='isCreateAccount==2' class="form-control" formControlName="dia_chi">
-                        </div>
-                        <div style="clear: both;"></div>
-                        <div class="infor-item">
-                            <button class="btn-submit" (click)="onShow(1,0)" *ngIf='isCreateAccount==1' >Thêm bến</button>
-                            <button class="btn-submit" (click)="onShow(2,0)" *ngIf='isCreateAccount==2'>Lưu</button>
-                        </div>
-                    </form>
-                </div>
-
-            <div *ngIf="isWaiting==true" class="loader">Loading...</div>
+          <p>Thông tin chi tiết bến</p>
         </div>
+        <form [formGroup]="formPoint">
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Tên bến</p>
+            <input type="text" #tenBen placeholder="Nhập tên bến" *ngIf='isCreateAccount==1' class="form-control"
+              formControlName="ten_ben">
+            <input type="text" #tenBen placeholder="Bến xe {{route.toStationName}}" *ngIf='isCreateAccount==2'
+              class="form-control" formControlName="ten_ben">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Địa chỉ</p>
+            <input type="text" #diaChi placeholder="Nhập địa chỉ" *ngIf='isCreateAccount==1' class="form-control"
+              formControlName="address">
+            <input type="text" #address placeholder="{{route.address}}" *ngIf='isCreateAccount==2' class="form-control"
+              formControlName="address">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Tỉnh</p>
+            <input type="text" #diaChi placeholder="Nhập tỉnh" *ngIf='isCreateAccount==1' class="form-control"
+              formControlName="province">
+            <input type="text" #province placeholder="{{route.province}}" *ngIf='isCreateAccount==2'
+              class="form-control" formControlName="province">
+          </div>
+          <div style="clear: both;"></div>
+          <div class="infor-item">
+            <button class="btn-submit" (click)="onShow(1,0)" *ngIf='isCreateAccount==1'>Thêm bến</button>
+            <button class="btn-submit" (click)="onShow(2,0)" *ngIf='isCreateAccount==2'>Lưu</button>
+          </div>
+        </form>
+      </div>
 
-
+      <div *ngIf="isWaiting==true" class="loader">Loading...</div>
     </div>
-    <div class="menu-content" *ngIf='isShow == 3'>
-        <div class="menu-content-item">
-            <div class="menu-content-title">
-                <p>Danh sách xe</p>
-            </div>
-            <div class="menu-content-item-content schedule">
-                <div style="height:300px; overflow:auto; ">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <tr>
-                            <th>Tuyến</th>
-                            <th>Tên xe</th>
-                            <th>Thời gian chạy</th>
-                        </tr>
-                        <ng-container *ngFor="let item of listCar">
-                            <tr>
-                                <td>{{item.ben_xe_di}}=>{{item.ben_xe_toi}}</td>
-                                <td>{{item.tenXe}}</td>
-                                <td>{{item.gioChay}}:00 h</td>
-                                <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa xe</td>
-                            </tr>
-                        </ng-container>
-                    </table>
-                </div>
-                <div class="menu-action">
-                    <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Thêm xe</p>
-                </div>
-            </div>
+
+
+  </div>
+  <div class="menu-content" *ngIf='isShow == 3'>
+    <div class="menu-content-item">
+      <div class="menu-content-title">
+        <p>Danh sách xe</p>
+      </div>
+      <div class="menu-content-item-content schedule">
+        <div style="height:300px; overflow:auto; ">
+          <table style="width:100%; border-collapse: collapse;">
+            <tr>
+              <th>Tuyến</th>
+              <th>Tên xe</th>
+              <th>Thời gian chạy</th>
+            </tr>
+            <ng-container *ngFor="let item of listCar">
+              <tr>
+                <td>{{item.ben_xe_di}}=>{{item.ben_xe_toi}}</td>
+                <td>{{item.tenXe}}</td>
+                <td>{{item.gioChay}}:00 h</td>
+                <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa xe</td>
+              </tr>
+            </ng-container>
+          </table>
         </div>
-        <div class="menu-item-right" *ngIf='isCreateAccount!=0'>
-            <div class="item-account">
-                <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344  );">
-                    <p>Thông tin tuyến xe chạy</p>
-                </div>
-                <form [formGroup]="formCar">
-                    <div class="infor-item form-group" style="padding-top: 5px;">
-                        <p for="">Nơi đi</p>
-                        <select name="placego" class="form-control" formControlName="diem_di_id" (change)="cityChanged($event.target.value,0)" *ngIf='isCreateAccount==1'>
-                            <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.thanh_pho}}</option>
-                        </select>
-                        <input type="text" placeholder="{{route.ben_xe_di}}" disabled *ngIf='isCreateAccount==2'>
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Nơi đến</p>
-                        <select name="placego" class="form-control" formControlName="diem_toi_id" (change)="cityChanged($event.target.value,1)" *ngIf='isCreateAccount==1'>
-                            <option *ngFor="let item of listDestination" value='{{item.id}}'>Bến xe {{item.ben_toi}}</option>
-                        </select>
-                        <input type="text" placeholder="{{route.ben_xe_toi}}" disabled *ngIf='isCreateAccount==2'>
-                    </div>
-                </form>
-            </div>
-            <div class="item-account" style="margin-left: 25px;">
-                <div class="menu-content-title" style="border-top-right-radius: 50px;
+        <div class="menu-action">
+          <p style="color: #009344;" (click)="onShow(0,1)"><i class="far fa-edit"></i> Thêm xe</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item-right" *ngIf='isCreateAccount!=0'>
+      <div class="item-account">
+        <div class="menu-content-title" style="background: -webkit-linear-gradient(left, #F2754E,#009344  );">
+          <p>Thông tin tuyến xe chạy</p>
+        </div>
+        <form [formGroup]="formCar">
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Nơi đi</p>
+            <select name="placego" class="form-control" formControlName="diem_di_id"
+              (change)="cityChanged($event.target.value,0)" *ngIf='isCreateAccount==1'>
+              <option *ngFor="let item of listDeparture" value='{{item.id}}'>Bến xe {{item.thanh_pho}}</option>
+            </select>
+            <input type="text" placeholder="{{route.ben_xe_di}}" disabled *ngIf='isCreateAccount==2'>
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Nơi đến</p>
+            <select name="placego" class="form-control" formControlName="diem_toi_id"
+              (change)="cityChanged($event.target.value,1)" *ngIf='isCreateAccount==1'>
+              <option *ngFor="let item of listDestination" value='{{item.id}}'>Bến xe {{item.toStationName}}</option>
+            </select>
+            <input type="text" placeholder="{{route.ben_xe_toi}}" disabled *ngIf='isCreateAccount==2'>
+          </div>
+        </form>
+      </div>
+      <div class="item-account" style="margin-left: 25px;">
+        <div class="menu-content-title" style="border-top-right-radius: 50px;
                 border-bottom-right-radius: 50px;">
-                    <p>Thông tin chi tiết xe</p>
-                </div>
-                <form [formGroup]="formCar">
-                    <div class="infor-item form-group" style="padding-top: 5px;">
-                        <p for="">Tên xe</p>
-                        <input type="text" #tenXe *ngIf='isCreateAccount==1' placeholder="Nhập tên xe" class="form-control" formControlName="ten_xe">
-                        <input type="text" #tenXe *ngIf='isCreateAccount==2' placeholder="{{route.tenXe}}" class="form-control" formControlName="ten_xe">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Hãng xe</p>
-                        <input type="text" #hangXe *ngIf='isCreateAccount==1' placeholder="Nhập hãng xe" class="form-control" formControlName="hang_xe">
-                        <input type="text" #hangXe *ngIf='isCreateAccount==2' placeholder="{{route.hangXe}}" class="form-control" formControlName="hang_xe">
-                    </div>
-                    <div class="infor-item form-group">
-                        <p for="">Thời gian chạy</p>
-                        <input type="text" #gioChay *ngIf='isCreateAccount==1' placeholder="Nhập thời gian chạy" class="form-control" formControlName="gio_chay">
-                        <input type="text" #gioChay *ngIf='isCreateAccount==2' placeholder="{{route.gioChay}}" class="form-control" formControlName="gio_chay">
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="infor-item">
-                        <button class="btn-submit" (click)="onShow(1,0)" *ngIf='isCreateAccount==1'>Thêm xe</button>
-                        <button class="btn-submit" (click)="onShow(2,0)" *ngIf='isCreateAccount==2'>Lưu</button>
-                    </div>
-                </form>
-            </div>
+          <p>Thông tin chi tiết xe</p>
         </div>
+        <form [formGroup]="formCar">
+          <div class="infor-item form-group" style="padding-top: 5px;">
+            <p for="">Tên xe</p>
+            <input type="text" #tenXe *ngIf='isCreateAccount==1' placeholder="Nhập tên xe" class="form-control"
+              formControlName="ten_xe">
+            <input type="text" #tenXe *ngIf='isCreateAccount==2' placeholder="{{route.tenXe}}" class="form-control"
+              formControlName="ten_xe">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Hãng xe</p>
+            <input type="text" #hangXe *ngIf='isCreateAccount==1' placeholder="Nhập hãng xe" class="form-control"
+              formControlName="hang_xe">
+            <input type="text" #hangXe *ngIf='isCreateAccount==2' placeholder="{{route.hangXe}}" class="form-control"
+              formControlName="hang_xe">
+          </div>
+          <div class="infor-item form-group">
+            <p for="">Thời gian chạy</p>
+            <input type="text" #gioChay *ngIf='isCreateAccount==1' placeholder="Nhập thời gian chạy"
+              class="form-control" formControlName="gio_chay">
+            <input type="text" #gioChay *ngIf='isCreateAccount==2' placeholder="{{route.gioChay}}" class="form-control"
+              formControlName="gio_chay">
+          </div>
+          <div style="clear: both;"></div>
+          <div class="infor-item">
+            <button class="btn-submit" (click)="onShow(1,0)" *ngIf='isCreateAccount==1'>Thêm xe</button>
+            <button class="btn-submit" (click)="onShow(2,0)" *ngIf='isCreateAccount==2'>Lưu</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="menu-content" *ngIf='isShow == 4'>
-        <div class="menu-content-item" style="width: 100%;">
-            <div class="menu-content-title">
-                <p>Danh sách các tuyến chạy trong ngày {{dateValue}}</p>
-            </div>
-            <div class="menu-content-item-content">
-                <div style="height:310px; overflow:auto; ">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <tr>
-                            <th>Tuyến</th>
-                            <th>Số lượng vé</th>
-                            <th>Giờ khởi hành</th>
-                            <th></th>
-                        </tr>
-                        <ng-container *ngFor="let item of listRouteExport">
-                            <tr>
-                                <td>{{item.ben_xe_di}} -- {{item.ben_xe_toi}}</td>
-                                <td>{{item.so_luong_ve}} vé</td>
-                                <td>{{item.gio_chay}}h</td>
-                                <td style="color: #F2754E;" (click)="onPostExcel(item)"> <i class="fas fa-file-excel"></i> Xuất file</td>
-                            </tr>
-                        </ng-container>
-                    </table>
-                </div>
-            </div>
-            <div class="menu-content-item-content" id="content" #content>
-                <div class="menu-content-title" style="height: 100px;">
-                    <p>Danh sách những người đi trong ngày {{dateValue}}</p>
-                    <p>Tuyến: {{detailItem.ben_xe_di}} -- {{detailItem.ben_xe_toi}}, giờ chạy: {{detailItem.gio_chay}}:00h</p>
-                </div>
-                <div style="height:310px; overflow:auto; margin-left: 0%;">
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <tr>
-                            <th>Mã vé</th>
-                            <th>Tên Khách</th>
-                            <th>Số điện thoại</th>
-                            <th>Giường</th>
-                            <th>Nơi xuống</th>
-                        </tr>
-                        <ng-container *ngFor="let i of dataShow">
-                            <tr>
-                                <td style="width: 25%;">{{i.maVe}}</td>
-                                <td style="width: 25%;">{{i.ten_khach_hang}}</td>
-                                <td style="width: 20%;">{{i.sdt}}</td>
-                                <td style="width: 20%;">{{i.giuong}}</td>
-                                <td style="width: 35%;">{{i.noiXuong}}</td>
-                            </tr>
-                        </ng-container>
-                    </table>
-                </div>
-            </div>
+  </div>
+  <div class="menu-content" *ngIf='isShow == 4'>
+    <div class="menu-content-item" style="width: 100%;">
+      <div class="menu-content-title">
+        <p>Danh sách các tuyến chạy trong ngày {{dateValue}}</p>
+      </div>
+      <div class="menu-content-item-content">
+        <div style="height:310px; overflow:auto; ">
+          <table style="width:100%; border-collapse: collapse;">
+            <tr>
+              <th>Tuyến</th>
+              <th>Số lượng vé</th>
+              <th>Giờ khởi hành</th>
+              <th></th>
+            </tr>
+            <ng-container *ngFor="let item of listRouteExport">
+              <tr>
+                <td>{{item.ben_xe_di}} -- {{item.ben_xe_toi}}</td>
+                <td>{{item.so_luong_ve}} vé</td>
+                <td>{{item.gio_chay}}h</td>
+                <td style="color: #F2754E;" (click)="onPostExcel(item)"> <i class="fas fa-file-excel"></i> Xuất file
+                </td>
+              </tr>
+            </ng-container>
+          </table>
         </div>
-
-    </div>
-    <div class="menu-content-1" *ngIf='isShow == 5' style="width: 85%;">
-         <div class="menu-content-item" style="width: 100%;">
-            <div class="search-infor">
-                <div class="search-left">
-                    <div class="menu-content-title" style="margin-bottom: 10px;">
-                        <p>Tìm kiếm theo doanh thu/ tuyến</p>
-                    </div>
-                    <div style="display: flex; width: 100%;">
-                        <div style="display: flex; width: 50%;">
-                            <input type="radio" style="height: 28px; width: 50%;" name="types" (change)="onItemChange(0,0)">
-                            <label style="line-height: 50px; margin-left: -10px;"> Doanh thu</label>
-                        </div>
-                        <div style="display: flex; width: 50%;">
-                            <input type="radio" style="height: 28px; width: 50%;" name="types" checked (change)="onItemChange(1,0)">
-                            <label style="line-height: 50px; margin-left: -10px;"> Tuyến</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="search-left" style="margin-left: 2%;">
-                    <div class="menu-content-title" style="margin-bottom: 10px;">
-                        <p>Tìm kiếm theo ngày, tháng</p>
-                    </div>
-                    <div style="display: flex;">
-                        <div style="width: 50%;">
-                            <input type="radio" style="height: 28px; float: left;" name="type" (change)="onItemChange(1,1)" checked>                            <label style="line-height: 50px; margin-left: -10px;"> Ngày</label>
-                        </div>
-                        <div style="width: 50%;">
-                            <input type="radio" style="height: 28px; float: left;" name="type"  (change)="onItemChange(2,1)">
-                            <label style="line-height: 50px; margin-left: -10px;"> Tháng</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="search-left" style="margin-left: 2%;">
-                    <div class="menu-content-title" style="margin-bottom: 10px;">
-                        <p>Chọn ngày tháng năm</p>
-                    </div>
-                    <input type="date" style="height: 28px;" value="{{today}}" (change)="dateChanged($event.target)">
-                    <button (click)="onShowChart(isRoute,isDate)">Tìm kiếm</button>
-                </div>
-            </div>
-            <div class="menu-content-title">
-                <p>Bảng thống kê</p>
-            </div>
-            <div class="menu-content-item-content">
-                <div style="height:310px; overflow:auto; ">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <tr>
-                            <th>Thời gian</th>
-                            <th>Tuyến</th>
-                            <th>Số lượng vé</th>
-                            <th>Tổng tiền</th>
-                        </tr>
-                        <ng-container *ngFor="let i of listStatistic">
-                            <tr>
-                                <td>{{i.time}}</td>
-                                <td>{{i.route}}</td>
-                                <td>{{i.number}}</td>
-                                <td>{{i.totalMoney}}</td>
-                              </tr>
-                        </ng-container>
-                    </table>
-                </div>
-            </div>
-            <div style="width: 100%; margin-top: 30px;" *ngIf='isChart != 0'>
-                <div class="menu-content-title">
-                    <p>Biểu đồ thống kê doanh thu</p>
-                </div>
-                <div style="height: 600px;">
-                    <canvas id="myChart3" *ngIf="typeChart==3"></canvas>
-                    <canvas id="myChart4" *ngIf="typeChart==4"></canvas>
-                </div>
-            </div>
+      </div>
+      <div class="menu-content-item-content" id="content" #content>
+        <div class="menu-content-title" style="height: 100px;">
+          <p>Danh sách những người đi trong ngày {{dateValue}}</p>
+          <p>Tuyến: {{detailItem.ben_xe_di}} -- {{detailItem.ben_xe_toi}}, giờ chạy: {{detailItem.gio_chay}}:00h</p>
         </div>
-    </div>
-    <div class="menu-content" *ngIf='isShow == 6'>
-        <div class="menu-content-item" style="width: 100%;">
-            <div *ngIf=!isWaittingCancel class="search-infor" style="width: 100%;">
-                <div class="search-left" style="width: 50%;">
-                    <div class="menu-content-title" style="margin-bottom: 10px;">
-                        <p>Hủy tuyến</p>
-                    </div>
-                    <div style="height:310px; overflow:auto;">
-                        <table style="width:100%; border-collapse: collapse;">
-                            <tr >
-                              <th>TUYẾN</th>
-                              <th>TRẠNG THÁI</th>
-                              <th></th>
-                              <th></th>
-                            </tr>
-                            <ng-container *ngFor="let i of listRoute">
-                                <tr>
-                                    <td>{{i.ben_xe_di}} -- {{i.ben_xe_toi}}</td>
-                                    <td *ngIf="i.trang_thai==1">Hoạt động</td>
-                                    <td *ngIf="i.trang_thai==0">Đã chặn</td>
-                                    <td *ngIf="i.trang_thai==1" style="color: #F2754E;" class="cancelTicket" (click)="onRouteExcute(i)"><i class="fas fa-bell-slash"></i> Hủy</td>
-                                    <td *ngIf="i.trang_thai==0" style="color: #009344;" class="cancelTicket" (click)="onRouteExcute(i)"><i class="fas fa-undo-alt"></i> Hoàn lại</td>
-                                  </tr>
-                            </ng-container>
-                          </table>
-                    </div>
-                </div>
-                <div class="search-left" style="margin-left: 2%; width: 50%;">
-                    <div class="menu-content-title" style="margin-bottom: 10px;">
-                        <p>Hủy xe</p>
-                    </div>
-                    <div class="search-left" style="margin-left: 2%;">
-                        <select style="width: 100%; margin-left: 0%;" (change)="changeRouteCancel($event.target.value)">
-                            <optgroup label="Chọn tuyến">
-                                <option *ngFor="let i of listRoute" value="{{i.id}}">Bến xe {{i.ben_xe_di}} ⇒ Bến xe {{i.ben_xe_toi}}</option>
-                              </optgroup>
-                        </select>
-
-                        <div style="height:310px; overflow:auto; margin-top: 10px;">
-                            <table style="width:100%; border-collapse: collapse;">
-                                <tr >
-                                  <th>NGÀY</th>
-                                  <th>GIỜ</th>
-                                </tr>
-                                <tr>
-                                    <td><input  type="date" class="inputCancle" id="timeCancel" value="{{today}}" min="{{today}}" (change)="onChangeDateCancel($event.target)"></td>
-                                    <td>
-                                        <select (change)="onChangeTime($event.target.value)">
-                                            <optgroup label="Chọn giờ" style="width: 50px;">
-                                                <option *ngFor="let i of listTimeGoForRoute" value="{{i.giochay}}"> {{i.giochay}}:00 h</option>
-                                            </optgroup>
-                                        </select>
-                                    </td>
-                                    <td style="color: #F2754E;" class="cancelTicket" (click)="onCancelDependent()"><i class="fas fa-bell-slash"></i> Hủy</td>
-                                </tr>
-
-                              </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div *ngIf=isWaittingCancel class="loader"></div>
+        <div style="height:310px; overflow:auto; margin-left: 0%;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <th>Mã vé</th>
+              <th>Tên Khách</th>
+              <th>Số điện thoại</th>
+              <th>Giường</th>
+              <th>Nơi xuống</th>
+            </tr>
+            <ng-container *ngFor="let i of dataShow">
+              <tr>
+                <td style="width: 25%;">{{i.maVe}}</td>
+                <td style="width: 25%;">{{i.ten_khach_hang}}</td>
+                <td style="width: 20%;">{{i.phone}}</td>
+                <td style="width: 20%;">{{i.giuong}}</td>
+                <td style="width: 35%;">{{i.noiXuong}}</td>
+              </tr>
+            </ng-container>
+          </table>
         </div>
+      </div>
     </div>
+
+  </div>
+  <div class="menu-content-1" *ngIf='isShow == 5' style="width: 85%;">
+    <div class="menu-content-item" style="width: 100%;">
+      <div class="search-infor">
+        <div class="search-left">
+          <div class="menu-content-title" style="margin-bottom: 10px;">
+            <p>Tìm kiếm theo doanh thu/ tuyến</p>
+          </div>
+          <div style="display: flex; width: 100%;">
+            <div style="display: flex; width: 50%;">
+              <input type="radio" style="height: 28px; width: 50%;" name="types" (change)="onItemChange(0,0)">
+              <label style="line-height: 50px; margin-left: -10px;"> Doanh thu</label>
+            </div>
+            <div style="display: flex; width: 50%;">
+              <input type="radio" style="height: 28px; width: 50%;" name="types" checked (change)="onItemChange(1,0)">
+              <label style="line-height: 50px; margin-left: -10px;"> Tuyến</label>
+            </div>
+          </div>
+        </div>
+        <div class="search-left" style="margin-left: 2%;">
+          <div class="menu-content-title" style="margin-bottom: 10px;">
+            <p>Tìm kiếm theo ngày, tháng</p>
+          </div>
+          <div style="display: flex;">
+            <div style="width: 50%;">
+              <input type="radio" style="height: 28px; float: left;" name="type" (change)="onItemChange(1,1)" checked>
+              <label style="line-height: 50px; margin-left: -10px;"> Ngày</label>
+            </div>
+            <div style="width: 50%;">
+              <input type="radio" style="height: 28px; float: left;" name="type" (change)="onItemChange(2,1)">
+              <label style="line-height: 50px; margin-left: -10px;"> Tháng</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="search-left" style="margin-left: 2%;">
+          <div class="menu-content-title" style="margin-bottom: 10px;">
+            <p>Chọn ngày tháng năm</p>
+          </div>
+          <input type="date" style="height: 28px;" value="{{today}}" (change)="dateChanged($event.target)">
+          <button (click)="onShowChart(isRoute,isDate)">Tìm kiếm</button>
+        </div>
+      </div>
+      <div class="menu-content-title">
+        <p>Bảng thống kê</p>
+      </div>
+      <div class="menu-content-item-content">
+        <div style="height:310px; overflow:auto; ">
+          <table style="width:100%; border-collapse: collapse;">
+            <tr>
+              <th>Thời gian</th>
+              <th>Tuyến</th>
+              <th>Số lượng vé</th>
+              <th>Tổng tiền</th>
+            </tr>
+            <ng-container *ngFor="let i of listStatistic">
+              <tr>
+                <td>{{i.time}}</td>
+                <td>{{i.route}}</td>
+                <td>{{i.number}}</td>
+                <td>{{i.totalMoney}}</td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+      <div style="width: 100%; margin-top: 30px;" *ngIf='isChart != 0'>
+        <div class="menu-content-title">
+          <p>Biểu đồ thống kê doanh thu</p>
+        </div>
+        <div style="height: 600px;">
+          <canvas id="myChart3" *ngIf="typeChart==3"></canvas>
+          <canvas id="myChart4" *ngIf="typeChart==4"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-content" *ngIf='isShow == 6'>
+    <div class="menu-content-item" style="width: 100%;">
+      <div *ngIf=!isWaittingCancel class="search-infor" style="width: 100%;">
+        <div class="search-left" style="width: 50%;">
+          <div class="menu-content-title" style="margin-bottom: 10px;">
+            <p>Hủy tuyến</p>
+          </div>
+          <div style="height:310px; overflow:auto;">
+            <table style="width:100%; border-collapse: collapse;">
+              <tr>
+                <th>TUYẾN</th>
+                <th>TRẠNG THÁI</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <ng-container *ngFor="let i of listRoute">
+                <tr>
+                  <td>{{i.ben_xe_di}} -- {{i.ben_xe_toi}}</td>
+                  <td *ngIf="i.trang_thai==1">Hoạt động</td>
+                  <td *ngIf="i.trang_thai==0">Đã chặn</td>
+                  <td *ngIf="i.trang_thai==1" style="color: #F2754E;" class="cancelTicket" (click)="onRouteExcute(i)"><i
+                      class="fas fa-bell-slash"></i> Hủy</td>
+                  <td *ngIf="i.trang_thai==0" style="color: #009344;" class="cancelTicket" (click)="onRouteExcute(i)"><i
+                      class="fas fa-undo-alt"></i> Hoàn lại</td>
+                </tr>
+              </ng-container>
+            </table>
+          </div>
+        </div>
+        <div class="search-left" style="margin-left: 2%; width: 50%;">
+          <div class="menu-content-title" style="margin-bottom: 10px;">
+            <p>Hủy xe</p>
+          </div>
+          <div class="search-left" style="margin-left: 2%;">
+            <select style="width: 100%; margin-left: 0%;" (change)="changeRouteCancel($event.target.value)">
+              <optgroup label="Chọn tuyến">
+                <option *ngFor="let i of listRoute" value="{{i.id}}">Bến xe {{i.ben_xe_di}} ⇒ Bến xe {{i.ben_xe_toi}}
+                </option>
+              </optgroup>
+            </select>
+
+            <div style="height:310px; overflow:auto; margin-top: 10px;">
+              <table style="width:100%; border-collapse: collapse;">
+                <tr>
+                  <th>NGÀY</th>
+                  <th>GIỜ</th>
+                </tr>
+                <tr>
+                  <td><input type="date" class="inputCancle" id="timeCancel" value="{{today}}" min="{{today}}"
+                      (change)="onChangeDateCancel($event.target)"></td>
+                  <td>
+                    <select (change)="onChangeTime($event.target.value)">
+                      <optgroup label="Chọn giờ" style="width: 50px;">
+                        <option *ngFor="let i of listTimeGoForRoute" value="{{i.giochay}}"> {{i.giochay}}:00 h</option>
+                      </optgroup>
+                    </select>
+                  </td>
+                  <td style="color: #F2754E;" class="cancelTicket" (click)="onCancelDependent()"><i
+                      class="fas fa-bell-slash"></i> Hủy</td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div *ngIf=isWaittingCancel class="loader"></div>
+    </div>
+  </div>
 </section>
 <div style="clear: both;"></div>
 <app-footer style="margin-bottom: 0px;"></app-footer>
