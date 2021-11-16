@@ -12,7 +12,14 @@ export class UserService {
 
   user: User[];
   getUsers() {
-    return this.http.get<User[]>(this.endpoint + "users");
+    const token = localStorage.getItem("access-token");
+    const headers = new HttpHeaders().append(
+      "Authorization",
+      "Bearer " + token
+    );
+    return this.http.get<User[]>(this.endpoint + "users", {
+      headers,
+    });
   }
 
   countUsers(): Observable<number> {
@@ -20,7 +27,7 @@ export class UserService {
   }
 
   createUser(user: User) {
-    const token = localStorage.getItem("x-token");
+    const token = localStorage.getItem("access-token");
     const headers = new HttpHeaders().append(
       "Authorization",
       "Bearer " + token

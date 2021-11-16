@@ -1,32 +1,51 @@
 <nav class="nav">
-    <div class="nav-menu flex-row">
-        <div class="nav-brand">
-            <a class="text-gray"> <span>Tran</span>sportation Services</a>
-        </div>
-        <div class="toogle-collapse">
-            <div class="toogle-icons">
-                <i class="fas fa-bars" (click)='onClick()'></i>
-            </div>
-        </div>
-        <div id="people">
-            <ul class="nav-items">
-                <li *ngIf="!token" class="nav-link"><a [routerLink]="['']"><div class="item">Trang chủ</div></a></li>
-                <li *ngIf="!token" class="nav-link"><a [routerLink]="['/schedule']"><div class="item">Lịch trình</div></a></li>
-                <li *ngIf="!token" class="nav-link"><a [routerLink]="['/policy/rules']"><div class="item">Điều khoản</div></a></li>
-                <li *ngIf="!token" class="nav-link"><a [routerLink]="['/invoice']"><div class="item">Hóa đơn</div></a></li>
-                <li *ngIf="!token" class="nav-link"><a [routerLink]="['/login']"><div class="item">Đăng nhập</div></a></li>
-                <li *ngIf="token" class="nav-link">
-                  <a><div class="item" (click)='onShowDown()'>Xin chào, {{username}} <i class="fas fa-chevron-down" style="font-size: 10px;"></i></div></a>
-                  <a class="logOut" (click)="onLogOut()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-              </li>
-              </ul>
-        </div>
-
-        <div class="social text-gray">
-            <a href="#"><!-- <i class="fab fa-facebook"></i> --></a>
-            <a href="#"><!-- <i class="fab fa-twitter"></i> --></a>
-            <a href="#"><!-- <i class="fab fa-instagram"></i> --></a>
-            <a href="#"></a>
-        </div>
+  <div class="nav-menu flex-row">
+    <div class="nav-brand">
+      <a class="text-gray"> <span>Tran</span>sportation Services</a>
     </div>
+    <div class="toogle-collapse">
+      <div class="toogle-icons">
+        <i class="fas fa-bars" (click)='onClick()'></i>
+      </div>
+    </div>
+    <div id="people">
+      <ul class="nav-items">
+        <li *ngIf="!token" class="nav-link"><a [routerLink]="['']">
+            <div class="item">Trang chủ</div>
+          </a></li>
+        <li *ngIf="!token" class="nav-link"><a [routerLink]="['/schedule']">
+            <div class="item">Lịch trình</div>
+          </a></li>
+        <li *ngIf="!token" class="nav-link"><a [routerLink]="['/policy/rules']">
+            <div class="item">Điều khoản</div>
+          </a></li>
+        <li *ngIf="!token" class="nav-link"><a [routerLink]="['/invoice']">
+            <div class="item">Hóa đơn</div>
+          </a></li>
+        <li *ngIf="!token" class="nav-link"><a [routerLink]="['/login']">
+            <div class="item">Đăng nhập</div>
+          </a></li>
+        <li *ngIf="user" class="nav-link">
+          <a>
+            <div class="item" (click)='onShowDown()'>Xin chào, {{username}} <i class="fas fa-chevron-down"
+                style="font-size: 10px;"></i></div>
+          </a>
+          <a class="logOut" (click)="onLogOut()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="social text-gray">
+      <a href="#">
+        <!-- <i class="fab fa-facebook"></i> -->
+      </a>
+      <a href="#">
+        <!-- <i class="fab fa-twitter"></i> -->
+      </a>
+      <a href="#">
+        <!-- <i class="fab fa-instagram"></i> -->
+      </a>
+      <a href="#"></a>
+    </div>
+  </div>
 </nav>

@@ -15,8 +15,6 @@ import { BookService } from 'src/app/services/book.service';
 import 'jspdf-autotable';
 import { ElementRef } from '@angular/core';
 
-const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: 'app-addmin',
@@ -177,7 +175,7 @@ export class AddminComponent implements OnInit {
     })
     this.getAllRoute();
     this.getAllAccount();
-    console.log(this.listUser)
+    console.log('listUser', this.listUser)
     this.getAllCar();
     this.getDate();
     this.onGetRouteToExport();
