@@ -11,15 +11,17 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
   user: User[];
-  getUsers() {
+  getUsers(): Observable<any> {
     const token = localStorage.getItem("access-token");
-    const headers = new HttpHeaders().append(
+    const Authorization = new HttpHeaders().append(
       "Authorization",
       "Bearer " + token
     );
-    return this.http.get<User[]>(this.endpoint + "users", {
-      headers,
+
+    const result = this.http.get(this.endpoint + "users", {
+      headers: Authorization
     });
+    return result;
   }
 
   countUsers(): Observable<number> {

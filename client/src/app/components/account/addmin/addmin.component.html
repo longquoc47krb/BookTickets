@@ -64,7 +64,7 @@
           </div>
           <div class="infor-item form-group">
             <p for="">Tài khoản</p>
-            <input type="text" class="form-control" formControlName="tai_khoan" placeholder="Nhập tên tài khoản">
+            <input type="text" class="form-control" formControlName="username" placeholder="Nhập tên tài khoản">
           </div>
           <div class="infor-item form-group">
             <p for="">Email</p>
@@ -72,11 +72,12 @@
           </div>
           <div class="infor-item form-group">
             <p for="">Mật khẩu</p>
-            <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="mat_khau">
+            <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="password">
           </div>
           <div class="infor-item form-group">
             <p for="">Nhập lại mật khẩu</p>
-            <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" formControlName="conf_mat_khau">
+            <input type="password" placeholder="Nhập lại mật khẩu" class="form-control"
+              formControlName="confirmPassword">
           </div>
         </form>
       </div>
@@ -92,7 +93,7 @@
           </div>
           <div class="infor-item form-group">
             <p for="">Địa chỉ</p>
-            <input type="text" placeholder="Nhập địa chỉ thường trú" class="form-control" formControlName="dia_chi">
+            <input type="text" placeholder="Nhập địa chỉ thường trú" class="form-control" formControlName="address">
           </div>
           <div style="clear: both;"></div>
           <div class="infor-item">
@@ -206,7 +207,7 @@
               </tr>
               <tr>
                 <td>Bến xe {{item.toStationName}}</td>
-                <td>{{item.dia_chi}}</td>
+                <td>{{item.address}}</td>
                 <td style="color: #F2754E;" (click)="onShow(0,2,item)"><i class="far fa-edit"></i> Chỉnh sửa </td>
               </tr>
             </ng-container>

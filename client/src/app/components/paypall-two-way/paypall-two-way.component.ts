@@ -193,14 +193,14 @@ export class PaypallTwoWayComponent implements OnInit {
       "ten": this.infor.username,
       "so_ghe": slots,
       "noi_xuong": this.infor.point,
-      "dia_chi": this.infor.district + " - " + this.infor.city
+      "address": this.infor.district + " - " + this.infor.city
     })
 
     this.slotsReturn.push({
       "ten": this.infor.username,
       "so_ghe": slotsReturn,
       "noi_xuong": this.infor.pointReturn,
-      "dia_chi": this.infor.district + " - " + this.infor.city
+      "address": this.infor.district + " - " + this.infor.city
     })
     console.log("data");
     console.log(this.slots);
@@ -218,14 +218,14 @@ export class PaypallTwoWayComponent implements OnInit {
       "ten": this.infor.username,
       "so_ghe": this.infor.bed.id,
       "noi_xuong": this.infor.point,
-      "dia_chi": this.infor.district + " - " + this.infor.city
+      "address": this.infor.district + " - " + this.infor.city
     })
     for (let i of person) {
       var data = {
         "ten": i.username,
         "so_ghe": i.bed.id,
         "noi_xuong": i.point,
-        "dia_chi": i.address
+        "address": i.address
       }
       slots.push(data)
     }
@@ -235,7 +235,7 @@ export class PaypallTwoWayComponent implements OnInit {
       "ten": this.inforReturn.username,
       "so_ghe": this.inforReturn.bed.id,
       "noi_xuong": this.inforReturn.point,
-      "dia_chi": this.inforReturn.district + " - " + this.inforReturn.city
+      "address": this.inforReturn.district + " - " + this.inforReturn.city
     })
 
     for (let i of personReturn) {
@@ -243,7 +243,7 @@ export class PaypallTwoWayComponent implements OnInit {
         "ten": i.username,
         "so_ghe": i.bed.id,
         "noi_xuong": i.point,
-        "dia_chi": i.address
+        "address": i.address
       }
       slotsReturn.push(data)
     }

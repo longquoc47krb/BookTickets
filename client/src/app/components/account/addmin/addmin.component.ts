@@ -14,7 +14,10 @@ import { BookService } from 'src/app/services/book.service';
 
 import 'jspdf-autotable';
 import { ElementRef } from '@angular/core';
+import { User } from 'src/app/shared/models/user.model';
 
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: 'app-addmin',
@@ -69,7 +72,7 @@ export class AddminComponent implements OnInit {
 
   listDeparture;
   listDestination;
-  listUser;
+  listUser = [];
   listRoute;
   listDestinationForRoute;
   route;
@@ -146,8 +149,7 @@ export class AddminComponent implements OnInit {
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(10), Validators.minLength(10)]],
-      address: ['', [Validators.required]],
-      province: ['', [Validators.required]]
+      address: ['', [Validators.required]]
     })
 
     this.formRoute = this.fb.group({
@@ -175,7 +177,7 @@ export class AddminComponent implements OnInit {
     })
     this.getAllRoute();
     this.getAllAccount();
-    console.log('listUser', this.listUser)
+    console.log(this.listUser)
     this.getAllCar();
     this.getDate();
     this.onGetRouteToExport();
@@ -582,10 +584,7 @@ export class AddminComponent implements OnInit {
       fullName: this.form.value.fullName,
       email: this.form.value.email,
       phone: this.form.value.phone,
-      cmnd: this.form.value.cmnd,
-      address: this.form.value.address,
-      province: this.form.value.province,
-      quan_huyen: this.form.value.quan_huyen
+      address: this.form.value.address
     }
 
     if (this.form.invalid) {
@@ -654,6 +653,7 @@ export class AddminComponent implements OnInit {
   }
 
   getAllRoute() {
+    console.log("route");
     this.listDeparture = JSON.parse(sessionStorage.getItem('lBenDi'));
     /* this.listDestination = JSON.parse(sessionStorage.getItem('lBenToi')); */
     this.listDestinationForRoute = JSON.parse(sessionStorage.getItem('lBenDi'));
@@ -661,6 +661,7 @@ export class AddminComponent implements OnInit {
     console.log(this.listDestinationForRoute)
     this.service.getAllRoute().subscribe(
       data => {
+        console.log("DATA", data);
         this.listRoute = data.data;
 
         this.routerIdCancel = this.listRoute[0].id;
@@ -673,7 +674,8 @@ export class AddminComponent implements OnInit {
             console.log(this.listTimeGoForRoute);
           }
         )
-      }
+      },
+      err => console.log("ERROR1", err)
     );
   }
 
@@ -681,12 +683,13 @@ export class AddminComponent implements OnInit {
   getAllAccount() {
     this.userService.getUsers().subscribe(
       res => {
-        console.log(res)
-        this.listUser = res;
-        console.log(this.listUser)
+        this.listUser = res.results;
+
+        console.log("ACCOUNT", this.listUser);
       },
       err => console.error(err)
     );
+
   }
 
   getAllCar() {

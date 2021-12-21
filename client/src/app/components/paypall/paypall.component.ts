@@ -167,7 +167,7 @@ export class PaypallComponent implements OnInit {
         "ten": this.infor.username,
         "so_ghe": this.infor.bed.id,
         "noi_xuong": this.infor.point,
-        "dia_chi": this.infor.district + " - " + this.infor.city
+        "address": this.infor.district + " - " + this.infor.city
       })
 
       for (let i = 0; i < length - 1; i++) {
@@ -175,7 +175,7 @@ export class PaypallComponent implements OnInit {
           "ten": this.listPersonGoWithBuyer[i].username,
           "so_ghe": this.listPersonGoWithBuyer[i].bed.id,
           "noi_xuong": this.listPersonGoWithBuyer[i].point,
-          "dia_chi": this.listPersonGoWithBuyer[i].address
+          "address": this.listPersonGoWithBuyer[i].address
         }
         slots.push(slot);
       }
@@ -185,7 +185,7 @@ export class PaypallComponent implements OnInit {
         "ten": this.infor.username,
         "so_ghe": this.infor_seat.seats[0],
         "noi_xuong": this.infor.point,
-        "dia_chi": this.infor.district + " - " + this.infor.city
+        "address": this.infor.district + " - " + this.infor.city
       })
     }
 

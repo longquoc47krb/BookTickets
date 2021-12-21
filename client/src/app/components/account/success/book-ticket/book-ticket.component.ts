@@ -398,7 +398,7 @@ export class BookTicketComponent implements OnInit {
                     "ten": this.customer.fullName,
                     "so_ghe": i,
                     "noi_xuong": this.point,
-                    "dia_chi": this.customer.diaChi
+                    "address": this.customer.diaChi
                   }
                   slots.push(slot);
                 }

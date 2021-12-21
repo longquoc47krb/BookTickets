@@ -62,7 +62,7 @@ export class InforPersonalComponent implements OnInit {
     //       ten:[this.inforCustomer.fullName, [Validators.required]],
     //       cmnd:[this.inforCustomer.cmnd, [Validators.required]],
     //       email:[this.inforCustomer.email, [Validators.required]],
-    //       dia_chi:[this.inforCustomer.diaChi, [Validators.required]],
+    //       address:[this.inforCustomer.diaChi, [Validators.required]],
     //       thanh_pho:[this.inforCustomer.thanhPho, [Validators.required]],
     //       quan_huyen:[this.inforCustomer.quanHuyen, [Validators.required]],
     //       phone:[this.inforCustomer.phone, [Validators.required]],

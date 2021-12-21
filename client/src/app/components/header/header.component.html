@@ -25,7 +25,7 @@
         <li *ngIf="!token" class="nav-link"><a [routerLink]="['/login']">
             <div class="item">Đăng nhập</div>
           </a></li>
-        <li *ngIf="user" class="nav-link">
+        <li *ngIf="token" class="nav-link">
           <a>
             <div class="item" (click)='onShowDown()'>Xin chào, {{username}} <i class="fas fa-chevron-down"
                 style="font-size: 10px;"></i></div>
